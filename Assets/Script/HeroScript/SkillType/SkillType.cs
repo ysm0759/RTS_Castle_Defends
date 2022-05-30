@@ -10,4 +10,8 @@ public abstract class SkillType : MonoBehaviour
 
     public abstract void ShowCancel();
 
+    public virtual bool ImmediateSkill(IWarriorSkill skill)
+    {
+        return false;
+    }
 }

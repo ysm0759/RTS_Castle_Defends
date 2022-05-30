@@ -32,7 +32,12 @@ public class MouseClick : MonoBehaviour
 
             if (KeyManager.instance.skill == Skill.SKILL_SHOW && RTSUserUnitControlManager.instance.isSelectedHero())
             {
-                KeyManager.instance.skill = Skill.SKILL_USE;
+                Debug.Log(KeyManager.instance.skill);
+                if (KeyManager.instance.skill != Skill.SKILL_USING_CANT_MOVE && KeyManager.instance.skill != Skill.SKILL_USING_CANT_MOVE)
+                {
+                    KeyManager.instance.skill = Skill.SKILL_USE; //TODO :: 스킬
+                }
+
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerGround))
                 {
                     skillPoint.SetActive(true);
@@ -76,6 +81,7 @@ public class MouseClick : MonoBehaviour
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             if( Physics.Raycast(ray, out hit , Mathf.Infinity,layerGround))
             {
+                KeyManager.instance.test++;
                 rTSUnitControlManager.MoveSelectUnits(hit.point);
             }
         }

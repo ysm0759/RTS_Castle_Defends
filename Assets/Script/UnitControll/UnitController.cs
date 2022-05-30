@@ -12,6 +12,8 @@ public class UnitController : MonoBehaviour
     private Collider[] hit;
     private UserUnit userUnit;
 
+    private Animator anim;
+
 
     private void Start()
     {
@@ -19,8 +21,9 @@ public class UnitController : MonoBehaviour
         state = new UnitState();
         userUnit = GetComponent<UserUnit>();
         InvokeRepeating("SearchTrace", 0f, 0.3f);
-        InvokeRepeating("IsArrive", 0f, 1f);
+        //InvokeRepeating("IsArrive", 0f, 0.2f);
         InvokeRepeating("Attack", 0f, userUnit.unitInfo.attackSpeed);
+        anim = GetComponent<Animator>();
     }
 
     private void OnDrawGizmosSelected()
@@ -39,12 +42,15 @@ public class UnitController : MonoBehaviour
     }
 
 
-
+    private void Update()
+    {
+        IsArrive();
+    }
 
     private void SearchTrace()
     {
 
-        if (state.IsMoveState(UnitMoveState.STOP))
+        if (state.IsMoveState(UnitMoveState.STOP) || KeyManager.instance.skill == Skill.SKILL_USING_CANT_MOVE || KeyManager.instance.skill == Skill.SKILL_USING_CAN_MOVE)
         {
             state.SetAttackState(UnitAttackState.NONE_ATTACK);
             return;
@@ -119,6 +125,12 @@ public class UnitController : MonoBehaviour
     }
     public void MoveTo(Vector3 end)
     {
+
+        if (CompareTag("Hero") && KeyManager.instance.skill == Skill.SKILL_USING_CANT_MOVE)
+        {
+            return;
+        }
+        anim.SetBool("IsMove", true);
         navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(end);
     }
@@ -126,6 +138,8 @@ public class UnitController : MonoBehaviour
 
     public void Hold()
     {
+        anim.SetBool("IsMove", false);
+
         navMeshAgent.isStopped = true;
         state.SetMoveState(UnitMoveState.HOLD);
         state.SetTraceState(UnitTraceState.ATTACK_TRACE);
@@ -134,6 +148,8 @@ public class UnitController : MonoBehaviour
 
     public void AttackMove()
     {
+        anim.SetBool("IsMove",true);
+
         navMeshAgent.isStopped = false;
         state.SetMoveState(UnitMoveState.MOVE);
         state.SetTraceState(UnitTraceState.TRACE);
@@ -141,14 +157,20 @@ public class UnitController : MonoBehaviour
 
     public void DirectMove()
     {
+        anim.SetBool("IsMove", true);
         navMeshAgent.isStopped = false;
         state.SetMoveState(UnitMoveState.MOVE);
         state.SetTraceState(UnitTraceState.NONE);
     }
+
     private void IsArrive()
     {
-        if (navMeshAgent.velocity.sqrMagnitude <= 0.2f * 0.2f && navMeshAgent.remainingDistance <= 0.5f)
+        //if(navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
+        //if(navMeshAgent.velocity == Vector3.zero)
+        if (navMeshAgent.velocity.sqrMagnitude <= 0.2f * 0.2f && navMeshAgent.remainingDistance <= 0.5f
+            && navMeshAgent.velocity == Vector3.zero)
         {
+            anim.SetBool("IsMove", false);
             state.SetTraceState(UnitTraceState.TRACE);
         }
     }
@@ -161,6 +183,7 @@ public class UnitController : MonoBehaviour
     public void Stop()
     {
         navMeshAgent.isStopped = true;
+        anim.SetBool("IsMove", false);
         state.SetMoveState(UnitMoveState.STOP);
         state.SetTraceState(UnitTraceState.NONE);
     }

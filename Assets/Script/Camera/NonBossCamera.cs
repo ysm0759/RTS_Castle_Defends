@@ -8,7 +8,7 @@ public class NonBossCamera : MonoBehaviour
     [SerializeField]
     private Transform foucs;
     private float rotateSpeed = 60f;
-    private float zoomMax = 150f;
+    private float zoomMax = 90f;
     private float zoomMin = 60f;
     private float zoomSpeed = 10;
     private Vector3 axisVec;

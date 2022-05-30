@@ -34,14 +34,13 @@ public class Targeting : SkillType
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Enemy"));
 
-        Debug.Log("브라발발");
+
 
         if (hit.collider == null)
         {
-
+            //대상을 못찾음
             unitController.SetNavStop();
             ShowCancel();
-            Debug.Log("대상을 못창므");
             KeyManager.instance.skill = Skill.SKILL_CANCEL;
             return;
         }

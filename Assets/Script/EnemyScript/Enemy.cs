@@ -19,7 +19,8 @@ public class Enemy : MonoBehaviour , IDamagable
 
     public void Hit(float damage)
     {
-        unitInfo.hp -= (unitInfo.df - damage) >= 0 ? 1 :  damage-unitInfo.df;
+        unitInfo.hp -= (damage - unitInfo.df) >= 0 ? (damage - unitInfo.df) : 1;
+        Debug.Log(unitInfo.hp);
     }
 
 }

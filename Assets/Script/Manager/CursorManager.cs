@@ -55,7 +55,6 @@ public class CursorManager : MonoBehaviour
             case CursorType.ATTACK:
                 Cursor.visible = true;
                 Cursor.SetCursor(cursorAttack, Vector2.zero, CursorMode.Auto);
-                Debug.Log("시 ㅡ발 잘된다!!!!!!!!!!");
                 break;
             case CursorType.BUILD:
                 Cursor.visible = true;

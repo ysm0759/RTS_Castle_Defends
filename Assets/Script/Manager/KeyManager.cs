@@ -28,6 +28,8 @@ public enum Skill
 {
     SKILL_SHOW,
     SKILL_USE,
+    SKILL_USING_CANT_MOVE,
+    SKILL_USING_CAN_MOVE,
     SKILL_CANCEL,
 
 }
@@ -46,6 +48,7 @@ public class KeyManager : MonoBehaviour
         }
     }
 
+    public int test = 0;
 
     public KeyState keyState;
     public Skill skill;
@@ -59,9 +62,13 @@ public class KeyManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(skill);
-        Debug.Log(keyState);
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+
+        if (skill == Skill.SKILL_USING_CANT_MOVE || skill == Skill.SKILL_USING_CAN_MOVE)
+        {
+            Debug.Log(skill);
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             keyState = KeyState.NUM1;
             if (RTSUserUnitControlManager.instance.isSelectedHero())
@@ -91,6 +98,7 @@ public class KeyManager : MonoBehaviour
             if (RTSUserUnitControlManager.instance.isSelectedHero())
                 skill = Skill.SKILL_SHOW;
         }
+
         else if (Input.GetKeyDown(KeyCode.Tab))
         {
             keyState = KeyState.TAB;
@@ -115,15 +123,15 @@ public class KeyManager : MonoBehaviour
             RTSUserUnitControlManager.instance.HoldSelectUnit();
             skill = Skill.SKILL_CANCEL;
         }
-        else if(Input.GetKeyDown(KeyCode.Mouse0))
+        else if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             //마우스는 MouseClick에 있음
         }
         else if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             //마우스는 MouseClick에 있음
-            if(skill == Skill.SKILL_USE)
-              skill = Skill.SKILL_CANCEL;
+            if (skill == Skill.SKILL_USE)
+                skill = Skill.SKILL_CANCEL;
         }
 
         else if (Input.GetKeyDown(KeyCode.Q))

@@ -124,6 +124,7 @@ public class UnitInfo : MonoBehaviour
 
     private void Awake()
     {
+
         this._maxHp = data.maxHp;
         this._hp = data.hp;
         this._df = data.df;
@@ -132,6 +133,7 @@ public class UnitInfo : MonoBehaviour
         this._damage = data.damage;
         this._attackRange = data.attackRange;
         this._upgradeCost = data.upgradeCost;
+
     }
 
 

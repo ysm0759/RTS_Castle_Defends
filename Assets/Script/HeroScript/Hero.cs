@@ -19,6 +19,10 @@ public abstract class Hero : MonoBehaviour
 
     private void Update()
     {
+        if (KeyManager.instance.skill == Skill.SKILL_USING_CANT_MOVE || KeyManager.instance.skill == Skill.SKILL_USING_CAN_MOVE)
+        {
+            return;
+        }
 
         // 캔슬 되었을때
         if (KeyManager.instance.skill == Skill.SKILL_CANCEL)
@@ -26,6 +30,7 @@ public abstract class Hero : MonoBehaviour
             CancelSkill(prevSkill);
             return;
         }
+
 
 
 
@@ -43,15 +48,13 @@ public abstract class Hero : MonoBehaviour
         }
 
 
-        if(prevSkill != (int)KeyManager.instance.keyState)
+        if (prevSkill != (int)KeyManager.instance.keyState)
         {
             CancelSkill(prevSkill);
             prevSkill = (int)KeyManager.instance.keyState;
         }
 
 
-        Debug.Log(prevSkill);
-        Debug.Log(KeyManager.instance.skill);
         // 에임 상태
         if (KeyManager.instance.skill == Skill.SKILL_SHOW)
             ShowRange((int)KeyManager.instance.keyState);
