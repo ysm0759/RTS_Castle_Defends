@@ -41,7 +41,7 @@ public class Targeting : SkillType
             //대상을 못찾음
             unitController.SetNavStop();
             ShowCancel();
-            KeyManager.instance.skill = Skill.SKILL_CANCEL;
+            KeyManager.instance.skill = Skill.SKILL_SHOW_CANCEL;
             return;
         }
         else

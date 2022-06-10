@@ -110,7 +110,7 @@ public class WarriorSkill2_1 : MonoBehaviour, IWarriorSkill
             {
                 anim.SetBool("SkillDone", true);
                 skillDone = true;
-                KeyManager.instance.skill = Skill.SKILL_CANCEL;
+                KeyManager.instance.skill = Skill.SKILL_DONE;
             }
 
 

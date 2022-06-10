@@ -45,6 +45,10 @@ public class NonBossCamera : MonoBehaviour
     }
     void CameraZoom()
     {
+        if(GameStateManager.instance.gameState != GameState.GAME_START)
+        {
+            return;
+        }
 
         float tmpAxis = Input.GetAxis("Mouse ScrollWheel");
 

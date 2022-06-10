@@ -12,6 +12,7 @@ public enum GameState
     READY,
     HERO_SELECT,
     GAME_START,
+    STORE,
     EXIT,
     CNT,
 }

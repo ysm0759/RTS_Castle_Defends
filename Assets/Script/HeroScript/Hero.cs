@@ -25,14 +25,11 @@ public abstract class Hero : MonoBehaviour
         }
 
         // 캔슬 되었을때
-        if (KeyManager.instance.skill == Skill.SKILL_CANCEL)
+        if (KeyManager.instance.skill == Skill.SKILL_SHOW_CANCEL)
         {
             CancelSkill(prevSkill);
             return;
         }
-
-
-
 
         //   Key값이 1, 2 ,3, 4, 5 가아니면
         if ((int)KeyManager.instance.keyState >= (int)KeyState.SKILL_COUNT)

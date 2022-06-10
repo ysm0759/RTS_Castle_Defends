@@ -9,11 +9,8 @@ public class UserUnitSpawner : MonoBehaviour
 
     private List<Transform> unitPrefabPosition;
 
+    //오브젝트 풀링
 
-    // 데이터를 얘한테 주면
-    // 얘가 포지션 , 스크립트 , 기타등등으로  시작할 때 유닛을 줘야함
-    // 어케 해야함 .. ?
-    // 프리팹을 들고 있어야하나 .. ?
 
     public List<UnitController> SpawnUnits()
     {

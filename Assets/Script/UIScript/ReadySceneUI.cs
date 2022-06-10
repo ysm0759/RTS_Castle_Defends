@@ -28,6 +28,12 @@ public class ReadySceneUI : MonoBehaviour
         GameManager.instance.GameStart();
     }
 
+    public void OnClickStore()
+    {
+        GameStateManager.instance.gameState = GameState.STORE;
+        GameManager.instance.StoreScene();
+    }
+
 
     public void OnClickHeroSelect()
     {

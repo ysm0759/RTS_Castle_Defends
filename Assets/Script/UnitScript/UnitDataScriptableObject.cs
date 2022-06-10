@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public enum UnitType
@@ -10,11 +11,16 @@ public enum UnitType
     USER_MAGICIAN,
     USER_TANKER,
     USER_AIR,
+    USER_UNIT_COUNT,
+
+
     ENEMY_MELEE,
     ENEMY_RANGER,
     ENEMY_MAGICIAN,
     ENEMY_TANKER,
     ENEMY_AIR,
+
+
     HERO_WARRIOR
 }
 
@@ -23,7 +29,7 @@ public class UnitDataScriptableObject : ScriptableObject
 {
 
 
-    public UnitType enumType;
+    public UnitType unitType;
     public float maxHp; //최대체력
     public float hp;  //체력
     public float df; //방어력
@@ -31,9 +37,14 @@ public class UnitDataScriptableObject : ScriptableObject
     public float attackSpeed;  //공격속도 
     public float damage;  //데미지
     public float attackRange;  //공격 거리
-    public float upgradeCost;  //업그레이드 가격
+    public int upgradeCost;  //업그레이드 가격
+    public int population;  //생성되는 유닛 인구수
     public float level;     //유닛 레벨
+    public UnitDataScriptableObject nextStat;
     public static float traceRange = 10; // 추적 거리
+    [TextArea]
+    public string explain; // 유닛 설명
+    public Sprite sprite;
 
 }
 

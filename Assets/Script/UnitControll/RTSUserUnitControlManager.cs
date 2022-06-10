@@ -11,6 +11,7 @@ public class RTSUserUnitControlManager : MonoBehaviour
 
     static private RTSUserUnitControlManager Instance;
 
+    private List<UnitType> unitType;
 
     private MouseClick mouseClick;
 
@@ -40,6 +41,9 @@ public class RTSUserUnitControlManager : MonoBehaviour
                 hero = unitList[i];
             }
         }
+
+        unitType = new List<UnitType>();
+
     }
 
     //마우스 클릭으로 유닛을 선택할 때 호출

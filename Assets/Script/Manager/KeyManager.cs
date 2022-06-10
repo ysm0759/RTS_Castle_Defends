@@ -27,10 +27,12 @@ public enum KeyState
 public enum Skill
 {
     SKILL_SHOW,
+    SKILL_SHOW_CANCEL,
     SKILL_USE,
     SKILL_USING_CANT_MOVE,
     SKILL_USING_CAN_MOVE,
-    SKILL_CANCEL,
+    SKILL_DONE,
+    SKILL_NONE,
 
 }
 
@@ -57,71 +59,72 @@ public class KeyManager : MonoBehaviour
     {
         Instance = this;
         keyState = KeyState.NONE;
-        skill = Skill.SKILL_CANCEL;
+        skill = Skill.SKILL_NONE;
     }
 
     private void Update()
     {
-
-        if (skill == Skill.SKILL_USING_CANT_MOVE || skill == Skill.SKILL_USING_CAN_MOVE)
+        if (Skill.SKILL_USING_CANT_MOVE != skill && Skill.SKILL_USING_CAN_MOVE != skill)
         {
-            Debug.Log(skill);
-            return;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            keyState = KeyState.NUM1;
-            if (RTSUserUnitControlManager.instance.isSelectedHero())
-                skill = Skill.SKILL_SHOW;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            keyState = KeyState.NUM2;
-            if (RTSUserUnitControlManager.instance.isSelectedHero())
-                skill = Skill.SKILL_SHOW;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            keyState = KeyState.NUM3;
-            if (RTSUserUnitControlManager.instance.isSelectedHero())
-                skill = Skill.SKILL_SHOW;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            keyState = KeyState.NUM4;
-            if (RTSUserUnitControlManager.instance.isSelectedHero())
-                skill = Skill.SKILL_SHOW;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            keyState = KeyState.NUM5;
-            if (RTSUserUnitControlManager.instance.isSelectedHero())
-                skill = Skill.SKILL_SHOW;
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                keyState = KeyState.NUM1;
+                if (RTSUserUnitControlManager.instance.isSelectedHero())
+                    skill = Skill.SKILL_SHOW;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                keyState = KeyState.NUM2;
+                if (RTSUserUnitControlManager.instance.isSelectedHero())
+                    skill = Skill.SKILL_SHOW;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                keyState = KeyState.NUM3;
+                if (RTSUserUnitControlManager.instance.isSelectedHero())
+                    skill = Skill.SKILL_SHOW;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                keyState = KeyState.NUM4;
+                if (RTSUserUnitControlManager.instance.isSelectedHero())
+                    skill = Skill.SKILL_SHOW;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                keyState = KeyState.NUM5;
+                if (RTSUserUnitControlManager.instance.isSelectedHero())
+                    skill = Skill.SKILL_SHOW;
+            }
         }
 
         else if (Input.GetKeyDown(KeyCode.Tab))
         {
             keyState = KeyState.TAB;
-            skill = Skill.SKILL_CANCEL;
+            if (Skill.SKILL_SHOW == skill)
+                skill = Skill.SKILL_SHOW_CANCEL;
         }
 
         else if (Input.GetKeyDown(KeyCode.A))
         {
             keyState = KeyState.A;
-            skill = Skill.SKILL_CANCEL;
+            if (Skill.SKILL_SHOW == skill)
+                skill = Skill.SKILL_SHOW_CANCEL;
             CursorManager.instance.SetCursor(CursorType.ATTACK);
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
             keyState = KeyState.S;
             RTSUserUnitControlManager.instance.StopSelectUnit();
-            skill = Skill.SKILL_CANCEL;
+            if (Skill.SKILL_SHOW == skill)
+                skill = Skill.SKILL_SHOW_CANCEL;
         }
         else if (Input.GetKeyDown(KeyCode.H))
         {
             keyState = KeyState.H;
             RTSUserUnitControlManager.instance.HoldSelectUnit();
-            skill = Skill.SKILL_CANCEL;
+            if (Skill.SKILL_SHOW == skill)
+                skill = Skill.SKILL_SHOW_CANCEL;
         }
         else if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -130,8 +133,8 @@ public class KeyManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             //마우스는 MouseClick에 있음
-            if (skill == Skill.SKILL_USE)
-                skill = Skill.SKILL_CANCEL;
+            //if (skill == Skill.SKILL_SHOW)
+            //    skill = Skill.SKILL_SHOW_CANCEL;
         }
 
         else if (Input.GetKeyDown(KeyCode.Q))
@@ -149,12 +152,36 @@ public class KeyManager : MonoBehaviour
         else if (Input.anyKeyDown)
         {
             keyState = KeyState.NONE;
-            skill = Skill.SKILL_CANCEL;
+            if (Skill.SKILL_SHOW == skill)
+                skill = Skill.SKILL_SHOW_CANCEL;
         }
 
+        //SkillState();
 
     }
 
+
+    private void SkillState()
+    {
+        if (Skill.SKILL_USING_CANT_MOVE == skill || Skill.SKILL_USING_CAN_MOVE == skill)
+        {
+
+        }
+        else if (keyState >= KeyState.SKILL_COUNT && RTSUserUnitControlManager.instance.isSelectedHero())
+        {
+            skill = Skill.SKILL_SHOW;
+        }
+        else if (keyState == KeyState.TAB ||
+                 keyState == KeyState.A ||
+                 keyState == KeyState.ESC ||
+                 keyState == KeyState.H ||
+                 keyState == KeyState.NONE ||
+                 keyState == KeyState.S)
+        {
+            skill = Skill.SKILL_SHOW_CANCEL;
+        }
+
+    }
 
 
 

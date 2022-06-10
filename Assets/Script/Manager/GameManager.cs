@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GameSeason
 {
@@ -15,17 +16,19 @@ public enum GameSeason
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject mouseDrag;
-    [SerializeField]
-    private GameObject skillUI;
-    [SerializeField]
-    private GameObject mainPanel;
-    [SerializeField]
-    private ReadySceneUI readySceneUI;
 
-    [SerializeField]
-    private GameObject readyPanel;
+    [SerializeField] private GameObject mouseDrag;
+    [SerializeField] private GameObject skillUI;
+    [SerializeField] private GameObject mainPanel;
+    [SerializeField] private ReadySceneUI readySceneUI;
+    [SerializeField] private GameObject readyPanel;
+    [SerializeField] private GameObject storePanel;
+    [SerializeField] private Text costPanel;
+
+
+    [SerializeField] private int maxCost;
+    [SerializeField] private int curCost;
+
 
 
     public GameSeason gameSeason;
@@ -52,6 +55,8 @@ public class GameManager : MonoBehaviour
         skillUI.SetActive(false);
         mainPanel.SetActive(true);
         readyPanel.SetActive(false);
+        storePanel.SetActive(false);
+
     }
 
 
@@ -61,6 +66,8 @@ public class GameManager : MonoBehaviour
         skillUI.SetActive(false);
         mainPanel.SetActive(true);
         readyPanel.SetActive(false);
+        storePanel.SetActive(false);
+
     }
 
     public void ReadyScene()
@@ -69,6 +76,8 @@ public class GameManager : MonoBehaviour
         skillUI.SetActive(false);
         mainPanel.SetActive(false);
         readyPanel.SetActive(true);
+        storePanel.SetActive(false);
+
     }
 
 
@@ -78,6 +87,8 @@ public class GameManager : MonoBehaviour
         skillUI.SetActive(false);
         mainPanel.SetActive(false);
         readyPanel.SetActive(true);
+        storePanel.SetActive(false);
+
     }
 
     public void GameStart()
@@ -86,8 +97,54 @@ public class GameManager : MonoBehaviour
         skillUI.SetActive(true);
         mainPanel.SetActive(false);
         readyPanel.SetActive(false);
+        storePanel.SetActive(false);
+
     }
 
+    public void StoreScene()
+    {
+        mouseDrag.SetActive(false);
+        skillUI.SetActive(false);
+        mainPanel.SetActive(false);
+        readyPanel.SetActive(false);
+        storePanel.SetActive(true);
+        UpdateCostPanel();
+    }
+
+
+    public void UpdateCostPanel()
+    {
+        costPanel.text =  $"{curCost} / {maxCost}";
+    }
+
+
+    public bool UseCost(int cost)
+    {
+        if(curCost - cost < 0)
+        {
+
+            return false;
+        }
+        else
+        {
+            curCost -= cost;
+            return true;
+        }
+    }
+    
+    public void IncreasedCost(int cost)
+    {
+        curCost += cost;
+        maxCost += cost;
+        UpdateCostPanel();
+
+    }
+
+    public void ResetCost()
+    {
+        curCost = maxCost;
+        UpdateCostPanel();
+    }
 
     public void Update()
     {
@@ -100,4 +157,7 @@ public class GameManager : MonoBehaviour
             readySceneUI.Season();
         }
     }
+
+
+
 }

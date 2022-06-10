@@ -21,6 +21,19 @@ public class UserUnit: MonoBehaviour , IDamagable
     public void Hit(float damage)
     {
         unitInfo.hp -= (damage - unitInfo.df) >= 0 ? (damage - unitInfo.df) : 1;
+        
+        if(unitInfo.hp <= 0)
+        {
+            Die();
+        }
         Debug.Log(unitInfo.hp);
     }
+
+    private void Die()
+    {
+
+        //죽었을 때
+
+    }
+
 }
