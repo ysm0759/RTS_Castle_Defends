@@ -16,7 +16,10 @@ public class Enemy : MonoBehaviour , IDamagable
         }
     }
 
-
+    public Transform GetTransform()
+    {
+        return this.transform;
+    }
     public void Hit(float damage)
     {
         unitInfo.hp -= (damage - unitInfo.df) >= 0 ? (damage - unitInfo.df) : 1;

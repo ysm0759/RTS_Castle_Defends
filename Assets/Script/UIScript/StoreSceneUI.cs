@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class StoreSceneUI : MonoBehaviour
 {
+    Hashtable hashtable = new Hashtable();
     private UnitDataScriptableObject[] data = new UnitDataScriptableObject[(int)UnitType.USER_UNIT_COUNT];
 
+    [SerializeField] private GameObject[] rockImage = new GameObject[(int)UnitType.USER_UNIT_COUNT];
     [SerializeField] private Text level;
 
     [SerializeField] private Text hp;
@@ -43,12 +45,15 @@ public class StoreSceneUI : MonoBehaviour
     private int unitType = 0;
 
 
+    //필요한게 코스트
+    //잠구고 열고 
     public void OnClickUnit(UnitDataScriptableObject firstData)
     {
         unitType = (int)firstData.unitType;
         if (data[unitType] == null)
         {
             data[unitType] = firstData;
+            SetHashtableKeyValue(data[unitType],false);
         }
 
         image.sprite = data[unitType].sprite;
@@ -114,7 +119,6 @@ public class StoreSceneUI : MonoBehaviour
 
     public void OnClickResetYes()
     {
-        Debug.Log("알라");
         for(int i =0; i < (int)UnitType.USER_UNIT_COUNT; i++)
         {
             data[i] = null;
@@ -134,6 +138,23 @@ public class StoreSceneUI : MonoBehaviour
         resetPanel.SetActive(true);
     }
 
-  
+    public void OnClickBuy(UnitDataScriptableObject data, int cost)
+    {
+        if((bool)hashtable[data] == false || GameManager.instance.UseCost(cost))
+        {
+            hashtable[data] = true;
+            rockImage[unitType].SetActive(false);
+        }
+    }
 
+
+    private void SetHashtableKeyValue(UnitDataScriptableObject key, bool value)
+    {
+        if(hashtable.Contains(key))
+        {
+            Debug.Log("있는 데이터!");
+            return;
+        }
+        hashtable.Add(key, value);
+    }
 }

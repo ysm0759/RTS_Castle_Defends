@@ -13,7 +13,8 @@ public class UnitController : MonoBehaviour
     private UserUnit userUnit;
 
     private Animator anim;
-
+    private float animAttackTime;
+    private float animAttackSpeed;
 
     private void Start()
     {
@@ -24,6 +25,7 @@ public class UnitController : MonoBehaviour
         //InvokeRepeating("IsArrive", 0f, 0.2f);
         InvokeRepeating("Attack", 0f, userUnit.unitInfo.attackSpeed);
         anim = GetComponent<Animator>();
+        SetAnimAttackTime();
     }
 
     private void OnDrawGizmosSelected()
@@ -77,15 +79,22 @@ public class UnitController : MonoBehaviour
             {
                 navMeshAgent.isStopped = true;
                 state.SetAttackState(UnitAttackState.DO_ATTACK);
+                anim.SetBool("Attack", true);
+                anim.SetBool("IsMove", false);
+
+                anim.SetFloat("AttackSpeed", animAttackSpeed);
             }
             else
             {
                 state.SetAttackState(UnitAttackState.NONE_ATTACK);
+                anim.SetBool("Attack", false);
+
             }
         }
         else
         {
             state.SetAttackState(UnitAttackState.NONE_ATTACK);
+            anim.SetBool("Attack", false);
         }
     }
 
@@ -101,6 +110,8 @@ public class UnitController : MonoBehaviour
             {
                 IDamagable target = tmp.transform.GetComponent<IDamagable>();
                 target?.Hit(userUnit.unitInfo.damage);
+                transform.LookAt(target.GetTransform());
+                return;
             }
         }
 
@@ -108,6 +119,30 @@ public class UnitController : MonoBehaviour
     }
 
 
+    public void SetAnimAttackTime()
+    {
+        RuntimeAnimatorController ac = anim.runtimeAnimatorController;
+        Debug.Log(ac.animationClips.Length);
+        for (int i = 0; i < ac.animationClips.Length; i++)
+        {
+            Debug.Log(ac.animationClips[i].name);
+
+            if (ac.animationClips[i].name == "Attack")
+            {
+                animAttackTime = ac.animationClips[i].length;
+                break;
+            }
+        }
+        Debug.Log(animAttackTime);
+        SetAnimAttackSpeed();
+
+    }
+
+    private void SetAnimAttackSpeed()
+    {
+        animAttackSpeed = animAttackTime / userUnit.unitInfo.attackSpeed;
+        Debug.Log(animAttackSpeed);
+    }
     public void SelectUnit()
     {
         unitMarker.SetActive(true);

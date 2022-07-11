@@ -29,6 +29,11 @@ public class UserUnit: MonoBehaviour , IDamagable
         Debug.Log(unitInfo.hp);
     }
 
+    public Transform GetTransform()
+    {
+        return this.transform;
+    }
+
     private void Die()
     {
 
