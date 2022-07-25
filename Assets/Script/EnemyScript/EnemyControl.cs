@@ -23,12 +23,7 @@ public class EnemyControl : MonoBehaviour
         InvokeRepeating("SetDestinationCastle", 0f, 2.0f);
     }
 
-    private void Update()
-    {
-
-    }
-
-
+  
     private void OnDrawGizmosSelected()
     {
 
@@ -89,12 +84,17 @@ public class EnemyControl : MonoBehaviour
     {
         if (state.IsAttackState(UnitAttackState.DO_ATTACK))
         {
+            navMeshAgent.isStopped = true;
             foreach (var tmp in hit)
             {
                 IDamagable target = tmp.transform.GetComponent<IDamagable>();
                 target?.Hit(enemyUnit.unitInfo.damage);
+                transform.LookAt(target.GetTransform());
+                return;
             }
         }
+
+
     }
 
     private void IsArrive()

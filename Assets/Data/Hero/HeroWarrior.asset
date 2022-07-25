@@ -19,7 +19,7 @@ MonoBehaviour:
   moveSpeed: 0.5
   attackSpeed: 0.5
   damage: 2
-  attackRange: 2
+  attackRange: 3
   upgradeCost: 1
   population: 0
   level: 0

@@ -22,7 +22,7 @@ public class UserUnitSpawner : MonoBehaviour
 
         for (int i = 0 ; i < unitPrefab.Count ; ++i)
         {
-            Vector3 position = new Vector3(120 , 10f ,120);
+            Vector3 position = new Vector3(120 , 5f ,120);
 
             GameObject clone = Instantiate(unitPrefab[i],position,Quaternion.identity);
             UnitController unit = clone.GetComponent<UnitController>();

@@ -28,21 +28,6 @@ public class UnitController : MonoBehaviour
         SetAnimAttackTime();
     }
 
-    private void OnDrawGizmosSelected()
-    {
-
-        if (hit != null && hit.Length == 0)
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, UnitDataScriptableObject.traceRange);
-        }
-        else
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, UnitDataScriptableObject.traceRange);
-        }
-    }
-
 
     private void Update()
     {
@@ -71,7 +56,7 @@ public class UnitController : MonoBehaviour
                 state.SetTraceState(UnitTraceState.ATTACK_TRACE);
             }
         }
-        if (state.IsTraceState(UnitTraceState.ATTACK_TRACE))
+        else if (state.IsTraceState(UnitTraceState.ATTACK_TRACE))
         {
             hit = Physics.OverlapSphere(transform.position, userUnit.unitInfo.attackRange, LayerMask.GetMask("Enemy"));
 
@@ -127,8 +112,10 @@ public class UnitController : MonoBehaviour
         {
             Debug.Log(ac.animationClips[i].name);
 
-            if (ac.animationClips[i].name == "Attack")
+            
+            if (ac.animationClips[i].name.ToUpper().Contains("ATTACK"))
             {
+                Debug.Log("가졍ㅎㅁ ?");
                 animAttackTime = ac.animationClips[i].length;
                 break;
             }

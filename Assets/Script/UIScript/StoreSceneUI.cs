@@ -97,7 +97,7 @@ public class StoreSceneUI : MonoBehaviour
 
     public void OnClickUpGrade()
     {
-        if (null == data[unitType] || null == data[unitType].nextStat)
+        if (null == data[unitType] || null == data[unitType].nextStat || rockImage[unitType].gameObject.activeSelf == true)
             return;
         
         if(GameManager.instance.UseCost(data[unitType].upgradeCost))
@@ -140,8 +140,9 @@ public class StoreSceneUI : MonoBehaviour
 
     public void OnClickBuy(UnitDataScriptableObject data, int cost)
     {
-        if((bool)hashtable[data] == false || GameManager.instance.UseCost(cost))
+        if((bool)hashtable[data] == false || GameManager.instance.UseCost(cost) && rockImage[unitType].gameObject.activeSelf == true)
         {
+            Debug.Log("?? 드가나 ");
             hashtable[data] = true;
             rockImage[unitType].SetActive(false);
         }
@@ -156,5 +157,10 @@ public class StoreSceneUI : MonoBehaviour
             return;
         }
         hashtable.Add(key, value);
+    }
+
+    public UnitDataScriptableObject[] GetScriptableData()
+    {
+        return data;
     }
 }

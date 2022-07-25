@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5209b45c3f67535469ffcfd9602ff3dd, type: 3}
   m_Name: EnemyMelee
   m_EditorClassIdentifier: 
-  enumType: 5
+  unitType: 0
   maxHp: 100
   hp: 100
   df: 1
   moveSpeed: 1
   attackSpeed: 1
   damage: 1
-  attackRange: 2
+  attackRange: 3
   upgradeCost: 0
+  population: 0
   level: 0
+  nextStat: {fileID: 0}
+  explain: 
+  sprite: {fileID: 0}

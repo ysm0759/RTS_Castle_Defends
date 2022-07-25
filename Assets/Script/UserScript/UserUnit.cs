@@ -26,7 +26,6 @@ public class UserUnit: MonoBehaviour , IDamagable
         {
             Die();
         }
-        Debug.Log(unitInfo.hp);
     }
 
     public Transform GetTransform()
