@@ -122,13 +122,14 @@ public class GameManager : MonoBehaviour
     {
         if(curCost - cost < 0)
         {
-
             return false;
         }
         else
         {
             curCost -= cost;
+            UpdateCostPanel();
             return true;
+        
         }
     }
     
