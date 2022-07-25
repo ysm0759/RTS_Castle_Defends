@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
         mainPanel.SetActive(false);
         readyPanel.SetActive(false);
         storePanel.SetActive(false);
-
+        RTSUserUnitControlManager.instance.InitUnit();
     }
 
     public void StoreScene()

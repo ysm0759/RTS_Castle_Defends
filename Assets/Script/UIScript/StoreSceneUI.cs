@@ -7,7 +7,10 @@ public class StoreSceneUI : MonoBehaviour
 {
     private UnitDataScriptableObject[] data = new UnitDataScriptableObject[(int)UnitType.USER_UNIT_COUNT];
 
-    [SerializeField] private GameObject[] rockImage = new GameObject[(int)UnitType.USER_UNIT_COUNT];
+    [SerializeField] private GameObject[] lockImage = new GameObject[(int)UnitType.USER_UNIT_COUNT];
+
+    private bool[] isBuy = new bool[(int)UnitType.USER_UNIT_COUNT];
+
     [SerializeField] private Text level;
 
     [SerializeField] private Text hp;
@@ -95,7 +98,7 @@ public class StoreSceneUI : MonoBehaviour
 
     public void OnClickUpGrade()
     {
-        if (null == data[unitType] || null == data[unitType].nextStat || rockImage[unitType].gameObject.activeSelf == true)
+        if (null == data[unitType] || null == data[unitType].nextStat || lockImage[unitType].gameObject.activeSelf == true)
             return;
         
         if(GameManager.instance.UseCost(data[unitType].upgradeCost))
@@ -120,7 +123,8 @@ public class StoreSceneUI : MonoBehaviour
         for(int i =0; i < (int)UnitType.USER_UNIT_COUNT; i++)
         {
             data[i] = null;
-            rockImage[i].SetActive(true);
+            lockImage[i].SetActive(true);
+            isBuy[i] = false;
         }
         OnClickUnit(defaultUnit);
         GameManager.instance.ResetCost();
@@ -139,10 +143,10 @@ public class StoreSceneUI : MonoBehaviour
 
     public void OnClickBuy()
     {
-        if( GameManager.instance.UseCost(10) && rockImage[unitType].gameObject.activeSelf == true)
+        if( GameManager.instance.UseCost(10) && lockImage[unitType].gameObject.activeSelf == true)
         {
-            Debug.Log("?? 드가나 ");
-            rockImage[unitType].SetActive(false);
+            isBuy[unitType] = true;
+            lockImage[unitType].SetActive(false);
         }
     }
 
@@ -151,5 +155,10 @@ public class StoreSceneUI : MonoBehaviour
     public UnitDataScriptableObject[] GetScriptableData()
     {
         return data;
+    }
+
+    public bool[] GetIsBuys()
+    {
+        return isBuy;
     }
 }

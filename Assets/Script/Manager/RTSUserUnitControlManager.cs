@@ -6,6 +6,8 @@ public class RTSUserUnitControlManager : MonoBehaviour
 {
     [SerializeField]
     private UserUnitSpawner unitSpawner;
+    [SerializeField]
+    private StoreSceneUI storeSceneUI;
     private List<UnitController> selectedUnitList;          //플레이어가 클래기 or 드래그로 선택한 유닛
     public List<UnitController> unitList{private set; get;} //맵에 존재하는 모든 유닛
 
@@ -16,6 +18,12 @@ public class RTSUserUnitControlManager : MonoBehaviour
     private MouseClick mouseClick;
 
     public UnitController hero;
+
+
+    private UnitDataScriptableObject[] datas;
+
+    private GameObject[] rockImages;
+
 
 
     static public RTSUserUnitControlManager instance
@@ -33,14 +41,13 @@ public class RTSUserUnitControlManager : MonoBehaviour
         Instance = this;
         selectedUnitList = new List<UnitController>();
         mouseClick = GetComponent<MouseClick>();
-        unitList = unitSpawner.SpawnUnits();
-        for(int i = 0; i < unitList.Count;i++)
-        {
-            if(unitList[i].tag == "Hero")
-            {
-                hero = unitList[i];
-            }
-        }
+        //for(int i = 0; i < unitList.Count;i++)
+        //{
+        //    if(unitList[i].tag == "Hero")
+        //    {
+        //        hero = unitList[i];
+        //    }
+        //}
 
         unitType = new List<UnitType>();
 
@@ -222,7 +229,19 @@ public class RTSUserUnitControlManager : MonoBehaviour
         mouseClick.SetSkillPointOnOff(onOff);
     }
 
+    public void InitUnit()
+    {
+        Debug.Log("실행1");
+        unitList = unitSpawner.SpawnUnits(storeSceneUI.GetScriptableData(), storeSceneUI.GetIsBuys());
 
+        for (int i = 0; i < unitList.Count; i++)
+        {
+            if (unitList[i].tag == "Hero")
+            {
+                hero = unitList[i];
+            }
+        }
+    }
 }
 
 

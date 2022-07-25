@@ -12,7 +12,7 @@ public class MouseDrag : MonoBehaviour
     private Vector2 end = Vector2.zero;
 
 
-    private Camera  mainCamera;
+    private Camera mainCamera;
     private RTSUserUnitControlManager rtsUnitControlManager;
 
 
@@ -20,7 +20,7 @@ public class MouseDrag : MonoBehaviour
     {
         mainCamera = Camera.main;
         rtsUnitControlManager = GetComponent<RTSUserUnitControlManager>();
-        
+
         //start , end 가 ( 0, 0 )인 상태로 이미지의 크기를 (0,0) 으로 설정해 화면에 보이지 않도록 함
         DrawDragRectangle();
     }
@@ -29,20 +29,20 @@ public class MouseDrag : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             start = Input.mousePosition;
             dragRect = new Rect();
         }
 
 
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             end = Input.mousePosition;
             DrawDragRectangle();
         }
 
-        if( Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             CalculateDragRect();
             SelectUnits();
@@ -62,7 +62,7 @@ public class MouseDrag : MonoBehaviour
 
     private void CalculateDragRect()
     {
-        if(Input.mousePosition.x < start.x)
+        if (Input.mousePosition.x < start.x)
         {
             dragRect.xMin = Input.mousePosition.x;
             dragRect.xMax = start.x;
@@ -74,7 +74,7 @@ public class MouseDrag : MonoBehaviour
         }
 
 
-        if(Input.mousePosition.y < start.y)
+        if (Input.mousePosition.y < start.y)
         {
             dragRect.yMin = Input.mousePosition.y;
             dragRect.yMax = start.y;
@@ -89,11 +89,12 @@ public class MouseDrag : MonoBehaviour
 
     private void SelectUnits()
     {
-
-        foreach(UnitController unit in rtsUnitControlManager.unitList)
+        if ( rtsUnitControlManager.unitList == null)
+            return;
+        foreach (UnitController unit in rtsUnitControlManager.unitList)
         {
             // 유닛의 월드 좌표를 화면 좌표로 변환해 드래그 범위 내에 있는지 검사
-            if(dragRect.Contains(mainCamera.WorldToScreenPoint(unit.transform.position)))
+            if (dragRect.Contains(mainCamera.WorldToScreenPoint(unit.transform.position)))
             {
                 rtsUnitControlManager.DragSelectUnit(unit);
             }
