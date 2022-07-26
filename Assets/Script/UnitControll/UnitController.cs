@@ -16,6 +16,7 @@ public class UnitController : MonoBehaviour
     private float animAttackTime;
     private float animAttackSpeed;
 
+    Vector3 targetPosition;
     private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -43,12 +44,14 @@ public class UnitController : MonoBehaviour
             return;
         }
 
-
+        Debug.Log(state.GetTraceState());
+        Debug.Log(state.GetMoveState());
         if (state.IsTraceState(UnitTraceState.TRACE))
         {
             hit = Physics.OverlapSphere(transform.position, UnitDataScriptableObject.traceRange, LayerMask.GetMask("Enemy"));
             if (hit.Length >= 1)
             {
+                Debug.Log("Search");
                 if(state.IsMoveState(UnitMoveState.MOVE))
                 {
                     MoveTo(hit[0].transform.position);
@@ -56,8 +59,9 @@ public class UnitController : MonoBehaviour
                 state.SetTraceState(UnitTraceState.ATTACK_TRACE);
             }
         }
-        else if (state.IsTraceState(UnitTraceState.ATTACK_TRACE))
+        if (state.IsTraceState(UnitTraceState.ATTACK_TRACE) && !state.IsMoveState(UnitMoveState.NONE))
         {
+            
             hit = Physics.OverlapSphere(transform.position, userUnit.unitInfo.attackRange, LayerMask.GetMask("Enemy"));
 
             if (hit.Length >= 1)
@@ -66,11 +70,12 @@ public class UnitController : MonoBehaviour
                 state.SetAttackState(UnitAttackState.DO_ATTACK);
                 anim.SetBool("Attack", true);
                 anim.SetBool("IsMove", false);
-
+                Debug.Log("Do_ATTACK");
                 anim.SetFloat("AttackSpeed", animAttackSpeed);
             }
             else
             {
+                state.SetTraceState(UnitTraceState.TRACE);
                 state.SetAttackState(UnitAttackState.NONE_ATTACK);
                 anim.SetBool("Attack", false);
 
@@ -87,15 +92,22 @@ public class UnitController : MonoBehaviour
 
     private void Attack()
     {
+        if (state.IsMoveState(UnitMoveState.STOP))
+        {
+            anim.SetBool("Attack", false);
+            return;
+        }
 
         if (state.IsAttackState(UnitAttackState.DO_ATTACK))
         {
-            navMeshAgent.isStopped = true;
             foreach (var tmp in hit)
             {
+                Debug.Log("Do_ATTACKING");
                 IDamagable target = tmp.transform.GetComponent<IDamagable>();
                 target?.Hit(userUnit.unitInfo.damage);
-                transform.LookAt(target.GetTransform());
+                targetPosition = new Vector3(target.GetTransform().transform.position.x, transform.position.y, target.GetTransform().transform.position.z);
+                transform.LookAt(targetPosition);
+
                 return;
             }
         }
@@ -110,17 +122,14 @@ public class UnitController : MonoBehaviour
         Debug.Log(ac.animationClips.Length);
         for (int i = 0; i < ac.animationClips.Length; i++)
         {
-            Debug.Log(ac.animationClips[i].name);
 
             
             if (ac.animationClips[i].name.ToUpper().Contains("ATTACK"))
             {
-                Debug.Log("가졍ㅎㅁ ?");
                 animAttackTime = ac.animationClips[i].length;
                 break;
             }
         }
-        Debug.Log(animAttackTime);
         SetAnimAttackSpeed();
 
     }
@@ -128,7 +137,7 @@ public class UnitController : MonoBehaviour
     private void SetAnimAttackSpeed()
     {
         animAttackSpeed = animAttackTime / userUnit.unitInfo.attackSpeed;
-        Debug.Log(animAttackSpeed);
+
     }
     public void SelectUnit()
     {
@@ -182,18 +191,21 @@ public class UnitController : MonoBehaviour
         anim.SetBool("IsMove", true);
         navMeshAgent.isStopped = false;
         state.SetMoveState(UnitMoveState.MOVE);
-        state.SetTraceState(UnitTraceState.NONE);
+        state.SetTraceState(UnitTraceState.NONE); //TODO
+        Debug.Log("너가 왜 들어가 ?!!!");
     }
 
     private void IsArrive()
     {
         //if(navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
         //if(navMeshAgent.velocity == Vector3.zero)
+  
         if (navMeshAgent.velocity.sqrMagnitude <= 0.2f * 0.2f && navMeshAgent.remainingDistance <= 0.5f
             && navMeshAgent.velocity == Vector3.zero)
         {
             anim.SetBool("IsMove", false);
             state.SetTraceState(UnitTraceState.TRACE);
+            Debug.Log("도착");
         }
     }
 
@@ -207,6 +219,7 @@ public class UnitController : MonoBehaviour
         navMeshAgent.isStopped = true;
         anim.SetBool("IsMove", false);
         state.SetMoveState(UnitMoveState.STOP);
-        state.SetTraceState(UnitTraceState.NONE);
+        state.SetTraceState(UnitTraceState.NONE); //TODO
+        Debug.Log("너는 왜 들어가 ?");
     }
 }

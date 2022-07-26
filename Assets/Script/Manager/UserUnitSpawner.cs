@@ -24,16 +24,13 @@ public class UserUnitSpawner : MonoBehaviour
         for(int i =0; i < tmpData.Length; i++)
         {
 
-            Debug.Log("실행2");
             if (isBuys[i] == false)
             {
                 continue;
             }
-            Debug.Log("실행4");
             for (int j = 0;  j < tmpData[i].population;j++)
             {
 
-                Debug.Log("실행3");
                 Vector3 position = new Vector3(120, 5f, 120);
                 GameObject clone = Instantiate(unitPrefab[i], position, Quaternion.identity);
                 clone.GetComponent<UnitInfo>().SetData(tmpData[i]);

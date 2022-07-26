@@ -13,6 +13,9 @@ public class EnemyControl : MonoBehaviour
     private Enemy enemyUnit;
 
     public Transform testDestination;
+
+
+    private Vector3 targetPosition;
     private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -89,7 +92,9 @@ public class EnemyControl : MonoBehaviour
             {
                 IDamagable target = tmp.transform.GetComponent<IDamagable>();
                 target?.Hit(enemyUnit.unitInfo.damage);
-                transform.LookAt(target.GetTransform());
+                targetPosition = new Vector3(target.GetTransform().transform.position.x, transform.position.y, target.GetTransform().transform.position.z);
+                transform.LookAt(targetPosition);
+
                 return;
             }
         }

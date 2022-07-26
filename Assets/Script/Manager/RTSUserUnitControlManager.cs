@@ -114,7 +114,7 @@ public class RTSUserUnitControlManager : MonoBehaviour
             if(KeyManager.instance.keyState == KeyState.A)
             {
                 selectedUnitList[i].AttackMove();
-                KeyManager.instance.keyState = KeyState.NONE;
+
             }
             else
             {
@@ -167,6 +167,7 @@ public class RTSUserUnitControlManager : MonoBehaviour
 
             }
         }
+        KeyManager.instance.keyState = KeyState.NONE;
         //KeyManager.instance.keyState = KeyState.NONE; //TODO 만약에 이상하면 풀어 !!;
     }
 
