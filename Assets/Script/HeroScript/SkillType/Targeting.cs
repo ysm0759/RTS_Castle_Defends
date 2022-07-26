@@ -33,7 +33,7 @@ public class Targeting : SkillType
         RaycastHit hit;
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Enemy"));
-
+      
 
 
         if (hit.collider == null)

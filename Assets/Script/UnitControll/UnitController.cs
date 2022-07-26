@@ -27,6 +27,7 @@ public class UnitController : MonoBehaviour
         InvokeRepeating("Attack", 0f, userUnit.unitInfo.attackSpeed);
         anim = GetComponent<Animator>();
         SetAnimAttackTime();
+        hit = new Collider[5];
     }
 
 
@@ -48,8 +49,7 @@ public class UnitController : MonoBehaviour
         Debug.Log(state.GetMoveState());
         if (state.IsTraceState(UnitTraceState.TRACE))
         {
-            hit = Physics.OverlapSphere(transform.position, UnitDataScriptableObject.traceRange, LayerMask.GetMask("Enemy"));
-            if (hit.Length >= 1)
+            if (Physics.OverlapSphereNonAlloc(transform.position, UnitDataScriptableObject.traceRange, hit, LayerMask.GetMask("Enemy")) >= 1)
             {
                 Debug.Log("Search");
                 if(state.IsMoveState(UnitMoveState.MOVE))
@@ -62,9 +62,7 @@ public class UnitController : MonoBehaviour
         if (state.IsTraceState(UnitTraceState.ATTACK_TRACE) && !state.IsMoveState(UnitMoveState.NONE))
         {
             
-            hit = Physics.OverlapSphere(transform.position, userUnit.unitInfo.attackRange, LayerMask.GetMask("Enemy"));
-
-            if (hit.Length >= 1)
+            if (Physics.OverlapSphereNonAlloc(transform.position, userUnit.unitInfo.attackRange, hit, LayerMask.GetMask("Enemy")) >= 1)
             {
                 navMeshAgent.isStopped = true;
                 state.SetAttackState(UnitAttackState.DO_ATTACK);
@@ -122,8 +120,6 @@ public class UnitController : MonoBehaviour
         Debug.Log(ac.animationClips.Length);
         for (int i = 0; i < ac.animationClips.Length; i++)
         {
-
-            
             if (ac.animationClips[i].name.ToUpper().Contains("ATTACK"))
             {
                 animAttackTime = ac.animationClips[i].length;
@@ -219,7 +215,6 @@ public class UnitController : MonoBehaviour
         navMeshAgent.isStopped = true;
         anim.SetBool("IsMove", false);
         state.SetMoveState(UnitMoveState.STOP);
-        state.SetTraceState(UnitTraceState.NONE); //TODO
-        Debug.Log("너는 왜 들어가 ?");
+        state.SetTraceState(UnitTraceState.NONE);
     }
 }

@@ -39,7 +39,7 @@ public class UnitDataScriptableObject : ScriptableObject
     public float attackRange;  //공격 거리
     public int upgradeCost;  //업그레이드 가격
     public int population;  //생성되는 유닛 인구수
-    public float level;     //유닛 레벨
+    public int level;     //유닛 레벨
     public UnitDataScriptableObject nextStat;
     public static float traceRange = 10; // 추적 거리
     [TextArea]

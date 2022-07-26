@@ -24,6 +24,7 @@ public class EnemyControl : MonoBehaviour
         InvokeRepeating("SearchMyEnemy", 0f, 0.3f);
         InvokeRepeating("Attack", 0f, enemyUnit.unitInfo.attackSpeed);
         InvokeRepeating("SetDestinationCastle", 0f, 2.0f);
+        hit = new Collider[2];
     }
 
   
@@ -53,9 +54,8 @@ public class EnemyControl : MonoBehaviour
 
         if (state.IsTraceState(UnitTraceState.TRACE)) //움직이다 적을 찾은 상태
         {
-            hit = Physics.OverlapSphere(transform.position, UnitDataScriptableObject.traceRange, LayerMask.GetMask("User"));
             navMeshAgent.isStopped = false;
-            if (hit.Length >= 1)
+            if (Physics.OverlapSphereNonAlloc(transform.position, UnitDataScriptableObject.traceRange, hit, LayerMask.GetMask("User")) >= 1)
             {
                 MoveTo(hit[0].transform.position);
                 state.SetTraceState(UnitTraceState.ATTACK_TRACE);
@@ -63,8 +63,8 @@ public class EnemyControl : MonoBehaviour
         }
         else if (state.IsTraceState(UnitTraceState.ATTACK_TRACE))
         {
-            hit = Physics.OverlapSphere(transform.position, enemyUnit.unitInfo.attackRange, LayerMask.GetMask("User"));
-            if (hit.Length >= 1)
+           
+            if (Physics.OverlapSphereNonAlloc(transform.position, enemyUnit.unitInfo.attackRange, hit, LayerMask.GetMask("Enemy")) >= 1 )
             {
                 navMeshAgent.isStopped = true;
                 state.SetAttackState(UnitAttackState.DO_ATTACK);

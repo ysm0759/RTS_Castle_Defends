@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,15 @@ public class UserUnitSpawner : MonoBehaviour
     //오브젝트 풀링 하면서 
     // ?? 생성하고 
 
+    [SerializeField]
+    public SubArray[] UnitIndex;
+
+    [Serializable]
+    public struct SubArray
+    {
+        [SerializeField]
+        public GameObject[] LevelObjects;
+    }
 
 
 
@@ -32,11 +42,9 @@ public class UserUnitSpawner : MonoBehaviour
             {
 
                 Vector3 position = new Vector3(120, 5f, 120);
-                GameObject clone = Instantiate(unitPrefab[i], position, Quaternion.identity);
+                GameObject clone = Instantiate(UnitIndex[i].LevelObjects[tmpData[i].level-1], position, Quaternion.identity);
                 clone.GetComponent<UnitInfo>().SetData(tmpData[i]);
-
                 UnitController unit = clone.GetComponent<UnitController>();
-
                 unitList.Add(unit);
             }
         }
