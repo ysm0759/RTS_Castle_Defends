@@ -16,6 +16,8 @@ public class UnitController : MonoBehaviour
     private float animAttackTime;
     private float animAttackSpeed;
 
+    private ObjectAttack attackType;
+
     Vector3 targetPosition;
     private void Start()
     {
@@ -27,6 +29,7 @@ public class UnitController : MonoBehaviour
         InvokeRepeating("Attack", 0f, userUnit.unitInfo.attackSpeed);
         anim = GetComponent<Animator>();
         SetAnimAttackTime();
+        attackType = GetComponent<ObjectAttack>();
         hit = new Collider[5];
     }
 
@@ -98,14 +101,22 @@ public class UnitController : MonoBehaviour
 
         if (state.IsAttackState(UnitAttackState.DO_ATTACK))
         {
+
             foreach (var tmp in hit)
             {
-                Debug.Log("Do_ATTACKING");
                 IDamagable target = tmp.transform.GetComponent<IDamagable>();
                 target?.Hit(userUnit.unitInfo.damage);
                 targetPosition = new Vector3(target.GetTransform().transform.position.x, transform.position.y, target.GetTransform().transform.position.z);
                 transform.LookAt(targetPosition);
+                if(attackType != null)
+                {
+                    attackType?.Attack(hit);
 
+                }
+                else
+                {
+                    Debug.Log("데이터 잘 못 넣음 확인바람!!!!!!!!!!!!!!!!!");
+                }
                 return;
             }
         }
