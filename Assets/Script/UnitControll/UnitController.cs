@@ -71,6 +71,8 @@ public class UnitController : MonoBehaviour
                         state.SetAttackState(UnitAttackState.DO_ATTACK);
                         anim.SetBool("IsMove", false);
                         anim.SetFloat("AttackSpeed", animAttackSpeed);
+                        targetPosition = new Vector3(hit[0].transform.position.x, transform.position.y, hit[0].transform.position.z);
+
                         if (canAttack)
                         {
                             StartCoroutine("Attack");
@@ -104,12 +106,9 @@ public class UnitController : MonoBehaviour
         }
         else if (state.IsAttackState(UnitAttackState.DO_ATTACK))
         {
-
-
             transform.LookAt(targetPosition);
             anim.SetBool("Attack", true);
             if (attackType != null)
-
                 attackType?.Attack(hit, userUnit.unitInfo.damage);
             else
 
