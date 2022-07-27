@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,61 +21,69 @@ public class ObjectPool : MonoBehaviour
 
     public static ObjectPool Instance;
 
-    [SerializeField]
-    private GameObject poolingObjectPrefab;
-    // 내가 원하는건 단품이 아님 세트메뉴임
-    // 아처 , 뭐 , 뭐시기 
-    Queue<UnitController> poolingObjectQueue = new Queue<UnitController>();
 
-    Hashtable hashtable;
+
+    [Serializable]
+    public struct SerializeFieldDictionary
+    {
+        public string name;
+        public GameObject PrefabObject;
+    }
+    public SerializeFieldDictionary[] poolingObjectPrefab;
+
+
+    Dictionary<string, GameObject> prefabDic;
+    Dictionary<string, Queue<GameObject>> poolingObjectQueues;
 
 
     private void Awake()
     {
         Instance = this;
-        hashtable = new Hashtable();
-        Initialize(10);
-    }
+        prefabDic = new Dictionary<string, GameObject>();
+        poolingObjectQueues = new Dictionary<string, Queue<GameObject>>();
 
-    private void Initialize(int initCount)
-    {
-        for (int i = 0; i < initCount; i++)
+
+
+        for (int i =0;i < poolingObjectPrefab.Length;i++)
         {
-            poolingObjectQueue.Enqueue(CreateNewObject());
+            prefabDic.Add(poolingObjectPrefab[i].name, poolingObjectPrefab[i].PrefabObject);
+            poolingObjectQueues.Add(poolingObjectPrefab[i].name, new Queue<GameObject>());
         }
     }
 
-    private UnitController CreateNewObject()
+    private GameObject CreateNewObject(string name)
     {
-        var newObj = Instantiate(poolingObjectPrefab).GetComponent<UnitController>();
+        var newObj = Instantiate(prefabDic[name]);
         newObj.gameObject.SetActive(false);
         newObj.transform.SetParent(transform);
         return newObj;
     }
 
-    public static UnitController GetObject()
+
+    public static GameObject GetObject(string name)
     {
-        if (Instance.poolingObjectQueue.Count > 0)
+        Debug.Log("오브젝트 풀 발생");
+        if (Instance.poolingObjectQueues[name]?.Count > 0)
         {
-            var obj = Instance.poolingObjectQueue.Dequeue();
+            var obj = Instance.poolingObjectQueues[name].Dequeue();
             obj.transform.SetParent(null);
             obj.gameObject.SetActive(true);
             return obj;
         }
         else
         {
-            var newObj = Instance.CreateNewObject();
+            var newObj = Instance.CreateNewObject(name);
             newObj.gameObject.SetActive(true);
             newObj.transform.SetParent(null);
             return newObj;
         }
     }
 
-    public static void ReturnObject(UnitController obj)
+    public static void ReturnObject(string name ,GameObject obj)
     {
         obj.gameObject.SetActive(false);
         obj.transform.SetParent(Instance.transform);
-        Instance.poolingObjectQueue.Enqueue(obj);
+        Instance.poolingObjectQueues[name].Enqueue(obj);
     }
 
 }
