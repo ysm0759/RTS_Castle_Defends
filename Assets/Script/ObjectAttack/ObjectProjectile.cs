@@ -14,6 +14,5 @@ public class ObjectProjectile : ObjectAttack
             clone.GetComponent<ProjectilePrefab>().SetDestination(hit[i].transform.position);
         }
 
-
     }
 }

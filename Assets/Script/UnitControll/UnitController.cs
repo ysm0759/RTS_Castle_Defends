@@ -19,14 +19,14 @@ public class UnitController : MonoBehaviour
     private ObjectAttack attackType;
 
     Vector3 targetPosition;
-    private void Start()
+
+    private void OnEnable()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         state = new UnitState();
         userUnit = GetComponent<UserUnit>();
         InvokeRepeating("SearchTrace", 0f, 0.3f);
         //InvokeRepeating("IsArrive", 0f, 0.2f);
-        InvokeRepeating("Attack", 0f, userUnit.unitInfo.attackSpeed);
         anim = GetComponent<Animator>();
         SetAnimAttackTime();
         attackType = GetComponent<ObjectAttack>();
@@ -69,17 +69,16 @@ public class UnitController : MonoBehaviour
             {
                 navMeshAgent.isStopped = true;
                 state.SetAttackState(UnitAttackState.DO_ATTACK);
-                anim.SetBool("Attack", true);
                 anim.SetBool("IsMove", false);
                 Debug.Log("Do_ATTACK");
                 anim.SetFloat("AttackSpeed", animAttackSpeed);
+                InvokeRepeating("Attack", 0f, userUnit.unitInfo.attackSpeed);
             }
             else
             {
                 state.SetTraceState(UnitTraceState.TRACE);
                 state.SetAttackState(UnitAttackState.NONE_ATTACK);
                 anim.SetBool("Attack", false);
-
             }
         }
         else
@@ -108,7 +107,8 @@ public class UnitController : MonoBehaviour
                 target?.Hit(userUnit.unitInfo.damage);
                 targetPosition = new Vector3(target.GetTransform().transform.position.x, transform.position.y, target.GetTransform().transform.position.z);
                 transform.LookAt(targetPosition);
-                if(attackType != null)
+                anim.SetBool("Attack", true);
+                if (attackType != null)
                 {
                     attackType?.Attack(hit);
 
