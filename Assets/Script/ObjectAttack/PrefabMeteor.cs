@@ -18,7 +18,6 @@ public class PrefabMeteor : PrefabObject
         {
             for(int i =0;i < Physics.OverlapSphereNonAlloc(gameObject.transform.position,5,hit, LayerMask.GetMask("Enemy"));i++)
             {
-                Debug.Log("????");
                 hit[i].GetComponent<IDamagable>().Hit(damage);
             }
 

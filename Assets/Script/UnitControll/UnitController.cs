@@ -71,7 +71,7 @@ public class UnitController : MonoBehaviour
                         state.SetAttackState(UnitAttackState.DO_ATTACK);
                         anim.SetBool("IsMove", false);
                         anim.SetFloat("AttackSpeed", animAttackSpeed);
-                        if(canAttack)
+                        if (canAttack)
                         {
                             StartCoroutine("Attack");
                         }
@@ -105,24 +105,17 @@ public class UnitController : MonoBehaviour
         else if (state.IsAttackState(UnitAttackState.DO_ATTACK))
         {
 
-            foreach (var tmp in hit)
-            {
-                //IDamagable target = tmp.transform.GetComponent<IDamagable>();
-                //target?.Hit(userUnit.unitInfo.damage);
-                //targetPosition = new Vector3(target.GetTransform().transform.position.x, transform.position.y, target.GetTransform().transform.position.z);
-                transform.LookAt(targetPosition);
-                anim.SetBool("Attack", true);
-                if (attackType != null)
-                {
-                    attackType?.Attack(hit, userUnit.unitInfo.damage);
 
-                }
-                else
-                {
-                    Debug.Log("데이터 잘 못 넣음 확인바람!!!!!!!!!!!!!!!!!");
-                }
-                break;
-            }
+            transform.LookAt(targetPosition);
+            anim.SetBool("Attack", true);
+            if (attackType != null)
+
+                attackType?.Attack(hit, userUnit.unitInfo.damage);
+            else
+
+                Debug.Log("데이터 잘 못 넣음 확인바람!!!!!!!!!!!!!!!!!");
+
+
         }
         yield return new WaitForSeconds(userUnit.unitInfo.attackSpeed);
         canAttack = true;

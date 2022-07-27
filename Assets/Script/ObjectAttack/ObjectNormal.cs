@@ -6,6 +6,6 @@ public class ObjectNormal : ObjectAttack
 {
     public override void Attack(Collider[] hit, float damage )
     {
-        Debug.Log("노말");
+        hit[0].transform.GetComponent<IDamagable>()?.Hit(damage);
     }
 }

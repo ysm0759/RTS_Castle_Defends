@@ -2,6 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+enum OBJECT_NAME
+{
+    User_Warrior,
+    User_Archer,
+    User_Megician,
+    
+    User_Projectile,
+    User_Meteor,
+
+
+    Enemy_Melee,
+}
+
 public class ObjectPool : MonoBehaviour
 {
 
@@ -13,10 +26,13 @@ public class ObjectPool : MonoBehaviour
     // 아처 , 뭐 , 뭐시기 
     Queue<UnitController> poolingObjectQueue = new Queue<UnitController>();
 
+    Hashtable hashtable;
+
+
     private void Awake()
     {
         Instance = this;
-
+        hashtable = new Hashtable();
         Initialize(10);
     }
 
