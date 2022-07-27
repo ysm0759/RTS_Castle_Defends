@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class ObjectAttack : MonoBehaviour
 {
-    public abstract void Attack(Collider[] hit);
+    public abstract void Attack(Collider[] hit,float damage);
 }

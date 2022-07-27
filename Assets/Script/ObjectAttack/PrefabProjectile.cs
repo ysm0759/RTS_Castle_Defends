@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectilePrefab : MonoBehaviour
+public class PrefabProjectile : PrefabObject
 {
 
-    Vector3 destination;
-    Vector3 dir;
     private void Update()
     {
         dir = destination - gameObject.transform.position;
@@ -16,10 +14,4 @@ public class ProjectilePrefab : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void SetDestination(Vector3 destination)
-    {
-        this.destination = destination;
-        gameObject.transform.LookAt(destination);
-
-    }
 }

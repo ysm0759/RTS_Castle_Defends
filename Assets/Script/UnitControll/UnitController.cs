@@ -20,13 +20,15 @@ public class UnitController : MonoBehaviour
 
     Vector3 targetPosition;
 
-    private void OnEnable()
+    bool canAttack = true;
+
+    private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         state = new UnitState();
         userUnit = GetComponent<UserUnit>();
-        InvokeRepeating("SearchTrace", 0f, 0.3f);
-        //InvokeRepeating("IsArrive", 0f, 0.2f);
+        //InvokeRepeating("SearchTrace", 0f, 0.3f);
+        StartCoroutine(SearchTrace());
         anim = GetComponent<Animator>();
         SetAnimAttackTime();
         attackType = GetComponent<ObjectAttack>();
@@ -39,96 +41,97 @@ public class UnitController : MonoBehaviour
         IsArrive();
     }
 
-    private void SearchTrace()
+    IEnumerator SearchTrace()
     {
-
-        if (state.IsMoveState(UnitMoveState.STOP) || KeyManager.instance.skill == Skill.SKILL_USING_CANT_MOVE || KeyManager.instance.skill == Skill.SKILL_USING_CAN_MOVE)
+        while (true)
         {
-            state.SetAttackState(UnitAttackState.NONE_ATTACK);
-            return;
-        }
-
-        Debug.Log(state.GetTraceState());
-        Debug.Log(state.GetMoveState());
-        if (state.IsTraceState(UnitTraceState.TRACE))
-        {
-            if (Physics.OverlapSphereNonAlloc(transform.position, UnitDataScriptableObject.traceRange, hit, LayerMask.GetMask("Enemy")) >= 1)
+            if (state.IsMoveState(UnitMoveState.STOP) || KeyManager.instance.skill == Skill.SKILL_USING_CANT_MOVE || KeyManager.instance.skill == Skill.SKILL_USING_CAN_MOVE)
             {
-                Debug.Log("Search");
-                if(state.IsMoveState(UnitMoveState.MOVE))
-                {
-                    MoveTo(hit[0].transform.position);
-                }
-                state.SetTraceState(UnitTraceState.ATTACK_TRACE);
-            }
-        }
-        if (state.IsTraceState(UnitTraceState.ATTACK_TRACE) && !state.IsMoveState(UnitMoveState.NONE))
-        {
-            
-            if (Physics.OverlapSphereNonAlloc(transform.position, userUnit.unitInfo.attackRange, hit, LayerMask.GetMask("Enemy")) >= 1)
-            {
-                navMeshAgent.isStopped = true;
-                state.SetAttackState(UnitAttackState.DO_ATTACK);
-                anim.SetBool("IsMove", false);
-                Debug.Log("Do_ATTACK");
-                anim.SetFloat("AttackSpeed", animAttackSpeed);
-                InvokeRepeating("Attack", 0f, userUnit.unitInfo.attackSpeed);
+                state.SetAttackState(UnitAttackState.NONE_ATTACK);
             }
             else
             {
-                state.SetTraceState(UnitTraceState.TRACE);
-                state.SetAttackState(UnitAttackState.NONE_ATTACK);
-                anim.SetBool("Attack", false);
+                if (state.IsTraceState(UnitTraceState.TRACE))
+                {
+                    if (Physics.OverlapSphereNonAlloc(transform.position, UnitDataScriptableObject.traceRange, hit, LayerMask.GetMask("Enemy")) >= 1)
+                    {
+                        if (state.IsMoveState(UnitMoveState.MOVE))
+                        {
+                            MoveTo(hit[0].transform.position);
+                        }
+                        state.SetTraceState(UnitTraceState.ATTACK_TRACE);
+                    }
+                }
+                if (state.IsTraceState(UnitTraceState.ATTACK_TRACE) && !state.IsMoveState(UnitMoveState.NONE))
+                {
+
+                    if (Physics.OverlapSphereNonAlloc(transform.position, userUnit.unitInfo.attackRange, hit, LayerMask.GetMask("Enemy")) >= 1)
+                    {
+                        navMeshAgent.isStopped = true;
+                        state.SetAttackState(UnitAttackState.DO_ATTACK);
+                        anim.SetBool("IsMove", false);
+                        anim.SetFloat("AttackSpeed", animAttackSpeed);
+                        if(canAttack)
+                        {
+                            StartCoroutine("Attack");
+                        }
+                    }
+                    else
+                    {
+                        state.SetTraceState(UnitTraceState.TRACE);
+                        state.SetAttackState(UnitAttackState.NONE_ATTACK);
+                        anim.SetBool("Attack", false);
+                    }
+                }
+                else
+                {
+                    state.SetAttackState(UnitAttackState.NONE_ATTACK);
+                    anim.SetBool("Attack", false);
+                }
             }
-        }
-        else
-        {
-            state.SetAttackState(UnitAttackState.NONE_ATTACK);
-            anim.SetBool("Attack", false);
+            yield return new WaitForSeconds(0.3f);
         }
     }
 
 
 
-    private void Attack()
+    IEnumerator Attack()
     {
+        canAttack = false;
         if (state.IsMoveState(UnitMoveState.STOP))
         {
             anim.SetBool("Attack", false);
-            return;
         }
-
-        if (state.IsAttackState(UnitAttackState.DO_ATTACK))
+        else if (state.IsAttackState(UnitAttackState.DO_ATTACK))
         {
 
             foreach (var tmp in hit)
             {
-                IDamagable target = tmp.transform.GetComponent<IDamagable>();
-                target?.Hit(userUnit.unitInfo.damage);
-                targetPosition = new Vector3(target.GetTransform().transform.position.x, transform.position.y, target.GetTransform().transform.position.z);
+                //IDamagable target = tmp.transform.GetComponent<IDamagable>();
+                //target?.Hit(userUnit.unitInfo.damage);
+                //targetPosition = new Vector3(target.GetTransform().transform.position.x, transform.position.y, target.GetTransform().transform.position.z);
                 transform.LookAt(targetPosition);
                 anim.SetBool("Attack", true);
                 if (attackType != null)
                 {
-                    attackType?.Attack(hit);
+                    attackType?.Attack(hit, userUnit.unitInfo.damage);
 
                 }
                 else
                 {
                     Debug.Log("데이터 잘 못 넣음 확인바람!!!!!!!!!!!!!!!!!");
                 }
-                return;
+                break;
             }
         }
-
-
+        yield return new WaitForSeconds(userUnit.unitInfo.attackSpeed);
+        canAttack = true;
     }
 
 
     public void SetAnimAttackTime()
     {
         RuntimeAnimatorController ac = anim.runtimeAnimatorController;
-        Debug.Log(ac.animationClips.Length);
         for (int i = 0; i < ac.animationClips.Length; i++)
         {
             if (ac.animationClips[i].name.ToUpper().Contains("ATTACK"))
@@ -186,7 +189,7 @@ public class UnitController : MonoBehaviour
 
     public void AttackMove()
     {
-        anim.SetBool("IsMove",true);
+        anim.SetBool("IsMove", true);
 
         navMeshAgent.isStopped = false;
         state.SetMoveState(UnitMoveState.MOVE);
@@ -199,20 +202,18 @@ public class UnitController : MonoBehaviour
         navMeshAgent.isStopped = false;
         state.SetMoveState(UnitMoveState.MOVE);
         state.SetTraceState(UnitTraceState.NONE); //TODO
-        Debug.Log("너가 왜 들어가 ?!!!");
     }
 
     private void IsArrive()
     {
         //if(navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
         //if(navMeshAgent.velocity == Vector3.zero)
-  
+
         if (navMeshAgent.velocity.sqrMagnitude <= 0.2f * 0.2f && navMeshAgent.remainingDistance <= 0.5f
             && navMeshAgent.velocity == Vector3.zero)
         {
             anim.SetBool("IsMove", false);
             state.SetTraceState(UnitTraceState.TRACE);
-            Debug.Log("도착");
         }
     }
 

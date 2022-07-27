@@ -64,7 +64,7 @@ public class EnemyControl : MonoBehaviour
         else if (state.IsTraceState(UnitTraceState.ATTACK_TRACE))
         {
            
-            if (Physics.OverlapSphereNonAlloc(transform.position, enemyUnit.unitInfo.attackRange, hit, LayerMask.GetMask("Enemy")) >= 1 )
+            if (Physics.OverlapSphereNonAlloc(transform.position, enemyUnit.unitInfo.attackRange, hit, LayerMask.GetMask("User")) >= 1 )
             {
                 navMeshAgent.isStopped = true;
                 state.SetAttackState(UnitAttackState.DO_ATTACK);
