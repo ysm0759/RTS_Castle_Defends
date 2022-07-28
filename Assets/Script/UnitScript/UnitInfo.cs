@@ -5,6 +5,13 @@ using UnityEngine;
 public class UnitInfo : MonoBehaviour
 {
 
+    Animation anim;
+    
+    void Awake()
+    {
+        anim = GetComponent<Animation>();
+    }
+
     [SerializeField]
     private UnitDataScriptableObject data;
     public UnitDataScriptableObject GetUnitDataScriptableObject()

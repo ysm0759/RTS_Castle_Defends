@@ -111,7 +111,6 @@ public class UnitController : MonoBehaviour
             if (attackType != null)
                 attackType?.Attack(hit, userUnit.unitInfo.damage);
             else
-
                 Debug.Log("데이터 잘 못 넣음 확인바람!!!!!!!!!!!!!!!!!");
 
 

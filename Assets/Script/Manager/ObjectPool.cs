@@ -62,7 +62,6 @@ public class ObjectPool : MonoBehaviour
 
     public static GameObject GetObject(string name)
     {
-        Debug.Log("오브젝트 풀 발생");
         if (Instance.poolingObjectQueues[name]?.Count > 0)
         {
             var obj = Instance.poolingObjectQueues[name].Dequeue();

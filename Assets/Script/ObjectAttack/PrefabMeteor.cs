@@ -21,9 +21,11 @@ public class PrefabMeteor : PrefabObject
                 hit[i].GetComponent<IDamagable>().Hit(damage);
             }
 
-            Destroy(gameObject);
+            ObjectPool.ReturnObject("meteor", gameObject);
         }
 
     }
+
+
 
 }

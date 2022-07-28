@@ -232,7 +232,6 @@ public class RTSUserUnitControlManager : MonoBehaviour
 
     public void InitUnit()
     {
-        Debug.Log("실행1");
         unitList = unitSpawner.SpawnUnits(storeSceneUI.GetScriptableData(), storeSceneUI.GetIsBuys());
 
         for (int i = 0; i < unitList.Count; i++)

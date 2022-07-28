@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ObjectProjectile : ObjectAttack
 {
-    [SerializeField] GameObject prefab;
     [SerializeField] int multiAttack = 1;
 
     public override void Attack(Collider[] hit, float damage)

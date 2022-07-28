@@ -124,7 +124,6 @@ public class KeyManager : MonoBehaviour
             keyState = KeyState.S;
 
             RTSUserUnitControlManager.instance.StopSelectUnit();
-            Debug.Log("??");
             if (Skill.SKILL_SHOW == skill)
                 skill = Skill.SKILL_SHOW_CANCEL;
         }
