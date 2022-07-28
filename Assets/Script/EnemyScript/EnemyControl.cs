@@ -23,41 +23,45 @@ public class EnemyControl : MonoBehaviour
     bool canAttack = true;
     private Vector3 targetPosition;
 
-    private void Start()
+    public void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent.enabled = true;
+
         enemyUnit = GetComponent<Enemy>();
         anim = GetComponent<Animator>();
         attackType = GetComponent<ObjectAttack>();
 
+        destination = FindObjectOfType<Destination>().gameObject.transform.position;
+
+
         state = new UnitState();
         hit = new Collider[1];
 
+
         StartCoroutine(SearchTrace());
-        InvokeRepeating("SetDestinationCastle", 0f, 2.0f);
+        StartCoroutine(SetDestinationCastle());
         SetAnimAttackTime();
 
-        destination = FindObjectOfType<Destination>().gameObject.transform.position;
     }
 
 
     IEnumerator SearchTrace()
     {
 
-
-        while(true)
+        while (true)
         {
+
             IsArrive();
             if (state.IsTraceState(UnitTraceState.TRACE)) //움직이다 적을 찾은 상태
             {
-                navMeshAgent.isStopped = false;
                 if (Physics.OverlapSphereNonAlloc(transform.position, UnitDataScriptableObject.traceRange, hit, LayerMask.GetMask("User")) >= 1)
                 {
                     MoveTo(hit[0].transform.position);
                     state.SetTraceState(UnitTraceState.ATTACK_TRACE);
                 }
             }
-            else if (state.IsTraceState(UnitTraceState.ATTACK_TRACE))
+            if (state.IsTraceState(UnitTraceState.ATTACK_TRACE))
             {
                 if (Physics.OverlapSphereNonAlloc(transform.position, enemyUnit.unitInfo.attackRange, hit, LayerMask.GetMask("User")) >= 1)
                 {
@@ -113,15 +117,19 @@ public class EnemyControl : MonoBehaviour
 
     private void IsArrive()
     {
+
         if (navMeshAgent.velocity.sqrMagnitude <= 0.2f * 0.2f && navMeshAgent.remainingDistance <= 0.5f)
         {
+
             anim.SetBool("IsMove", false);
             state.SetTraceState(UnitTraceState.TRACE);
+
         }
     }
 
     public void MoveTo(Vector3 end)
     {
+        navMeshAgent.isStopped = false;
         anim.SetBool("IsMove", true);
         navMeshAgent.SetDestination(end);
     }
@@ -129,15 +137,18 @@ public class EnemyControl : MonoBehaviour
 
 
 
-    private void SetDestinationCastle()
+    IEnumerator SetDestinationCastle()
     {
-        if (state.IsTraceState(UnitTraceState.TRACE))
+        while (true)
         {
-            MoveTo(destination);
-            state.SetMoveState(UnitMoveState.MOVE);
-            state.SetTraceState(UnitTraceState.TRACE);
+            if (state.IsTraceState(UnitTraceState.TRACE))
+            {
+                MoveTo(destination);
+                state.SetMoveState(UnitMoveState.MOVE);
+                state.SetTraceState(UnitTraceState.TRACE);
+            }
+            yield return new WaitForSeconds(2.0f);
         }
-
     }
 
 

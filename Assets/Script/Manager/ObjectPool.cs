@@ -53,7 +53,9 @@ public class ObjectPool : MonoBehaviour
 
     private GameObject CreateNewObject(string name)
     {
+
         var newObj = Instantiate(prefabDic[name]);
+
         newObj.gameObject.SetActive(false);
         newObj.transform.SetParent(transform);
         return newObj;
@@ -62,6 +64,7 @@ public class ObjectPool : MonoBehaviour
 
     public static GameObject GetObject(string name)
     {
+
 
         if (Instance.poolingObjectQueues[name]?.Count > 0)
         {
