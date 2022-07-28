@@ -25,26 +25,24 @@ public class UnitController : MonoBehaviour
     private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        state = new UnitState();
         userUnit = GetComponent<UserUnit>();
-        //InvokeRepeating("SearchTrace", 0f, 0.3f);
-        StartCoroutine(SearchTrace());
         anim = GetComponent<Animator>();
-        SetAnimAttackTime();
         attackType = GetComponent<ObjectAttack>();
-        hit = new Collider[5];
+
+        state = new UnitState();
+        hit = new Collider[1];
+
+        StartCoroutine(SearchTrace());
+        SetAnimAttackTime();
+
     }
 
-
-    private void Update()
-    {
-        IsArrive();
-    }
 
     IEnumerator SearchTrace()
     {
         while (true)
         {
+            IsArrive();
             if (state.IsMoveState(UnitMoveState.STOP) || KeyManager.instance.skill == Skill.SKILL_USING_CANT_MOVE || KeyManager.instance.skill == Skill.SKILL_USING_CAN_MOVE)
             {
                 state.SetAttackState(UnitAttackState.NONE_ATTACK);
@@ -109,10 +107,9 @@ public class UnitController : MonoBehaviour
             transform.LookAt(targetPosition);
             anim.SetBool("Attack", true);
             if (attackType != null)
-                attackType?.Attack(hit, userUnit.unitInfo.damage);
+                attackType?.Attack(hit, userUnit.unitInfo.damage, userUnit.unitInfo.attackName);
             else
                 Debug.Log("데이터 잘 못 넣음 확인바람!!!!!!!!!!!!!!!!!");
-
 
         }
         yield return new WaitForSeconds(userUnit.unitInfo.attackSpeed);

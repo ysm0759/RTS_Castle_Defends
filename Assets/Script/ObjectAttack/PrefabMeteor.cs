@@ -5,9 +5,18 @@ using UnityEngine;
 public class PrefabMeteor : PrefabObject
 {
     Collider[] hit;
+    int layer;
     private void Awake()
     {
         hit = new Collider[10];
+        if(gameObject.layer == LayerMask.GetMask("Enemy"))
+        {
+            layer = LayerMask.GetMask("Enemy");
+        }
+        else
+        {
+            layer = LayerMask.GetMask("User");
+        }
     }
     private void Update()
     {
@@ -16,7 +25,7 @@ public class PrefabMeteor : PrefabObject
 
         if (dir.sqrMagnitude < 0.0001)
         {
-            for(int i =0;i < Physics.OverlapSphereNonAlloc(gameObject.transform.position,5,hit, LayerMask.GetMask("Enemy"));i++)
+            for(int i =0;i < Physics.OverlapSphereNonAlloc(gameObject.transform.position,5,hit, layer);i++)
             {
                 hit[i].GetComponent<IDamagable>().Hit(damage);
             }

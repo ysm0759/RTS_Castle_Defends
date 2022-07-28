@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectNormal : ObjectAttack
 {
-    public override void Attack(Collider[] hit, float damage )
+    public override void Attack(Collider[] hit, float damage, string name = null)
     {
         hit[0].transform.GetComponent<IDamagable>()?.Hit(damage);
     }

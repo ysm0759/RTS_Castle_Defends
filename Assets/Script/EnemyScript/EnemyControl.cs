@@ -6,112 +6,123 @@ using UnityEngine.AI;
 public class EnemyControl : MonoBehaviour
 {
 
-    private GameObject unitMarker;
     private NavMeshAgent navMeshAgent;
     private UnitState state;
     private Collider[] hit;
     private Enemy enemyUnit;
 
-    public Transform testDestination;
+    public Vector3 destination;
 
 
+    private Animator anim;
+    private float animAttackTime;
+    private float animAttackSpeed;
+
+    private ObjectAttack attackType;
+
+    bool canAttack = true;
     private Vector3 targetPosition;
+
     private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        state = new UnitState();
         enemyUnit = GetComponent<Enemy>();
-        InvokeRepeating("SearchMyEnemy", 0f, 0.3f);
-        InvokeRepeating("Attack", 0f, enemyUnit.unitInfo.attackSpeed);
+        anim = GetComponent<Animator>();
+        attackType = GetComponent<ObjectAttack>();
+
+        state = new UnitState();
+        hit = new Collider[1];
+
+        StartCoroutine(SearchTrace());
         InvokeRepeating("SetDestinationCastle", 0f, 2.0f);
-        hit = new Collider[2];
-    }
+        SetAnimAttackTime();
 
-  
-    private void OnDrawGizmosSelected()
-    {
-
-        if (hit != null && hit.Length == 0)
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, UnitDataScriptableObject.traceRange);
-        }
-        else
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, UnitDataScriptableObject.traceRange);
-        }
+        destination = FindObjectOfType<Destination>().gameObject.transform.position;
     }
 
 
-
-
-
-    private void SearchMyEnemy()
+    IEnumerator SearchTrace()
     {
 
-        IsArrive();
 
-        if (state.IsTraceState(UnitTraceState.TRACE)) //움직이다 적을 찾은 상태
+        while(true)
         {
-            navMeshAgent.isStopped = false;
-            if (Physics.OverlapSphereNonAlloc(transform.position, UnitDataScriptableObject.traceRange, hit, LayerMask.GetMask("User")) >= 1)
+            IsArrive();
+            if (state.IsTraceState(UnitTraceState.TRACE)) //움직이다 적을 찾은 상태
             {
-                MoveTo(hit[0].transform.position);
-                state.SetTraceState(UnitTraceState.ATTACK_TRACE);
+                navMeshAgent.isStopped = false;
+                if (Physics.OverlapSphereNonAlloc(transform.position, UnitDataScriptableObject.traceRange, hit, LayerMask.GetMask("User")) >= 1)
+                {
+                    MoveTo(hit[0].transform.position);
+                    state.SetTraceState(UnitTraceState.ATTACK_TRACE);
+                }
             }
-        }
-        else if (state.IsTraceState(UnitTraceState.ATTACK_TRACE))
-        {
-           
-            if (Physics.OverlapSphereNonAlloc(transform.position, enemyUnit.unitInfo.attackRange, hit, LayerMask.GetMask("User")) >= 1 )
+            else if (state.IsTraceState(UnitTraceState.ATTACK_TRACE))
             {
-                navMeshAgent.isStopped = true;
-                state.SetAttackState(UnitAttackState.DO_ATTACK);
+                if (Physics.OverlapSphereNonAlloc(transform.position, enemyUnit.unitInfo.attackRange, hit, LayerMask.GetMask("User")) >= 1)
+                {
+                    navMeshAgent.isStopped = true;
+                    state.SetAttackState(UnitAttackState.DO_ATTACK);
+                    anim.SetBool("IsMove", false);
+                    anim.SetFloat("AttackSpeed", animAttackSpeed);
+                    targetPosition = new Vector3(hit[0].transform.position.x, transform.position.y, hit[0].transform.position.z);
+
+                    if (canAttack)
+                    {
+                        StartCoroutine("Attack");
+                    }
+                }
+                else
+                {
+                    state.SetTraceState(UnitTraceState.TRACE);
+                    state.SetAttackState(UnitAttackState.NONE_ATTACK);
+                    anim.SetBool("Attack", false);
+                }
             }
             else
             {
-                state.SetTraceState(UnitTraceState.TRACE);
                 state.SetAttackState(UnitAttackState.NONE_ATTACK);
+                anim.SetBool("Attack", false);
+                anim.SetBool("IsMove", false);
             }
+
+            yield return new WaitForSeconds(0.3f);
         }
-        else
-        {
-            state.SetAttackState(UnitAttackState.NONE_ATTACK);
-        }
+        
     }
 
-
-
-    private void Attack()
+    IEnumerator Attack()
     {
+        canAttack = false;
+
         if (state.IsAttackState(UnitAttackState.DO_ATTACK))
         {
-            navMeshAgent.isStopped = true;
-            foreach (var tmp in hit)
-            {
-                IDamagable target = tmp.transform.GetComponent<IDamagable>();
-                target?.Hit(enemyUnit.unitInfo.damage);
-                targetPosition = new Vector3(target.GetTransform().transform.position.x, transform.position.y, target.GetTransform().transform.position.z);
-                transform.LookAt(targetPosition);
+            transform.LookAt(targetPosition);
+            anim.SetBool("Attack", true);
+            if (attackType != null)
+                attackType?.Attack(hit, enemyUnit.unitInfo.damage, enemyUnit.unitInfo.attackName);
+            else
+                Debug.Log("데이터 잘 못 넣음 확인바람!!!!!!!!!!!!!!!!!");
 
-                return;
-            }
         }
-
-
+        yield return new WaitForSeconds(enemyUnit.unitInfo.attackSpeed);
+        canAttack = true;
     }
+
+
 
     private void IsArrive()
     {
         if (navMeshAgent.velocity.sqrMagnitude <= 0.2f * 0.2f && navMeshAgent.remainingDistance <= 0.5f)
         {
+            anim.SetBool("IsMove", false);
             state.SetTraceState(UnitTraceState.TRACE);
         }
     }
 
     public void MoveTo(Vector3 end)
     {
+        anim.SetBool("IsMove", true);
         navMeshAgent.SetDestination(end);
     }
 
@@ -122,7 +133,7 @@ public class EnemyControl : MonoBehaviour
     {
         if (state.IsTraceState(UnitTraceState.TRACE))
         {
-            MoveTo(testDestination.position);
+            MoveTo(destination);
             state.SetMoveState(UnitMoveState.MOVE);
             state.SetTraceState(UnitTraceState.TRACE);
         }
@@ -130,18 +141,25 @@ public class EnemyControl : MonoBehaviour
     }
 
 
-    public void AttackMove()
+    public void SetAnimAttackTime()
     {
-        navMeshAgent.isStopped = false;
-        state.SetMoveState(UnitMoveState.MOVE);
-        state.SetTraceState(UnitTraceState.TRACE);
+        RuntimeAnimatorController ac = anim.runtimeAnimatorController;
+        for (int i = 0; i < ac.animationClips.Length; i++)
+        {
+            if (ac.animationClips[i].name.ToUpper().Contains("ATTACK"))
+            {
+                animAttackTime = ac.animationClips[i].length;
+                break;
+            }
+        }
+        SetAnimAttackSpeed();
+
     }
 
-    public void DirectMove()
+    private void SetAnimAttackSpeed()
     {
-        navMeshAgent.isStopped = false;
-        state.SetMoveState(UnitMoveState.MOVE);
-        state.SetTraceState(UnitTraceState.NONE);
+        animAttackSpeed = animAttackTime / enemyUnit.unitInfo.attackSpeed;
+
     }
 
 }

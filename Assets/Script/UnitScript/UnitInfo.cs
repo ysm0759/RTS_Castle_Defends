@@ -6,11 +6,6 @@ public class UnitInfo : MonoBehaviour
 {
 
     Animation anim;
-    
-    void Awake()
-    {
-        anim = GetComponent<Animation>();
-    }
 
     [SerializeField]
     private UnitDataScriptableObject data;
@@ -127,6 +122,19 @@ public class UnitInfo : MonoBehaviour
             _upgradeCost = value;
         }
     }
+    [SerializeField]
+    private string _attackName; //업그레이드 가격
+    public string attackName//업그레이드 가격
+    {
+        get
+        {
+            return _attackName;
+        }
+        set
+        {
+            _attackName = value;
+        }
+    }
     public static float traceRange = 10; // 추적 거리
 
     private void Awake()
@@ -140,6 +148,7 @@ public class UnitInfo : MonoBehaviour
         this._damage        = data.damage;
         this._attackRange   = data.attackRange;
         this._upgradeCost   = data.upgradeCost;
+        this._attackName    = data.attackName;
 
     }
 
@@ -153,6 +162,8 @@ public class UnitInfo : MonoBehaviour
         this._damage = data.damage;
         this._attackRange = data.attackRange;
         this._upgradeCost = data.upgradeCost;
+        this._attackName = data.attackName;
+
     }
 
 

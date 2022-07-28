@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5209b45c3f67535469ffcfd9602ff3dd, type: 3}
-  m_Name: EnemyMelee
+  m_Name: Dragon
   m_EditorClassIdentifier: 
   unitType: 0
-  maxHp: 100
-  hp: 100
-  df: 1
-  moveSpeed: 1
+  maxHp: 70
+  hp: 70
+  df: 2
+  moveSpeed: 5
   attackSpeed: 1
-  damage: 1
-  attackRange: 3
+  damage: 5
+  attackRange: 7
   upgradeCost: 0
   population: 0
   level: 0
+  attackName: meteor
   nextStat: {fileID: 0}
   explain: 
   sprite: {fileID: 0}

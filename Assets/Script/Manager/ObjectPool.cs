@@ -58,10 +58,11 @@ public class ObjectPool : MonoBehaviour
         newObj.transform.SetParent(transform);
         return newObj;
     }
-
+    
 
     public static GameObject GetObject(string name)
     {
+
         if (Instance.poolingObjectQueues[name]?.Count > 0)
         {
             var obj = Instance.poolingObjectQueues[name].Dequeue();
