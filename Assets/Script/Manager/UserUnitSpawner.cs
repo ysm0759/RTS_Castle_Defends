@@ -8,6 +8,9 @@ public class UserUnitSpawner : MonoBehaviour
     [SerializeField]
     private List<GameObject> unitPrefab;
 
+    [SerializeField]
+    private List<GameObject> heroPrefab;
+
     private List<Transform> unitPrefabPosition;
 
     //오브젝트 풀링
@@ -30,8 +33,9 @@ public class UserUnitSpawner : MonoBehaviour
     {
         List<UnitController> unitList = new List<UnitController>();
 
+        Vector3 position = new Vector3(120, 5f, 120);
 
-        for(int i =0; i < tmpData.Length; i++)
+        for (int i =0; i < tmpData.Length; i++)
         {
 
             if (isBuys[i] == false)
@@ -41,7 +45,7 @@ public class UserUnitSpawner : MonoBehaviour
             for (int j = 0;  j < tmpData[i].population;j++)
             {
 
-                Vector3 position = new Vector3(120, 5f, 120);
+
                 GameObject clone = Instantiate(UnitIndex[i].LevelObjects[tmpData[i].level-1], position, Quaternion.identity);
                 clone.GetComponent<UnitInfo>().SetData(tmpData[i]);
                 UnitController unit = clone.GetComponent<UnitController>();
@@ -53,16 +57,21 @@ public class UserUnitSpawner : MonoBehaviour
 
         for (int i = 0 ; i < unitPrefab.Count ; ++i)
         {
-            Vector3 position = new Vector3(120 , 5f ,120);
 
             GameObject clone = Instantiate(unitPrefab[i],position,Quaternion.identity);
             UnitController unit = clone.GetComponent<UnitController>();
-
             unitList.Add(unit);
-            
         }
-        
+
+        GameObject heroClone = Instantiate(heroPrefab[0], position, Quaternion.identity);
+        UnitController heroUnitController = heroClone.GetComponent<UnitController>();
+        unitList.Add(heroUnitController);
+
         return unitList;
+
+
+
+
     }
 
     

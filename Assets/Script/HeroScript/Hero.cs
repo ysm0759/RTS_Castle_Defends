@@ -16,9 +16,9 @@ public abstract class Hero : MonoBehaviour
     private GameObject maker;
     private int prevSkill = 0;
 
-
     private void Update()
     {
+        Debug.Log(KeyManager.instance.skill);
         if (KeyManager.instance.skill == Skill.SKILL_USING_CANT_MOVE || KeyManager.instance.skill == Skill.SKILL_USING_CAN_MOVE)
         {
             return;
@@ -27,6 +27,7 @@ public abstract class Hero : MonoBehaviour
         // 캔슬 되었을때
         if (KeyManager.instance.skill == Skill.SKILL_SHOW_CANCEL)
         {
+
             CancelSkill(prevSkill);
             return;
         }
@@ -34,6 +35,8 @@ public abstract class Hero : MonoBehaviour
         //   Key값이 1, 2 ,3, 4, 5 가아니면
         if ((int)KeyManager.instance.keyState >= (int)KeyState.SKILL_COUNT)
         {
+            CancelSkill(prevSkill);
+
             return;
         }
         //쿨타임 상태
@@ -41,12 +44,14 @@ public abstract class Hero : MonoBehaviour
         {
             KeyManager.instance.keyState = KeyState.NONE;
             //CancelSkill(prevSkill);
+
             return;
         }
 
 
         if (prevSkill != (int)KeyManager.instance.keyState)
         {
+
             CancelSkill(prevSkill);
             prevSkill = (int)KeyManager.instance.keyState;
         }
@@ -54,13 +59,19 @@ public abstract class Hero : MonoBehaviour
 
         // 에임 상태
         if (KeyManager.instance.skill == Skill.SKILL_SHOW)
+        {
             ShowRange((int)KeyManager.instance.keyState);
+
+
+        }
 
         // 스킬 사용
         if (KeyManager.instance.skill == Skill.SKILL_USE)
+        {
             UseSkill((int)KeyManager.instance.keyState);
+        }
 
- 
+
 
     }
 

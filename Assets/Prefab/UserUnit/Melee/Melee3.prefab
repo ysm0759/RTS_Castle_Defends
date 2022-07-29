@@ -172,6 +172,7 @@ MonoBehaviour:
   _damage: 0
   _attackRange: 0
   _upgradeCost: 0
+  _attackName: 
 --- !u!95 &-3553044458567482098
 Animator:
   serializedVersion: 3

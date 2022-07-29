@@ -36,6 +36,7 @@ public class Range : SkillType
     //마우스에 따른 원 이미지
     public override void ShowSkill(float scope, float range)
     {
+        Debug.Log("???????");
         RaycastHit hit;
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground"));

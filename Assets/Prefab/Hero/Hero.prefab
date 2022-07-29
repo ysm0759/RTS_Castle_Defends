@@ -175,6 +175,7 @@ MonoBehaviour:
   _damage: 0
   _attackRange: 0
   _upgradeCost: 0
+  _attackName: 
 --- !u!114 &8441040787800109167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,9 +233,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87846d4a0730f9248aed37fc4acbd701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillScope: 30
-  skillRange: 30
-  cool: 7
+  skillScope: 0
+  skillRange: 5
+  cool: 20
+  skillPoint: {fileID: 0}
 --- !u!114 &7960628701822574632
 MonoBehaviour:
   m_ObjectHideFlags: 0

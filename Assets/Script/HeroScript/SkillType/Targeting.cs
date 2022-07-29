@@ -46,11 +46,12 @@ public class Targeting : SkillType
         }
         else
         {
+            Debug.Log("상대 찾음");
             // 사정거리 안에 들어오면 스킬쓰고 쿨 돌리기 작업
             RTSUserUnitControlManager.instance.hero.MoveTo(hit.transform.position);
             KeyManager.instance.skill = Skill.SKILL_USE;
             CursorManager.instance.SetCursor(CursorType.DEFAULT);
-            skill.StartCoolDown();
+            skill.StartCoolDown(hit.collider);
 
         }
 

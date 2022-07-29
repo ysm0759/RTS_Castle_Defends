@@ -35,8 +35,12 @@ public class WarriorSkill1_1 : MonoBehaviour, IWarriorSkill
 
     private Collider[] hit;
 
+    [SerializeField]
+    private GameObject effect;
+
     private void Start()
     {
+        effect.SetActive(false);
         immediateSkill = GetComponent<Immediate>();
         isCoolDown = false;
         anim = GetComponent<Animator>();
@@ -69,7 +73,7 @@ public class WarriorSkill1_1 : MonoBehaviour, IWarriorSkill
         immediateSkill.ShowCancel();
     }
 
-    public void StartCoolDown()
+    public void StartCoolDown(Collider hit = null)
     {
         if(isCoolDown == false)  
         {
@@ -89,6 +93,7 @@ public class WarriorSkill1_1 : MonoBehaviour, IWarriorSkill
         anim.SetBool("SkillNum1", true);
         anim.SetBool("SkillDone", false);
         skillDone = false;
+        effect.SetActive(true);
 
 
         KeyManager.instance.skill = Skill.SKILL_USING_CAN_MOVE;
@@ -114,6 +119,8 @@ public class WarriorSkill1_1 : MonoBehaviour, IWarriorSkill
                 anim.SetBool("SkillNum1", false);
                 skillDone = true;
                 KeyManager.instance.skill = Skill.SKILL_DONE;
+                effect.SetActive(false);
+
 
             }
 

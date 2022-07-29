@@ -168,7 +168,6 @@ public class RTSUserUnitControlManager : MonoBehaviour
             }
         }
         KeyManager.instance.keyState = KeyState.NONE;
-        //KeyManager.instance.keyState = KeyState.NONE; //TODO 만약에 이상하면 풀어 !!;
     }
 
     //매개변수로 받아온  newUnit 선택 설정
@@ -195,6 +194,10 @@ public class RTSUserUnitControlManager : MonoBehaviour
 
     public bool isSelectedHero()
     {
+        if( null == hero)
+        {
+            return false;
+        }
         return hero.isSelected();
     }
 

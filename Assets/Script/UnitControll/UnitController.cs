@@ -22,6 +22,7 @@ public class UnitController : MonoBehaviour
 
     bool canAttack = true;
 
+
     private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -156,6 +157,7 @@ public class UnitController : MonoBehaviour
 
         if (CompareTag("Hero") && KeyManager.instance.skill == Skill.SKILL_USING_CANT_MOVE)
         {
+            
             return;
         }
         anim.SetBool("IsMove", true);

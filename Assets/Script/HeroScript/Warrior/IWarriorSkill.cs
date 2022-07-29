@@ -8,5 +8,5 @@ public interface IWarriorSkill
     bool IsCoolDown();
     void ShowRange();
     void CanselSkill();
-    void StartCoolDown();
+    void StartCoolDown(Collider hit = null);
 }

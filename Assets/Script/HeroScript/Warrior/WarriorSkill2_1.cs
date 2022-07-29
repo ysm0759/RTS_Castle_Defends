@@ -23,7 +23,7 @@ public class WarriorSkill2_1 : MonoBehaviour, IWarriorSkill
     //코루틴 돌려야함
 
     bool skillDone;
-    float watiTime = 0;  // 시전시간
+    float waitTime = 0;  // 시전시간
     float invokeTime = 2.0f; //공격생성시간
     float speed = 0;
     [SerializeField]
@@ -68,7 +68,7 @@ public class WarriorSkill2_1 : MonoBehaviour, IWarriorSkill
     {
         rangeSkill.ShowCancel();
     }
-    public void StartCoolDown()
+    public void StartCoolDown(Collider hit = null)
     {
         if (isCoolDown == false)
         {
@@ -82,7 +82,7 @@ public class WarriorSkill2_1 : MonoBehaviour, IWarriorSkill
     {
         // 쿨타임 관련 처리
         float tmpCool = 0f;
-        watiTime = 0;
+        waitTime = 0;
         moveDelay = 0;
         anim.SetTrigger("SkillNum2");
         anim.SetBool("SkillDone", false);
@@ -98,7 +98,7 @@ public class WarriorSkill2_1 : MonoBehaviour, IWarriorSkill
             tmpCool += Time.deltaTime;
             isCoolDown = true;
             InGameSkillUI.instance.skillUI[1].fillAmount = (float)(tmpCool / cool);
-            watiTime += Time.deltaTime;
+            waitTime += Time.deltaTime;
             moveDelay += Time.deltaTime;
 
             if(false == skillDone && moveDelay >= moveDelayTime)
@@ -106,11 +106,13 @@ public class WarriorSkill2_1 : MonoBehaviour, IWarriorSkill
                 transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.Self);
             }
 
-            if(watiTime >= invokeTime && false == skillDone)
+            if(waitTime >= invokeTime && false == skillDone)
             {
                 anim.SetBool("SkillDone", true);
                 skillDone = true;
                 KeyManager.instance.skill = Skill.SKILL_DONE;
+
+                //데미지 주고 
             }
 
 
