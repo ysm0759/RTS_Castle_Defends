@@ -51,7 +51,8 @@ public class EnemyControl : MonoBehaviour
 
         while (true)
         {
-
+            if (!enemyUnit.unitInfo.isAlive)
+                yield break;
             IsArrive();
             if (state.IsTraceState(UnitTraceState.TRACE)) //움직이다 적을 찾은 상태
             {

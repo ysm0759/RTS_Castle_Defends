@@ -22,6 +22,10 @@ public class Enemy : MonoBehaviour , IDamagable
     }
     public void Hit(float damage)
     {
+        if (unitInfo.hp <= 0)
+        {
+            Destroy(gameObject);
+        }
         unitInfo.hp -= (damage - unitInfo.df) >= 0 ? (damage - unitInfo.df) : 1;
     }
 

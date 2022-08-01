@@ -7,6 +7,22 @@ public class UnitInfo : MonoBehaviour
 
     Animation anim;
 
+    bool _isAlive = true;
+
+    public bool isAlive
+    {
+        get
+        {
+            return _isAlive;
+        }
+        private set
+        {
+            _isAlive = value;
+        }
+
+    }
+
+
     [SerializeField]
     private UnitDataScriptableObject data;
     public UnitDataScriptableObject GetUnitDataScriptableObject()
@@ -42,8 +58,13 @@ public class UnitInfo : MonoBehaviour
         set
         {
             _hp = value;
+            if (_hp <= 0)
+                isAlive = false;
         }
     }
+    
+    
+
     [SerializeField]
     private float _df; //방어력
     public float df//방어력

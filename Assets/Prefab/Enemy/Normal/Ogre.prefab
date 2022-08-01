@@ -157,6 +157,7 @@ MonoBehaviour:
   _damage: 0
   _attackRange: 0
   _upgradeCost: 0
+  _attackName: 
 --- !u!136 &8715962959101659262
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -223,7 +224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4008027257513042, guid: c282d043ab483824dbc609990acb217d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4008027257513042, guid: c282d043ab483824dbc609990acb217d, type: 3}
       propertyPath: m_LocalPosition.z
