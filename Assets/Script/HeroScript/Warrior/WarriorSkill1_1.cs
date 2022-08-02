@@ -17,7 +17,7 @@ public class WarriorSkill1_1 : MonoBehaviour, IWarriorSkill
     [SerializeField] 
     float skillRange; // 내 사거리
     [SerializeField]
-    float damage = 10f;
+    float damage = 100f;
 
     [SerializeField]
     float cool;
