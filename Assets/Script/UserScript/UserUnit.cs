@@ -28,11 +28,6 @@ public class UserUnit: MonoBehaviour , IDamagable
         }
     }
 
-    public Transform GetTransform()
-    {
-        return this.transform;
-    }
-
     private void Die()
     {
 
