@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitInfo : MonoBehaviour
+public class TowerInfo : MonoBehaviour
 {
-
-    public static float traceRange = 10; // 추적 거리
-
-
     bool _isAlive = true;
 
     public bool isAlive
@@ -25,7 +21,7 @@ public class UnitInfo : MonoBehaviour
 
 
     [SerializeField]
-    private UnitDataScriptableObject data;
+    private TowerScriptable data;
 
     [SerializeField]
     private float _maxHp; //최대체력
@@ -58,8 +54,8 @@ public class UnitInfo : MonoBehaviour
                 isAlive = false;
         }
     }
-    
-    
+
+
 
     [SerializeField]
     private float _df; //방어력
@@ -156,29 +152,28 @@ public class UnitInfo : MonoBehaviour
     private void Awake()
     {
 
-        this._maxHp         = data.maxHp;
-        this._hp            = data.hp;
-        this._df            = data.df;
-        this._moveSpeed     = data.moveSpeed;
-        this._attackSpeed   = data.attackSpeed;
-        this._damage        = data.damage;
-        this._attackRange   = data.attackRange;
-        this._upgradeCost   = data.upgradeCost;
-        this._attackName    = data.attackName;
-
-    }
-
-    public void SetData(UnitDataScriptableObject data)
-    {
         this._maxHp = data.maxHp;
         this._hp = data.hp;
         this._df = data.df;
-        this._moveSpeed = data.moveSpeed;
         this._attackSpeed = data.attackSpeed;
         this._damage = data.damage;
         this._attackRange = data.attackRange;
         this._upgradeCost = data.upgradeCost;
         this._attackName = data.attackName;
+
+    }
+
+    public void SetData(TowerScriptable data)
+    {
+        this._maxHp = data.maxHp;
+        this._hp = data.hp;
+        this._df = data.df;
+        this._attackSpeed = data.attackSpeed;
+        this._damage = data.damage;
+        this._attackRange = data.attackRange;
+        this._upgradeCost = data.upgradeCost;
+        this._attackName = data.attackName;
+
 
     }
 

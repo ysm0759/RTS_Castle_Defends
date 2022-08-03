@@ -9,34 +9,9 @@ public class ArcherTower : Tower
     bool canAttack;
     private void Start()
     {
-        towerInfo = GetComponent<TowerScriptable>();
-    }
+        hit = new Collider[10];
+    } 
 
 
-
-    public override void Attack()
-    {
-
-    }
-
-    public override void Hit(float damage)
-    {
-    }
-
-    public override void ResetTower()
-    {
-    }
-
-    public override void Rotate()
-    {
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(CanAttack)
-        {
-
-        }
-    }
 
 }

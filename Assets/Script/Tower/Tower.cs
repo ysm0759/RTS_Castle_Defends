@@ -2,19 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Tower : MonoBehaviour ,IDamagable
+public class Tower : MonoBehaviour ,IDamagable
 {
 
-    protected TowerScriptable towerInfo;
+    protected UnitInfo towerInfo; //소환할떄 그 데이터 세팅 해주기!
     protected ObjectAttack objectAttack;
+    [SerializeField] GameObject rangeObject;
 
+    public void SetTowerInfo()
+    {
 
-    public abstract void ResetTower(); // 모두 있어야 하는것
+    }
 
-    public abstract void Attack(); // 개개인으로 있어야 하는것 
+    public IEnumerator AttackPeriod()
+    {
+        yield return null;
+    }
 
-    public abstract void Rotate(); // 
+    public virtual void Attack()
+    {
+        Debug.Log("??");
+    }
 
-    public abstract void Hit(float damage);
+    public void Rotate()
+    {
+
+    }
+
+    public void Hit(float damage)
+    {
+    }
 
 }

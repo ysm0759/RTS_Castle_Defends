@@ -18,6 +18,7 @@ public class PrefabMeteor : PrefabObject
             layer = LayerMask.GetMask("User");
         }
     }
+
     private void Update()
     {
         dir = destination - gameObject.transform.position;
