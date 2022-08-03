@@ -41,6 +41,8 @@ public class UnitDataScriptableObject : ScriptableObject
     public int population;  //생성되는 유닛 인구수
     public int level;     //유닛 레벨
     public string attackName; // 오브젝트 풀링 할 네임
+    public int multiAttack;
+
     public UnitDataScriptableObject nextStat;
 
     public static float traceRange = 10; // 추적 거리

@@ -24,6 +24,7 @@ MonoBehaviour:
   population: 0
   level: 0
   attackName: bat
+  multiAttack: 3
   nextStat: {fileID: 0}
   explain: 
   sprite: {fileID: 0}

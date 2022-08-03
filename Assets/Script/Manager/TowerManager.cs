@@ -41,7 +41,6 @@ public class TowerManager : MonoBehaviour
         {
             ResetTowers();
         }
-        Debug.Log(towerStatu);
         SellTower();
         BuyTower();
     }
@@ -51,7 +50,7 @@ public class TowerManager : MonoBehaviour
     {
         foreach(string tmp in towerDic.Keys)
         {
-            towerDic[tmp].GetComponent<Tower>().SetTowerInfo();
+            towerDic[tmp].GetComponentInChildren<Tower>().SetTowerInfo();
         }
     }
 
@@ -83,6 +82,8 @@ public class TowerManager : MonoBehaviour
     {
         foreach(string tmp in towerDic.Keys)
         {
+            Debug.Log(tmp);
+            Debug.Log(towerDic[tmp].gameObject.GetComponent<MeshRenderer>());
             towerDic[tmp].gameObject.GetComponent<MeshRenderer>().enabled = true;
             Destroy(towerDic[tmp].GetComponentInChildren<Transform>().gameObject);
         }
@@ -107,7 +108,7 @@ public class TowerManager : MonoBehaviour
                 {
                     hit.collider.GetComponent<MeshRenderer>().enabled = false;
                     GameObject tower = Instantiate(towerPrefab);
-                    towerDic.Add(hit.collider.gameObject.name, tower);
+                    towerDic.Add(hit.collider.gameObject.name, hit.collider.gameObject);
                     tower.transform.SetParent(hit.transform);
                     tower.transform.position = hit.transform.position;
                     tower.transform.localScale *= 10;

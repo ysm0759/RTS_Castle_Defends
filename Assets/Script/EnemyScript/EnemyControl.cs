@@ -22,7 +22,7 @@ public class EnemyControl : MonoBehaviour
 
     bool canAttack = true;
     private Vector3 targetPosition;
-
+    int hitCount = 0;
     public void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -36,7 +36,7 @@ public class EnemyControl : MonoBehaviour
 
 
         state = new UnitState();
-        hit = new Collider[1];
+        hit = new Collider[enemyUnit.unitInfo.multiAttack];
 
 
         StartCoroutine(SearchTrace());
@@ -104,8 +104,14 @@ public class EnemyControl : MonoBehaviour
         {
             transform.LookAt(targetPosition);
             anim.SetBool("Attack", true);
+
             if (attackType != null)
-                attackType?.Attack(hit, enemyUnit.unitInfo.damage, enemyUnit.unitInfo.attackName);
+            {
+                for (int i = 0; i < hitCount; i++)
+                {
+                    attackType?.Attack(hit[i], enemyUnit.unitInfo.damage, enemyUnit.unitInfo.attackName);
+                }
+            }
             else
                 Debug.Log("데이터 잘 못 넣음 확인바람!!!!!!!!!!!!!!!!!");
 

@@ -18,7 +18,6 @@ public abstract class Hero : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(KeyManager.instance.skill);
         if (KeyManager.instance.skill == Skill.SKILL_USING_CANT_MOVE || KeyManager.instance.skill == Skill.SKILL_USING_CAN_MOVE)
         {
             return;

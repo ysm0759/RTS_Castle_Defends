@@ -5,11 +5,11 @@ using UnityEngine;
 public class ObjectMeteor : ObjectAttack
 {
 
-    public override void Attack(Collider[] hit, float damage, string name = null)
+    public override void Attack(Collider hit, float damage, string name = null)
     {
         GameObject clone = ObjectPool.GetObject(name);
-        clone.transform.position = hit[0].transform.position + (Vector3.up * 20);
-        clone.GetComponent<PrefabObject>().SetDestinationDamage(hit[0].transform.position, damage);
+        clone.transform.position = hit.transform.position + (Vector3.up * 20);
+        clone.GetComponent<PrefabObject>().SetDestinationDamage(hit.transform.position, damage);
 
     }
 }

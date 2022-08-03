@@ -23,6 +23,8 @@ MonoBehaviour:
   upgradeCost: 1
   population: 5
   level: 2
+  attackName: 
+  multiAttack: 1
   nextStat: {fileID: 11400000, guid: a5ed5423103864e449c9af1cee9e1aaa, type: 2}
   explain: "\uC804\uC0AC\n\uADF8 \uB204\uAD6C\uBCF4\uB2E4 \uC6A9\uB9F9\uD569\uB2C8\uB2E4.
     \uACF5\uC911 \uC720\uB2DB\uC744 \uACF5\uACA9 \uBABB\uD558\uC9C0\uB9CC \uBB50\uB77C

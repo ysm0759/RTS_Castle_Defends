@@ -22,6 +22,7 @@ public class UnitController : MonoBehaviour
 
     bool canAttack = true;
 
+    int hitCount = 0;
 
     private void Start()
     {
@@ -31,7 +32,8 @@ public class UnitController : MonoBehaviour
         attackType = GetComponent<ObjectAttack>();
 
         state = new UnitState();
-        hit = new Collider[1];
+        Debug.Log(userUnit.unitInfo.multiAttack);
+        hit = new Collider[userUnit.unitInfo.multiAttack];
 
         StartCoroutine(SearchTrace());
         SetAnimAttackTime();
@@ -42,6 +44,9 @@ public class UnitController : MonoBehaviour
     {
         while (true)
         {
+            Debug.Log(state.GetAttackState());
+            Debug.Log(state.GetTraceState());
+            Debug.Log(state.GetMoveState());
             IsArrive();
             if (state.IsMoveState(UnitMoveState.STOP) || KeyManager.instance.skill == Skill.SKILL_USING_CANT_MOVE || KeyManager.instance.skill == Skill.SKILL_USING_CAN_MOVE)
             {
@@ -49,8 +54,10 @@ public class UnitController : MonoBehaviour
             }
             else
             {
+                Debug.Log(" ???>??");
                 if (state.IsTraceState(UnitTraceState.TRACE))
                 {
+                    Debug.Log(" ???");
                     if (Physics.OverlapSphereNonAlloc(transform.position, UnitDataScriptableObject.traceRange, hit, LayerMask.GetMask("Enemy")) >= 1)
                     {
                         if (state.IsMoveState(UnitMoveState.MOVE))
@@ -62,8 +69,9 @@ public class UnitController : MonoBehaviour
                 }
                 if (state.IsTraceState(UnitTraceState.ATTACK_TRACE) && !state.IsMoveState(UnitMoveState.NONE))
                 {
-
-                    if (Physics.OverlapSphereNonAlloc(transform.position, userUnit.unitInfo.attackRange, hit, LayerMask.GetMask("Enemy")) >= 1)
+                    hitCount = Physics.OverlapSphereNonAlloc(transform.position, userUnit.unitInfo.attackRange, hit, LayerMask.GetMask("Enemy"));
+                    Debug.Log(hitCount);
+                    if (hitCount >= 1)
                     {
                         navMeshAgent.isStopped = true;
                         state.SetAttackState(UnitAttackState.DO_ATTACK);
@@ -78,6 +86,7 @@ public class UnitController : MonoBehaviour
                     }
                     else
                     {
+                        Debug.Log(" ???>????????????");
                         state.SetTraceState(UnitTraceState.TRACE);
                         state.SetAttackState(UnitAttackState.NONE_ATTACK);
                         anim.SetBool("Attack", false);
@@ -85,6 +94,7 @@ public class UnitController : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log(" ???>?!!!!!!!!!!!!!!?");
                     state.SetAttackState(UnitAttackState.NONE_ATTACK);
                     anim.SetBool("Attack", false);
                 }
@@ -106,8 +116,14 @@ public class UnitController : MonoBehaviour
         {
             transform.LookAt(targetPosition);
             anim.SetBool("Attack", true);
+
             if (attackType != null)
-                attackType?.Attack(hit, userUnit.unitInfo.damage, userUnit.unitInfo.attackName);
+            {
+                for (int i = 0; i < hitCount; i++)
+                {
+                    attackType?.Attack(hit[i], userUnit.unitInfo.damage, userUnit.unitInfo.attackName);
+                }
+            }
             else
                 Debug.Log("데이터 잘 못 넣음 확인바람!!!!!!!!!!!!!!!!!");
 
@@ -157,7 +173,7 @@ public class UnitController : MonoBehaviour
 
         if (CompareTag("Hero") && KeyManager.instance.skill == Skill.SKILL_USING_CANT_MOVE)
         {
-            
+
             return;
         }
         anim.SetBool("IsMove", true);

@@ -153,6 +153,24 @@ public class UnitInfo : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private int _multiAttack;
+
+    public int multiAttack//업그레이드 가격
+    {
+        get
+        {
+            return _multiAttack;
+        }
+        set
+        {
+            _multiAttack = value;
+        }
+    }
+
+
+
+
     private void Awake()
     {
 
@@ -179,6 +197,7 @@ public class UnitInfo : MonoBehaviour
         this._attackRange = data.attackRange;
         this._upgradeCost = data.upgradeCost;
         this._attackName = data.attackName;
+        this._multiAttack = data.multiAttack;
 
     }
 

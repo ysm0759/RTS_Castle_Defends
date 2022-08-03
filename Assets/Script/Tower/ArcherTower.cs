@@ -9,9 +9,14 @@ public class ArcherTower : Tower
     bool canAttack;
     private void Start()
     {
-        hit = new Collider[10];
+
+        objectAttack = GetComponent<ObjectProjectile>();
     } 
 
+    public void Attack()
+    {
+        objectAttack.Attack(hit[0], towerInfo.damage, towerInfo.attackName);
+    }
 
 
 }
