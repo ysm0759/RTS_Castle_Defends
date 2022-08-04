@@ -5,28 +5,18 @@ using UnityEngine;
 public class EnemySpwanManager : MonoBehaviour
 {
     public GameObject unitPrefab;
-    public Transform center;
-    public int destance;
-    public int offsetZ;
+
     public EnemyStageData stageData;
 
+    private int enemyNumbering;
 
     public static EnemySpwanManager instance;
+
+
 
     private void Awake()
     {
         instance = this;
-    }
-    private void Start()
-    {
-        transform.position = transform.position + Vector3.right * destance;
-        transform.position = transform.position + Vector3.up * offsetZ;
-
-    }
-
-    private void Update()
-    {
-
     }
 
 
@@ -38,6 +28,7 @@ public class EnemySpwanManager : MonoBehaviour
             {
                 GameObject clone = Instantiate(stageData.EnemySpawnData[i].PrefabObject, transform.position, Quaternion.identity);
                 clone.transform.position *= Random.Range(0.1f, 2f);
+                clone.GetComponent<EnemyNumbering>().SetEnemyNumbering(enemyNumbering);
                 clone.GetComponent<UnitInfo>().SetData(stageData.EnemySpawnData[i].unitDataScriptableObject);
             } 
         }
