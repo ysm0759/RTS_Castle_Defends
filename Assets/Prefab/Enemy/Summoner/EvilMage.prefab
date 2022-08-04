@@ -148,7 +148,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 1e755739ca2da6945911b822ed93bb6e, type: 2}
-  enumType: 5
   _maxHp: 0
   _hp: 0
   _df: 0
@@ -158,6 +157,7 @@ MonoBehaviour:
   _attackRange: 0
   _upgradeCost: 0
   _attackName: 
+  _multiAttack: 0
 --- !u!136 &8715962959101659262
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5f547ed763fe714bab5e8b44322757d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EA: 3
+  EA: 10
 --- !u!1001 &3491183514205673386
 PrefabInstance:
   m_ObjectHideFlags: 0

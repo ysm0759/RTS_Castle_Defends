@@ -13,16 +13,11 @@ public class RTSUserUnitControlManager : MonoBehaviour
 
     static private RTSUserUnitControlManager Instance;
 
-    private List<UnitType> unitType;
 
     private MouseClick mouseClick;
 
     public UnitController hero;
 
-
-    private UnitDataScriptableObject[] datas;
-
-    private GameObject[] rockImages;
 
 
 
@@ -41,15 +36,6 @@ public class RTSUserUnitControlManager : MonoBehaviour
         Instance = this;
         selectedUnitList = new List<UnitController>();
         mouseClick = GetComponent<MouseClick>();
-        //for(int i = 0; i < unitList.Count;i++)
-        //{
-        //    if(unitList[i].tag == "Hero")
-        //    {
-        //        hero = unitList[i];
-        //    }
-        //}
-
-        unitType = new List<UnitType>();
 
     }
 
@@ -96,7 +82,7 @@ public class RTSUserUnitControlManager : MonoBehaviour
         selectedUnitList.Clear();
     }
 
-    public void MoveSelectUnits(Vector3 end)
+    public void MoveSelectUnits(Vector3 end) //유닛 배치
     {
         int cnt = selectedUnitList.Count;
         Vector3 tmpVec = end;

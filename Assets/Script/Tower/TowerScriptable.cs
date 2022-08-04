@@ -18,13 +18,18 @@ public class TowerScriptable : ScriptableObject
     public int multiAttack;
     public TowerScriptable nextData;
     public int upgradeCost;  //업그레이드 가격
+    public int buyCost; //구매가격
     public int level;     //유닛 레벨
 
 
+    public GameObject prefab;
+
     [TextArea]
-    public string explain; // 유닛 설명
+    public string explain; // 설명
     public Sprite sprite;
 
+
+   
 
 
 

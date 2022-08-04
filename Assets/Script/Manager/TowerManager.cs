@@ -70,7 +70,7 @@ public class TowerManager : MonoBehaviour
                 if (towerDic.TryGetValue(hit.collider.gameObject.name, out tmp))
                 {
                     hit.collider.GetComponent<MeshRenderer>().enabled = true;
-                    Destroy(tmp.GetComponentInChildren<Transform>().gameObject);
+                    Destroy(tmp.GetComponentInChildren<Tower>().gameObject);
                     towerDic.Remove(hit.collider.gameObject.name);
 
                 }

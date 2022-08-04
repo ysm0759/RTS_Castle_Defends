@@ -20,8 +20,6 @@ public class TowerInfo : MonoBehaviour
     }
 
 
-    [SerializeField]
-    private TowerScriptable data;
 
     [SerializeField]
     private float _maxHp; //최대체력
@@ -149,19 +147,38 @@ public class TowerInfo : MonoBehaviour
         }
     }
 
-    private void Awake()
+    [SerializeField]
+    private int _multiAttack;
+
+    public int multiAttack//멀티공격
     {
-
-        this._maxHp = data.maxHp;
-        this._hp = data.hp;
-        this._df = data.df;
-        this._attackSpeed = data.attackSpeed;
-        this._damage = data.damage;
-        this._attackRange = data.attackRange;
-        this._upgradeCost = data.upgradeCost;
-        this._attackName = data.attackName;
-
+        get
+        {
+            return _multiAttack;
+        }
+        set
+        {
+            _multiAttack = value;
+        }
     }
+    
+    [SerializeField]
+    private int _buyCost;
+
+    public int buyCost//멀티공격
+    {
+        get
+        {
+            return _buyCost;
+        }
+        set
+        {
+            _buyCost = value;
+        }
+    }
+
+
+
 
     public void SetData(TowerScriptable data)
     {
@@ -173,6 +190,8 @@ public class TowerInfo : MonoBehaviour
         this._attackRange = data.attackRange;
         this._upgradeCost = data.upgradeCost;
         this._attackName = data.attackName;
+        this._multiAttack = data.multiAttack;
+        this._buyCost = data.buyCost;
 
 
     }

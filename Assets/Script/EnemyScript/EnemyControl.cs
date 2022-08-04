@@ -39,12 +39,18 @@ public class EnemyControl : MonoBehaviour
         hit = new Collider[enemyUnit.unitInfo.multiAttack];
 
 
-        StartCoroutine(SearchTrace());
+        StartCoroutine(SetMultiAttackSize());
         StartCoroutine(SetDestinationCastle());
         SetAnimAttackTime();
 
     }
 
+    IEnumerator SetMultiAttackSize()
+    {
+        yield return null;
+        hit = new Collider[enemyUnit.unitInfo.multiAttack];
+        StartCoroutine(SearchTrace());
+    }
 
     IEnumerator SearchTrace()
     {
@@ -64,7 +70,8 @@ public class EnemyControl : MonoBehaviour
             }
             if (state.IsTraceState(UnitTraceState.ATTACK_TRACE))
             {
-                if (Physics.OverlapSphereNonAlloc(transform.position, enemyUnit.unitInfo.attackRange, hit, LayerMask.GetMask("User")) >= 1)
+                hitCount = Physics.OverlapSphereNonAlloc(transform.position, enemyUnit.unitInfo.attackRange, hit, LayerMask.GetMask("User"));
+                if (hitCount >= 1)
                 {
                     navMeshAgent.isStopped = true;
                     state.SetAttackState(UnitAttackState.DO_ATTACK);
@@ -88,7 +95,7 @@ public class EnemyControl : MonoBehaviour
             {
                 state.SetAttackState(UnitAttackState.NONE_ATTACK);
                 anim.SetBool("Attack", false);
-                anim.SetBool("IsMove", false);
+                //anim.SetBool("IsMove", false);
             }
 
             yield return new WaitForSeconds(0.3f);
@@ -136,6 +143,7 @@ public class EnemyControl : MonoBehaviour
 
     public void MoveTo(Vector3 end)
     {
+
         navMeshAgent.isStopped = false;
         anim.SetBool("IsMove", true);
         navMeshAgent.SetDestination(end);
@@ -146,10 +154,12 @@ public class EnemyControl : MonoBehaviour
 
     IEnumerator SetDestinationCastle()
     {
+        Debug.Log("1");
         while (true)
         {
             if (state.IsTraceState(UnitTraceState.TRACE))
             {
+                Debug.Log("2");
                 MoveTo(destination);
                 state.SetMoveState(UnitMoveState.MOVE);
                 state.SetTraceState(UnitTraceState.TRACE);

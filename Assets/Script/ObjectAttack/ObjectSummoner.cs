@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class ObjectSummoner : ObjectAttack
 {
+    public int EA;
+
 
     public override void Attack(Collider hit, float damage, string name = null)
     {
-
-        GameObject clone = ObjectPool.GetObject(name);
-        clone.transform.position = transform.position;
+        for(int i = 0; i < EA; i ++)
+        {
+            GameObject clone = ObjectPool.GetObject(name);
+            clone.transform.position = transform.position;
+        }
     }
 }
 

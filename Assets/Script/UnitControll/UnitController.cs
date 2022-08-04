@@ -32,21 +32,22 @@ public class UnitController : MonoBehaviour
         attackType = GetComponent<ObjectAttack>();
 
         state = new UnitState();
-        Debug.Log(userUnit.unitInfo.multiAttack);
-        hit = new Collider[userUnit.unitInfo.multiAttack];
 
-        StartCoroutine(SearchTrace());
+        StartCoroutine(SetMultiAttackSize());
         SetAnimAttackTime();
     }
 
-
+    IEnumerator SetMultiAttackSize()
+    {
+        yield return null;
+        hit = new Collider[userUnit.unitInfo.multiAttack];
+        StartCoroutine(SearchTrace());
+    }
     IEnumerator SearchTrace()
     {
         while (true)
         {
-            Debug.Log(state.GetAttackState());
-            Debug.Log(state.GetTraceState());
-            Debug.Log(state.GetMoveState());
+
             IsArrive();
             if (state.IsMoveState(UnitMoveState.STOP) || KeyManager.instance.skill == Skill.SKILL_USING_CANT_MOVE || KeyManager.instance.skill == Skill.SKILL_USING_CAN_MOVE)
             {
@@ -54,10 +55,8 @@ public class UnitController : MonoBehaviour
             }
             else
             {
-                Debug.Log(" ???>??");
                 if (state.IsTraceState(UnitTraceState.TRACE))
                 {
-                    Debug.Log(" ???");
                     if (Physics.OverlapSphereNonAlloc(transform.position, UnitDataScriptableObject.traceRange, hit, LayerMask.GetMask("Enemy")) >= 1)
                     {
                         if (state.IsMoveState(UnitMoveState.MOVE))
@@ -70,7 +69,6 @@ public class UnitController : MonoBehaviour
                 if (state.IsTraceState(UnitTraceState.ATTACK_TRACE) && !state.IsMoveState(UnitMoveState.NONE))
                 {
                     hitCount = Physics.OverlapSphereNonAlloc(transform.position, userUnit.unitInfo.attackRange, hit, LayerMask.GetMask("Enemy"));
-                    Debug.Log(hitCount);
                     if (hitCount >= 1)
                     {
                         navMeshAgent.isStopped = true;
@@ -86,7 +84,6 @@ public class UnitController : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log(" ???>????????????");
                         state.SetTraceState(UnitTraceState.TRACE);
                         state.SetAttackState(UnitAttackState.NONE_ATTACK);
                         anim.SetBool("Attack", false);
@@ -94,7 +91,6 @@ public class UnitController : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log(" ???>?!!!!!!!!!!!!!!?");
                     state.SetAttackState(UnitAttackState.NONE_ATTACK);
                     anim.SetBool("Attack", false);
                 }
