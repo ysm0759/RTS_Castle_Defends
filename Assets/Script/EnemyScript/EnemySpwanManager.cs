@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemySpwanManager : MonoBehaviour
 {
-    public GameObject unitPrefab;
-
     public EnemyStageData stageData;
 
     private int enemyNumbering;
@@ -28,7 +26,6 @@ public class EnemySpwanManager : MonoBehaviour
             {
                 GameObject clone = Instantiate(stageData.EnemySpawnData[i].PrefabObject, transform.position, Quaternion.identity);
                 clone.transform.position *= Random.Range(0.1f, 2f);
-                clone.GetComponent<EnemyNumbering>().SetEnemyNumbering(enemyNumbering);
                 clone.GetComponent<UnitInfo>().SetData(stageData.EnemySpawnData[i].unitDataScriptableObject);
             } 
         }

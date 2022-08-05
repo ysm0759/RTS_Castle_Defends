@@ -14,7 +14,7 @@ enum TowerStatu
 public class TowerManager : MonoBehaviour
 {
 
-    [SerializeField] GameObject towerPrefab;
+    [SerializeField] TowerScriptable towerData;
     Dictionary<string, GameObject> towerDic;
 
     private Camera mainCamera;
@@ -46,13 +46,15 @@ public class TowerManager : MonoBehaviour
     }
 
 
-    private void SetTowersInfo()
+    private void InitTowers()
     {
         foreach(string tmp in towerDic.Keys)
         {
-            towerDic[tmp].GetComponentInChildren<Tower>().SetTowerInfo();
+            towerDic[tmp].GetComponentInChildren<Tower>().InitTower();
         }
     }
+
+
 
     private void SellTower()
     {
@@ -78,6 +80,8 @@ public class TowerManager : MonoBehaviour
         }
     }
 
+
+
     private void ResetTowers()
     {
         foreach(string tmp in towerDic.Keys)
@@ -85,7 +89,7 @@ public class TowerManager : MonoBehaviour
             Debug.Log(tmp);
             Debug.Log(towerDic[tmp].gameObject.GetComponent<MeshRenderer>());
             towerDic[tmp].gameObject.GetComponent<MeshRenderer>().enabled = true;
-            Destroy(towerDic[tmp].GetComponentInChildren<Transform>().gameObject);
+            Destroy(towerDic[tmp].GetComponentInChildren<Tower>().gameObject);
         }
         towerDic.Clear();
     }
@@ -103,15 +107,14 @@ public class TowerManager : MonoBehaviour
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("TowerArea")))
             {
-                GameObject tmp;
-                if (!towerDic.TryGetValue(hit.collider.gameObject.name, out tmp))
+                if (!towerDic.ContainsKey(hit.collider.gameObject.name))
                 {
                     hit.collider.GetComponent<MeshRenderer>().enabled = false;
-                    GameObject tower = Instantiate(towerPrefab);
+                    GameObject tower = Instantiate(towerData.prefab);
                     towerDic.Add(hit.collider.gameObject.name, hit.collider.gameObject);
                     tower.transform.SetParent(hit.transform);
                     tower.transform.position = hit.transform.position;
-                    tower.transform.localScale *= 10;
+                    tower.GetComponent<Tower>().SetTowerInfo(towerData);
                 }
             }
         }

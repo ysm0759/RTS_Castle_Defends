@@ -154,12 +154,10 @@ public class EnemyControl : MonoBehaviour
 
     IEnumerator SetDestinationCastle()
     {
-        Debug.Log("1");
         while (true)
         {
             if (state.IsTraceState(UnitTraceState.TRACE))
             {
-                Debug.Log("2");
                 MoveTo(destination);
                 state.SetMoveState(UnitMoveState.MOVE);
                 state.SetTraceState(UnitTraceState.TRACE);

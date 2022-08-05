@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4244421499933885881}
   - component: {fileID: 8046792602138879925}
   - component: {fileID: 6017275132653298573}
+  - component: {fileID: 7854395426453248255}
   m_Layer: 8
   m_Name: Tower_A
   m_TagString: Untagged
@@ -107,6 +108,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe77be3f3e88a634d820840e84d59df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7854395426453248255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4244421499935890297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c146fcf4624214cbef8e6c85e4d3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHp: 0
+  _hp: 0
+  _df: 0
+  _moveSpeed: 0
+  _attackSpeed: 0
+  _damage: 0
+  _attackRange: 0
+  _upgradeCost: 0
+  _attackName: 
+  _multiAttack: 0
+  _buyCost: 0
 --- !u!1 &4947004355120793524
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +142,7 @@ GameObject:
   - component: {fileID: 3898415938793057395}
   - component: {fileID: 1414776934149180393}
   - component: {fileID: 7095265096215270436}
+  - component: {fileID: 5854300982993804439}
   m_Layer: 0
   m_Name: AttackRange
   m_TagString: Untagged
@@ -165,3 +190,15 @@ CapsuleCollider:
   m_Height: 100
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5854300982993804439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4947004355120793524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25b8176c1fb4ea40a9bfa84c8f13d8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
