@@ -58,7 +58,10 @@ public class EnemyControl : MonoBehaviour
         while (true)
         {
             if (!enemyUnit.unitInfo.isAlive)
+            {
+                Debug.Log("디짐");
                 yield break;
+            }
             IsArrive();
             if (state.IsTraceState(UnitTraceState.TRACE)) //움직이다 적을 찾은 상태
             {
@@ -143,7 +146,11 @@ public class EnemyControl : MonoBehaviour
 
     public void MoveTo(Vector3 end)
     {
-
+        if (!enemyUnit.unitInfo.isAlive)
+        {
+            Debug.Log("디짐2");
+            return;
+        }
         navMeshAgent.isStopped = false;
         anim.SetBool("IsMove", true);
         navMeshAgent.SetDestination(end);

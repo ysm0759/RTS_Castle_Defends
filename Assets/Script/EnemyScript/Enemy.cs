@@ -1,13 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Enemy : MonoBehaviour , IDamagable
+public class Enemy : MonoBehaviour, IDamagable
 {
 
     [SerializeField]
     private UnitInfo _unitInfo;
- 
+
+    public UnityAction<Collider> onDead;
+
+    private Collider col;
+    private void Awake()
+    {
+        col = GetComponent<Collider>();
+    }
     public UnitInfo unitInfo
     {
         get
@@ -20,9 +28,20 @@ public class Enemy : MonoBehaviour , IDamagable
     {
         if (unitInfo.hp <= 0)
         {
+            OnDead();
             Destroy(gameObject);
         }
         unitInfo.hp -= (damage - unitInfo.df) >= 0 ? (damage - unitInfo.df) : 1;
+    }
+
+
+    public void OnDead()
+    {
+        Debug.Log(onDead);
+        if(onDead !=null)
+        {
+            onDead.Invoke(col);
+        }
     }
 
 }

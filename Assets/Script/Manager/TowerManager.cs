@@ -61,7 +61,6 @@ public class TowerManager : MonoBehaviour
         if(towerStatu != TowerStatu.SELL)
             return;
 
-        Debug.Log("판매");
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
@@ -99,7 +98,6 @@ public class TowerManager : MonoBehaviour
     {
         if (towerStatu != TowerStatu.BUY)
             return;
-        Debug.Log("구매");
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -115,6 +113,8 @@ public class TowerManager : MonoBehaviour
                     tower.transform.SetParent(hit.transform);
                     tower.transform.position = hit.transform.position;
                     tower.GetComponent<Tower>().SetTowerInfo(towerData);
+                    tower.GetComponent<Tower>().InitTower();
+                    tower.transform.localScale *= 5;
                 }
             }
         }

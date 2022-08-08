@@ -33,10 +33,7 @@ public class AttackTower : MonoBehaviour
     
     IEnumerator InitTowerData()
     {
-        Debug.Log("2");
-
         yield return null;
-        Debug.Log("3");
 
         tower = GetComponentInParent<Tower>();
 
@@ -56,9 +53,10 @@ public class AttackTower : MonoBehaviour
     {
         enemyList.Add(other);
 
-        if(canAttack)
+        other.GetComponent<Enemy>().onDead += RemoveInListOfTower;
+
+        if (canAttack)
         {
-            Debug.Log("코루틱 시작");
             StartCoroutine(Attack());
         }
     }
@@ -66,6 +64,7 @@ public class AttackTower : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         enemyList.Remove(other);
+        other.GetComponent<Enemy>().onDead -= RemoveInListOfTower;
     }
 
 
@@ -79,13 +78,10 @@ public class AttackTower : MonoBehaviour
         canAttack = false;
         while(true)
         {
-            Debug.Log("공격");
             if(enemyList.Count <= 0)
                break;
-            Debug.Log("공격 성공");
             for(int i = 0; i < multiAttack && i < enemyList.Count; i++)
             {
-                if(enemyList.)
                 objectAttack.Attack(enemyList[i], attackDamage, attackName);
             }
 
@@ -95,6 +91,12 @@ public class AttackTower : MonoBehaviour
 
         canAttack = true;
     
+    }
+
+    public void RemoveInListOfTower(Collider enemy)
+    {
+        Debug.Log(enemyList.Count);
+        enemyList.Remove(enemy);
     }
 
 
