@@ -15,6 +15,7 @@ public class Tower : MonoBehaviour ,IDamagable
     /// 상위에 Object에 Tower를 박는다
     /// 상위  object에 TowerInfo를 컴포넌트로
     /// 하위에 공격 콜라이더를 박는다
+    /// 콜라이더에 Trigger를 체크
     /// </summary>
     bool isBurn;
     bool isDestroy;
