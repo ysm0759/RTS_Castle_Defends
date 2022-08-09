@@ -16,10 +16,10 @@ MonoBehaviour:
   hp: 100
   df: 2
   damage: 5
-  attackSpeed: 0.3
+  attackSpeed: 3
   attackRange: 10
   attackName: meteor
-  multiAttack: 10
+  multiAttack: 1
   nextData: {fileID: 0}
   upgradeCost: 2
   buyCost: 2
