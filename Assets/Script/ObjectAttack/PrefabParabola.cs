@@ -5,7 +5,7 @@ using UnityEngine;
 public class PrefabParabola : PrefabObject
 {
 
-
+    float maxHeight = 20;
     private void Start()
     {
         StartCoroutine(Parabola());
@@ -18,24 +18,25 @@ public class PrefabParabola : PrefabObject
         dir = target.transform.position - gameObject.transform.position;
         float tmp = dir.magnitude;
         float tmptime = 0f;
+        Destroy(gameObject, 1f);
+
         while (true)
         {
             transform.position = Vector3.MoveTowards(transform.position, destination, tmp * Time.deltaTime);
-            tmptime += Time.deltaTime; 
-            if(tmptime <= 0.5f)
-            {
-                transform.position += Vector3.up * Time.deltaTime * 60;
-                
-            }
-            else if ( tmptime >= 0.5f)
-            {
-                transform.position -= Vector3.up * Time.deltaTime * 60;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-            //this.transform.Translate(transform.forward + (Time.deltaTime * dir));
+            tmptime += Time.deltaTime;
+            maxHeight -= Time.deltaTime * 40;
+
+            transform.position += Vector3.up * maxHeight;
+            Debug.Log(maxHeight);
+            //if (tmptime <= 0.5f)
+            //{
+
+            //    transform.position += Vector3.up * maxHeight;
+            //}
+            //else if (tmptime >= 0.5f)
+            //{
+            //    transform.position -= Vector3.up * Time.deltaTime * 80;
+            //}
 
 
             yield return null;
