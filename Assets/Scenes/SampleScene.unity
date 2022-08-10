@@ -16721,6 +16721,9 @@ MonoBehaviour:
     PrefabObject: {fileID: 146768, guid: c1f7cd26d86e36c44921a1c45d23513b, type: 3}
   - name: destroy
     PrefabObject: {fileID: 160018, guid: 43cc1a347ac43cd498e91db9fb766337, type: 3}
+  - name: catapultStone
+    PrefabObject: {fileID: 6291624057181988201, guid: d19c945e306cd9e48849a908baec17cd,
+      type: 3}
 --- !u!114 &1001416599
 MonoBehaviour:
   m_ObjectHideFlags: 0
