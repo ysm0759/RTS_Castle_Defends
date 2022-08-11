@@ -7,7 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TowerData.asset", menuName = "Tower/TowerData")]
 public class TowerScriptable : ScriptableObject
 {
-
+    public TowerIndex towerIndex;
     public int maxHp;
     public int hp;
     public int df;
@@ -19,10 +19,12 @@ public class TowerScriptable : ScriptableObject
     public TowerScriptable nextData;
     public int upgradeCost;  //업그레이드 가격
     public int buyCost; //구매가격
+
     public int level;     //유닛 레벨
 
 
     public GameObject prefab;
+    public int modelIndex;
 
     [TextArea]
     public string explain; // 설명

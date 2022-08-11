@@ -142,6 +142,12 @@ public class GameManager : MonoBehaviour
 
     }
 
+
+    public void ReturnCost(int cost)
+    {
+        curCost += cost;
+        UpdateCostPanel();
+    }
     public void ResetCost()
     {
         curCost = maxCost;

@@ -11,7 +11,9 @@ public class Tower : MonoBehaviour ,IDamagable
     
     protected TowerInfo towerInfo; //소환할떄 그 데이터 세팅 해주기!
     [SerializeField] TowerScriptable tmp;
+    [SerializeField] List<GameObject> towerModel;
 
+    private AttackTower attackTower;
     private GameObject burning;
     private GameObject destroy;
     /// <summary>
@@ -33,6 +35,8 @@ public class Tower : MonoBehaviour ,IDamagable
             SetTowerInfo(tmp);
             InitTower();
         }
+
+        attackTower = GetComponentInChildren<AttackTower>();
     }
 
     public void InitTower()
@@ -43,6 +47,11 @@ public class Tower : MonoBehaviour ,IDamagable
         Debug.Log(burnHp);
         isBurn = false;
         isDestroy = false;
+
+        if(attackTower != null)
+        {
+            attackTower.SetData();
+        }
     }
 
 
@@ -79,7 +88,19 @@ public class Tower : MonoBehaviour ,IDamagable
     {
         towerInfo = GetComponent<TowerInfo>();
         towerInfo.SetData(data);
+        SetModel(data);
+    }
 
+
+    public void SetModel(TowerScriptable data)
+    {
+        for(int i =0; i <towerModel.Count;i++)
+        {
+            if (data.modelIndex == i)
+                this.towerModel[i].SetActive(true);
+            else
+                this.towerModel[i].SetActive(false);
+        }
     }
 
 

@@ -12,7 +12,11 @@ public class TowerElementUI : MonoBehaviour
     {
         towerStoreUI.SetTowerData(towerData);
     }
-    
 
+    public void SetData(TowerScriptable towerData)
+    {
+        this.towerData = towerData;
+        towerStoreUI.SetTowerData(this.towerData);
+    }
 
 }

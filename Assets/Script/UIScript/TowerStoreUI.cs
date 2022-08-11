@@ -4,7 +4,14 @@ using UnityEngine.UI;
 public class TowerStoreUI : MonoBehaviour
 {
 
+    [SerializeField] TowerScriptable[] defaultData;
+    [SerializeField] TowerElementUI[] elementData;
+
+
     [SerializeField] TowerScriptable data;
+
+
+    
     [SerializeField] Text hp;
     [SerializeField] Text nextHp;
     [SerializeField] Text df;
@@ -19,6 +26,10 @@ public class TowerStoreUI : MonoBehaviour
 
     [SerializeField] Image image;
 
+    private void Awake()
+    {
+        elementData = GetComponentsInChildren<TowerElementUI>();
+    }
     public void SetTowerData(TowerScriptable towerData)
     {
         data = towerData;
@@ -39,10 +50,10 @@ public class TowerStoreUI : MonoBehaviour
         
         if(data.nextData != null)
         {
-            nextHp.text = (data.hp- data.nextData.hp).ToString();
-            nextDf.text = (data.df - data.nextData.df).ToString();
-            nextAttackDamage.text = (data.damage - data.nextData.damage).ToString();
-            nextAttackSpeed.text = (data.attackSpeed - data.nextData.attackSpeed).ToString();
+            nextHp.text = ( data.nextData.hp- data.hp).ToString();
+            nextDf.text = ( data.nextData.df- data.df).ToString();
+            nextAttackDamage.text = (data.nextData.damage- data.damage).ToString();
+            nextAttackSpeed.text = (data.nextData.attackSpeed- data.attackSpeed).ToString();
         }
         else
         {
@@ -51,8 +62,39 @@ public class TowerStoreUI : MonoBehaviour
             nextAttackDamage.text = "";
             nextAttackSpeed.text = "";
         }
+    }
 
 
+    public void OnClickedBuy()
+    {
 
     }
+    public void OnClickedSell()
+    {
+
+    }
+    public void OnClickedUpgrade()
+    {
+        if(data.nextData == null)
+        {
+            return;
+        }
+        else
+        {
+            GameManager.instance.UseCost(data.upgradeCost);
+            data = data.nextData;
+            elementData[(int)data.towerIndex].SetData(data);
+            TowerManager.instance.UpgradeTower(data);
+
+        }
+    }
+
+    public void OnClickedReset()
+    {
+        for(int i =0; i <elementData.Length;i++)
+        {
+            elementData[i].SetData(defaultData[i]);
+        }
+    }
+
 }

@@ -13,7 +13,6 @@ public class AttackTower : MonoBehaviour
 
     float  attackDamage;
     float  attackSpeed;
-    float  attackRange;
     int    multiAttack;
     string attackName;
 
@@ -26,11 +25,15 @@ public class AttackTower : MonoBehaviour
         enemyList = new List<Collider>();
         objectAttack = GetComponent<ObjectAttack>();
         canAttack = true;
-        StartCoroutine(InitTowerData());
-        
- 
+
+        SetData();
     }
     
+    public void SetData()
+    {
+        StartCoroutine(InitTowerData());
+    }
+
     IEnumerator InitTowerData()
     {
         yield return null;
@@ -39,7 +42,6 @@ public class AttackTower : MonoBehaviour
 
         attackDamage = tower.GetTowerInfo().damage;
         attackSpeed = tower.GetTowerInfo().attackSpeed;
-        attackRange = tower.GetTowerInfo().attackRange;
         multiAttack = tower.GetTowerInfo().multiAttack;
         attackName = tower.GetTowerInfo().attackName;
 
@@ -52,6 +54,8 @@ public class AttackTower : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         enemyList.Add(other);
+
+        Debug.Log(attackDamage);
 
         other.GetComponent<Enemy>().onDead += RemoveInListOfTower;
 
