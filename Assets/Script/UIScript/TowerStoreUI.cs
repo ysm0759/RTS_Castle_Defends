@@ -14,6 +14,8 @@ public class TowerStoreUI : MonoBehaviour
     [SerializeField] Text attackSpeed;
     [SerializeField] Text nextAttackSpeed;
     [SerializeField] Text level;
+    [SerializeField] Text upgradeCost;
+    [SerializeField] Text explain;
 
     [SerializeField] Image image;
 
@@ -30,7 +32,27 @@ public class TowerStoreUI : MonoBehaviour
         attackDamage.text = data.damage.ToString();
         attackSpeed.text = data.attackSpeed.ToString();
         level.text = data.level.ToString();
+        upgradeCost.text = data.upgradeCost.ToString();
+        explain.text = data.explain;
+
         image.sprite = data.sprite;
         
+        if(data.nextData != null)
+        {
+            nextHp.text = (data.hp- data.nextData.hp).ToString();
+            nextDf.text = (data.df - data.nextData.df).ToString();
+            nextAttackDamage.text = (data.damage - data.nextData.damage).ToString();
+            nextAttackSpeed.text = (data.attackSpeed - data.nextData.attackSpeed).ToString();
+        }
+        else
+        {
+            nextHp.text = "";
+            nextDf.text = "";
+            nextAttackDamage.text = "";
+            nextAttackSpeed.text = "";
+        }
+
+
+
     }
 }
