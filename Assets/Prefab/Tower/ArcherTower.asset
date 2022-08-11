@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df48eaf52f8aedd4c85c0a2b9e362b3a, type: 3}
   m_Name: ArcherTower
   m_EditorClassIdentifier: 
-  maxHp: 100
-  hp: 100
+  maxHp: 100000
+  hp: 100000
   df: 2
-  damage: 5
-  attackSpeed: 0.3
+  damage: 1
+  attackSpeed: 0.5
   attackRange: 10
   attackName: arrow
-  multiAttack: 10
+  multiAttack: 1
   nextData: {fileID: 0}
   upgradeCost: 2
   buyCost: 2
-  level: 5
+  level: 1
   prefab: {fileID: 4244421499935890297, guid: fe583fb4b7c5fa94aa99fd820e1e417c, type: 3}
   explain: "\uD558\uC774"
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: bdd298d93989a844692f99ea0005e692, type: 3}

@@ -15,9 +15,8 @@ public class PrefabProjectile : PrefabObject
 
     private void OnEnable()
     {
-        //trailRenderer.gameObject.SetActive(true);
+        trailRenderer.gameObject.SetActive(true);
         //trailRenderer.enabled = true;
-        trailRenderer.Clear();
 
     
     }
@@ -26,7 +25,7 @@ public class PrefabProjectile : PrefabObject
     {
 
         trailRenderer.Clear();
-        //trailRenderer.gameObject.SetActive(false);
+        trailRenderer.gameObject.SetActive(false);
 
         //trailRenderer.enabled = false;
 
@@ -34,6 +33,7 @@ public class PrefabProjectile : PrefabObject
 
     private void Update()
     {
+
         if (target != null)
         {
             dir = target.transform.position - gameObject.transform.position;
