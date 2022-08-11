@@ -10,19 +10,25 @@ public class PrefabProjectile : PrefabObject
 
     private void Awake()
     {
-        trailRenderer = GetComponent<TrailRenderer>();
+        //trailRenderer = GetComponent<TrailRenderer>();
     }
 
     private void OnEnable()
     {
-        trailRenderer.enabled = true;
+        //trailRenderer.gameObject.SetActive(true);
+        //trailRenderer.enabled = true;
         trailRenderer.Clear();
+
+    
     }
 
     private void OnDisable()
     {
+
         trailRenderer.Clear();
-        trailRenderer.enabled = false;
+        //trailRenderer.gameObject.SetActive(false);
+
+        //trailRenderer.enabled = false;
 
     }
 

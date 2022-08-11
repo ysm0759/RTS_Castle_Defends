@@ -70,13 +70,13 @@ public class ObjectPool : MonoBehaviour
         {
             var obj = Instance.poolingObjectQueues[name].Dequeue();
             obj.transform.SetParent(null);
-            obj.gameObject.SetActive(true);
+            //obj.gameObject.SetActive(true);
             return obj;
         }
         else
         {
             var newObj = Instance.CreateNewObject(name);
-            newObj.gameObject.SetActive(true);
+            //newObj.gameObject.SetActive(true);
             newObj.transform.SetParent(null);
             return newObj;
         }

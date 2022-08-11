@@ -202,7 +202,7 @@ public class UnitController : MonoBehaviour
         anim.SetBool("IsMove", true);
         navMeshAgent.isStopped = false;
         state.SetMoveState(UnitMoveState.MOVE);
-        state.SetTraceState(UnitTraceState.NONE); //TODO
+        state.SetTraceState(UnitTraceState.NONE); 
     }
 
     private void IsArrive()

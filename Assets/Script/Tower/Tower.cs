@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// TODO :: Tower 설치 UI
+// TODO :: IN Game Interface 
+
 public class Tower : MonoBehaviour ,IDamagable
 {
-
+    
     protected TowerInfo towerInfo; //소환할떄 그 데이터 세팅 해주기!
     [SerializeField] TowerScriptable tmp;
 

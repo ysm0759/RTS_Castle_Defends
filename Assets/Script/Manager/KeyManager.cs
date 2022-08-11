@@ -11,7 +11,7 @@ public enum KeyState
     NUM3,
     NUM4,
     NUM5,
-    SKILL_COUNT, //TODO 이상하면 지울것
+    SKILL_COUNT, 
     TAB,
     Q,
     E,
