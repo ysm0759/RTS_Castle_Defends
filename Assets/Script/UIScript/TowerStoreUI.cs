@@ -67,12 +67,13 @@ public class TowerStoreUI : MonoBehaviour
 
     public void OnClickedBuy()
     {
-
+        TowerManager.instance.BuyTower(data);
     }
     public void OnClickedSell()
-    {
-
+    { 
+        TowerManager.instance.SellTower(data);
     }
+
     public void OnClickedUpgrade()
     {
         if(data.nextData == null)

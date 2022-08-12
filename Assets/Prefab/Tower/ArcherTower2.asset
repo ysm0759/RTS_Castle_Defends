@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: ArcherTower2
   m_EditorClassIdentifier: 
   towerIndex: 1
-  maxHp: 100
-  hp: 100
+  maxHp: 110
+  hp: 110
   df: 2
-  damage: 3
-  attackSpeed: 0.5
+  damage: 4
+  attackSpeed: 0.4
   attackRange: 10
   attackName: arrow
   multiAttack: 1
@@ -26,6 +26,6 @@ MonoBehaviour:
   buyCost: 5
   level: 1
   prefab: {fileID: 4929235388335204972, guid: 8638e570c02f63a428fc47ac3d320956, type: 3}
-  modelIndex: 0
+  modelIndex: 1
   explain: "\uD558\uC774"
   sprite: {fileID: 21300000, guid: bdd298d93989a844692f99ea0005e692, type: 3}

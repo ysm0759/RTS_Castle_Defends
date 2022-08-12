@@ -21,7 +21,7 @@ MonoBehaviour:
   attackRange: 10
   attackName: arrow
   multiAttack: 1
-  nextData: {fileID: 11400000, guid: c373357fe4c3a1d408004105475576a6, type: 2}
+  nextData: {fileID: 11400000, guid: e37b8c3dbd1c626439c07262dad33418, type: 2}
   upgradeCost: 2
   buyCost: 5
   level: 1

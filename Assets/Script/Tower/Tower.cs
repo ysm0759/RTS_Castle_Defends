@@ -6,9 +6,9 @@ using UnityEngine;
 // TODO :: Tower 설치 UI
 // TODO :: IN Game Interface 
 
-public class Tower : MonoBehaviour ,IDamagable
+public class Tower : MonoBehaviour, IDamagable
 {
-    
+
     protected TowerInfo towerInfo; //소환할떄 그 데이터 세팅 해주기!
     [SerializeField] TowerScriptable tmp;
     [SerializeField] List<GameObject> towerModel;
@@ -23,20 +23,17 @@ public class Tower : MonoBehaviour ,IDamagable
     /// 하위에 공격 콜라이더를 박는다
     /// 콜라이더에 Trigger를 체크
     /// </summary>
+
+
+    public bool isSetTower;
     bool isBurn;
     bool isDestroy;
-
     float burnHp;
 
     private void Awake()
     {
-        if (tmp != null)
-        {
-            SetTowerInfo(tmp);
-            InitTower();
-        }
-
         attackTower = GetComponentInChildren<AttackTower>();
+        isSetTower = false;
     }
 
     public void InitTower()
@@ -44,14 +41,15 @@ public class Tower : MonoBehaviour ,IDamagable
         this.gameObject.SetActive(true);
         this.towerInfo.hp = towerInfo.maxHp;
         burnHp = towerInfo.maxHp * 0.5f;
-        Debug.Log(burnHp);
         isBurn = false;
         isDestroy = false;
+        isSetTower = true;
 
-        if(attackTower != null)
+        if (attackTower != null)
         {
             attackTower.SetData();
         }
+
     }
 
 
@@ -89,12 +87,13 @@ public class Tower : MonoBehaviour ,IDamagable
         towerInfo = GetComponent<TowerInfo>();
         towerInfo.SetData(data);
         SetModel(data);
+        InitTower();
     }
 
 
     public void SetModel(TowerScriptable data)
     {
-        for(int i =0; i <towerModel.Count;i++)
+        for (int i = 0; i < towerModel.Count; i++)
         {
             if (data.modelIndex == i)
                 this.towerModel[i].SetActive(true);
@@ -103,5 +102,23 @@ public class Tower : MonoBehaviour ,IDamagable
         }
     }
 
+    private void Update()
+    {
+        test();
+    }
 
+    public void test()
+    {
+        //Renderer ObstacleRenderer;
+        //ObstacleRenderer = towerModel[0].gameObject.GetComponentInChildren<Renderer>();
+
+        //Material Mat = ObstacleRenderer.material;
+
+        //Color matColor = Mat.color;
+
+        //matColor.a = 0.5f;
+
+        //Mat.color = matColor;
+
+    }
 }
