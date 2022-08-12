@@ -25,21 +25,36 @@ public class TowerManager : MonoBehaviour
     [Space(20)]
     [SerializeField] TowerScriptable towerData;
     [Space(20)]
-    [SerializeField] TowersList[] towersList;
+    [SerializeField] TowersList[] towersListNode;
     [Space(20)]
     [SerializeField] GameObject explain;
     [SerializeField] GameObject onOffObject;
 
-    GameObject towerGameObject;
-    Dictionary<string, GameObject> towerDic;
+    GameObject nodeGameObject;
 
+    TowerNode[] towerNodes;
 
     private Camera mainCamera;
     static public TowerManager instance;
     TowerStatu towerStatu = TowerStatu.NONE;
 
 
-    
+    private void Awake()
+    {
+        mainCamera = Camera.main;
+        instance = this;
+        
+
+        Transform[] tmp = GetComponentsInChildren<Transform>();
+        towerNodes = new TowerNode[tmp.Length - 1];
+
+
+        for (int i = 1; i < tmp.Length; i++)
+        {
+            towerNodes[i-1] = new TowerNode();
+            towerNodes[i - 1].node = tmp[i].gameObject;
+        }
+    }
 
     [Serializable]
     public class TowersList
@@ -47,24 +62,19 @@ public class TowerManager : MonoBehaviour
         public List<GameObject> Towers;
     }
 
-    public class TowerNodes
+    public class TowerNode
     {
-        public GameObject tower;
-        public bool isEmpty;
+        public GameObject node;
+        public bool isEmpty = true;
 
         public void SetClear()
         {
-            Destroy(tower);
+            Destroy(node.GetComponentInChildren<Tower>().gameObject);
             isEmpty = true;
         }
     }
 
-    private void Awake()
-    {
-        mainCamera = Camera.main;
-        instance = this;
-        towerDic = new Dictionary<string, GameObject>();
-    }
+
 
     private void Update()
     {
@@ -78,15 +88,19 @@ public class TowerManager : MonoBehaviour
 
     private void InitTowers()
     {
-        foreach (string tmp in towerDic.Keys)
+
+        for (int i = 0; i < towersListNode.Length; i++)
         {
-            towerDic[tmp].GetComponentInChildren<Tower>().InitTower();
+            foreach (GameObject tmp in towersListNode[i].Towers)
+            {
+                towerNodes[Int32.Parse(tmp.name)].node.GetComponentInChildren<Tower>().InitTower();
+            }
         }
     }
 
     public void UpgradeTower(TowerScriptable towerData)
     {
-        foreach (GameObject tmp in towersList[(int)towerData.towerIndex].Towers)
+        foreach (GameObject tmp in towersListNode[(int)towerData.towerIndex].Towers)
         {
             Tower towerTmp = tmp.GetComponent<Tower>();
             towerTmp.SetTowerInfo(towerData);
@@ -98,21 +112,17 @@ public class TowerManager : MonoBehaviour
 
     private void ResetTowers()
     {
-        foreach (string tmp in towerDic.Keys)
+
+        for(int i =0;i < towersListNode.Length;i++)
         {
-            Debug.Log(tmp);
-            Debug.Log(towerDic[tmp].gameObject.GetComponent<MeshRenderer>());
-            towerDic[tmp].gameObject.GetComponent<MeshRenderer>().enabled = true;
-            Destroy(towerDic[tmp].GetComponentInChildren<Tower>().gameObject);
-
+            foreach(GameObject tmp in towersListNode[i].Towers)
+            {
+                int index = Int32.Parse(tmp.name);
+                towerNodes[index].SetClear();
+                towerNodes[index].node.GetComponent<MeshRenderer>().enabled = true;
+            }
+            towersListNode[i].Towers.Clear();
         }
-
-        for (int i = 0; i < towersList.Length; i++)
-        {
-            towersList[i].Towers.Clear();
-        }
-
-        towerDic.Clear();
     }
 
 
@@ -147,38 +157,48 @@ public class TowerManager : MonoBehaviour
 
             if (towerStatu == TowerStatu.BUY)
             {
+                RaycastHit hit;
+                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("TowerArea")))
+                {
+                    int idx = Int32.Parse(hit.collider.name);
 
-                //if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("TowerArea")))
-                //{
+                    if (towerNodes[idx].isEmpty)
+                    {
+                        nodeGameObject = hit.collider.gameObject;
+                        towerNodes[idx].isEmpty = false;
+                        GameObject tower = Instantiate(towerData.prefab);
+                        tower.transform.SetParent(hit.transform);
+                        tower.transform.position = hit.transform.position;
+                        tower.GetComponent<Tower>().SetTowerInfo(towerData);
+                        tower.transform.localScale *= 5;
+                    }
+                }
+                else
+                {
+                    if (nodeGameObject != null)
+                    {
+                        int idx = Int32.Parse(nodeGameObject.name);
+                        towerNodes[idx].isEmpty = true;
+                        Tower towerTmp = towerNodes[idx].node.GetComponentInChildren<Tower>();
+                        Destroy(towerTmp.gameObject);
+                        nodeGameObject = null;
+                    }
 
-                //    GameObject tower = Instantiate(towerData.prefab);
-                //    tower.transform.SetParent(hit.transform);
-                //    tower.transform.position = hit.transform.position;
-                //    tower.transform.localScale *= 5;
-                //    towerGameObject = tower;
+                }
 
-                //}
-                //else
-                //{
-
-                //    if (towerGameObject != null && !towerGameObject.GetComponent<Tower>().isSetTower)
-                //    {
-                //        Destroy(towerGameObject);
-                //    }
-
-                //}
                 if (Input.GetMouseButtonDown(0))
                 {
-                    RaycastHit hit;
-                    Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
                     if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("TowerArea")))
                     {
-                        if (!towerDic.ContainsKey(hit.collider.gameObject.name))
+                        int idx = Int32.Parse(hit.collider.name);
+                        if (towerNodes[idx].isEmpty)
                         {
+                            towerNodes[idx].isEmpty = false;
                             hit.collider.GetComponent<MeshRenderer>().enabled = false;
                             GameObject tower = Instantiate(towerData.prefab);
-                            towersList[(int)towerData.towerIndex].Towers.Add(tower);
-                            towerDic.Add(hit.collider.gameObject.name, hit.collider.gameObject);
+                            towersListNode[(int)towerData.towerIndex].Towers.Add(hit.collider.gameObject);
                             tower.transform.SetParent(hit.transform);
                             tower.transform.position = hit.transform.position;
                             tower.GetComponent<Tower>().SetTowerInfo(towerData);
@@ -198,16 +218,15 @@ public class TowerManager : MonoBehaviour
                 Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("TowerArea")))
                 {
-                    GameObject tmp;
-                    if (towerDic.TryGetValue(hit.collider.gameObject.name, out tmp))
+                    int idx = Int32.Parse(hit.collider.name);
+                    if (!towerNodes[idx].isEmpty)
                     {
+                        towerNodes[idx].isEmpty = true;
                         hit.collider.GetComponent<MeshRenderer>().enabled = true;
-                        Tower towerTmp = tmp.GetComponentInChildren<Tower>();
-                        GameManager.instance.ReturnCost(towerTmp.GetTowerInfo().buyCost);
-                        towersList[(int)towerData.towerIndex].Towers.Remove(towerTmp.gameObject);
-                        Destroy(towerTmp.gameObject);
-                        towerDic.Remove(hit.collider.gameObject.name);
+                        Tower towerTmp =towerNodes[idx].node.GetComponentInChildren<Tower>();
+                        towersListNode[(int)towerData.towerIndex].Towers.Remove(hit.collider.gameObject);
                         GameManager.instance.ReturnCost(towerData.buyCost);
+                        Destroy(towerTmp.gameObject);
 
                     }
                 }
