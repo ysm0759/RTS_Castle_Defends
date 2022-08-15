@@ -9,9 +9,10 @@ public enum UnitType
     USER_MELEE,
     USER_RANGER,
     USER_MAGICIAN,
+    USER_UNIT_COUNT,
+
     USER_TANKER,
     USER_AIR,
-    USER_UNIT_COUNT,
 
 
     ENEMY_MELEE,

@@ -102,7 +102,7 @@ public class TowerManager : MonoBehaviour
     {
         foreach (GameObject tmp in towersListNode[(int)towerData.towerIndex].Towers)
         {
-            Tower towerTmp = tmp.GetComponent<Tower>();
+            Tower towerTmp = tmp.GetComponentInChildren<Tower>();
             towerTmp.SetTowerInfo(towerData);
         }
     }
@@ -159,33 +159,35 @@ public class TowerManager : MonoBehaviour
             {
                 RaycastHit hit;
                 Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("TowerArea")))
-                {
-                    int idx = Int32.Parse(hit.collider.name);
 
-                    if (towerNodes[idx].isEmpty)
-                    {
-                        nodeGameObject = hit.collider.gameObject;
-                        towerNodes[idx].isEmpty = false;
-                        GameObject tower = Instantiate(towerData.prefab);
-                        tower.transform.SetParent(hit.transform);
-                        tower.transform.position = hit.transform.position;
-                        tower.GetComponent<Tower>().SetTowerInfo(towerData);
-                        tower.transform.localScale *= 5;
-                    }
-                }
-                else
-                {
-                    if (nodeGameObject != null)
-                    {
-                        int idx = Int32.Parse(nodeGameObject.name);
-                        towerNodes[idx].isEmpty = true;
-                        Tower towerTmp = towerNodes[idx].node.GetComponentInChildren<Tower>();
-                        Destroy(towerTmp.gameObject);
-                        nodeGameObject = null;
-                    }
 
-                }
+                //if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("TowerArea")))
+                //{
+                //    int idx = Int32.Parse(hit.collider.name);
+
+                //    if (towerNodes[idx].isEmpty)
+                //    {
+                //        nodeGameObject = hit.collider.gameObject;
+                //        towerNodes[idx].isEmpty = false;
+                //        GameObject tower = Instantiate(towerData.prefab);
+                //        tower.transform.SetParent(hit.transform);
+                //        tower.transform.position = hit.transform.position;
+                //        tower.GetComponent<Tower>().SetTowerInfo(towerData);
+                //        tower.transform.localScale *= 5;
+                //    }
+                //}
+                //else
+                //{
+                //    if (nodeGameObject != null)
+                //    {
+                //        int idx = Int32.Parse(nodeGameObject.name);
+                //        towerNodes[idx].isEmpty = true;
+                //        Tower towerTmp = towerNodes[idx].node.GetComponentInChildren<Tower>();
+                //        Destroy(towerTmp.gameObject);
+                //        nodeGameObject = null;
+                //    }
+
+                //}
 
                 if (Input.GetMouseButtonDown(0))
                 {

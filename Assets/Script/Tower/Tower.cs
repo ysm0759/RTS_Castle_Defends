@@ -10,7 +10,6 @@ public class Tower : MonoBehaviour, IDamagable
 {
 
     protected TowerInfo towerInfo; //소환할떄 그 데이터 세팅 해주기!
-    [SerializeField] TowerScriptable tmp;
     [SerializeField] List<GameObject> towerModel;
 
     private AttackTower attackTower;
@@ -25,6 +24,11 @@ public class Tower : MonoBehaviour, IDamagable
     /// </summary>
 
 
+    /// 기본 제공 타워
+    /// 캐술 , 게이트 등
+    /// 스크립트를 붙인다 컴포넌트에
+    [SerializeField] TowerScriptable dafaultTower;
+
     public bool isSetTower;
     bool isBurn;
     bool isDestroy;
@@ -34,6 +38,14 @@ public class Tower : MonoBehaviour, IDamagable
     {
         attackTower = GetComponentInChildren<AttackTower>();
         isSetTower = false;
+
+        // 기본 타워 생성 Component에 Tower Scriptable 컴포넌트를 붙여준다
+        if (dafaultTower != null)
+        {
+            towerInfo = GetComponent<TowerInfo>();
+            towerInfo.SetData(dafaultTower);
+            InitTower();
+        }
     }
 
     public void InitTower()
@@ -63,14 +75,15 @@ public class Tower : MonoBehaviour, IDamagable
             isBurn = true;
             burning = ObjectPool.GetObject("burning");
             burning.transform.position = transform.position;
+            burning.SetActive(true);
         }
         else if (towerInfo.hp <= 0 && isDestroy == false)
         {
-
             this.gameObject.SetActive(false);
             ObjectPool.ReturnObject("burning", burning);
             destroy = ObjectPool.GetObject("destroy");
             destroy.transform.position = transform.position;
+            destroy.SetActive(true);
         }
 
     }

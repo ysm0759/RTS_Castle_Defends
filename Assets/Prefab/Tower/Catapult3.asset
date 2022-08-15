@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df48eaf52f8aedd4c85c0a2b9e362b3a, type: 3}
+  m_Name: Catapult3
+  m_EditorClassIdentifier: 
+  towerIndex: 0
+  maxHp: 200
+  hp: 200
+  df: 2
+  damage: 10
+  attackSpeed: 2
+  attackRange: 10
+  attackName: catapultStone
+  multiAttack: 1
+  nextData: {fileID: 0}
+  upgradeCost: 2
+  buyCost: 5
+  level: 3
+  prefab: {fileID: 961652435454712152, guid: dbac2e475c6e95141ac1445d51e8a3b7, type: 3}
+  modelIndex: 3
+  explain: "\uD558\uC774"
+  sprite: {fileID: 21300000, guid: 286b4ff486d9d5744a294e62dc7bf1c6, type: 3}

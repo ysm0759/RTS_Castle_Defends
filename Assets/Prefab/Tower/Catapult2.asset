@@ -10,20 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df48eaf52f8aedd4c85c0a2b9e362b3a, type: 3}
-  m_Name: Catapult
+  m_Name: Catapult2
   m_EditorClassIdentifier: 
-  maxHp: 100
-  hp: 100
+  towerIndex: 0
+  maxHp: 150
+  hp: 150
   df: 2
-  damage: 5
-  attackSpeed: 3
+  damage: 7
+  attackSpeed: 2.5
   attackRange: 10
   attackName: catapultStone
   multiAttack: 1
-  nextData: {fileID: 0}
+  nextData: {fileID: 11400000, guid: 9808cc0f885a5b346940f462d4b20f9a, type: 2}
   upgradeCost: 2
-  buyCost: 2
-  level: 5
-  prefab: {fileID: 314120752628232225, guid: 3f06596cc25474848985e68893bae741, type: 3}
+  buyCost: 5
+  level: 2
+  prefab: {fileID: 961652435454712152, guid: dbac2e475c6e95141ac1445d51e8a3b7, type: 3}
+  modelIndex: 2
   explain: "\uD558\uC774"
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 71c2b4cf23700ba48adb9a2295a87fa3, type: 3}
