@@ -123,13 +123,13 @@ public class GameManager : MonoBehaviour
     {
         if(curCost - cost < 0)
         {
-            return false;
+            return false; //돈 없음
         }
         else
         {
             curCost -= cost;
-            UpdateCostPanel();
-            return true;
+            UpdateCostPanel(); // 돈있음
+            return true; 
         
         }
     }

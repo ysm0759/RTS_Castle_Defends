@@ -1,167 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class StoreSceneUI : MonoBehaviour
 {
-    private UnitDataScriptableObject[] data = new UnitDataScriptableObject[(int)UnitType.USER_UNIT_COUNT];
 
-    [SerializeField] private GameObject[] lockImage = new GameObject[(int)UnitType.USER_UNIT_COUNT];
-
-    private bool[] isBuy = new bool[(int)UnitType.USER_UNIT_COUNT];
-
-    [SerializeField] private Text level;
-
-    [SerializeField] private Text hp;
-    [SerializeField] private Text hpLevel;
-    
-    [SerializeField] private Text df;
-    [SerializeField] private Text dfLevel;
-
-    [SerializeField] private Text damage;
-    [SerializeField] private Text damageLevel;
-
-    [SerializeField] private Text attackSpeed;
-    [SerializeField] private Text attackSpeedLevel;
-
-    [SerializeField] private Text moveSpeed;
-    [SerializeField] private Text moveSpeedLevel;
-    
-    [SerializeField] private Text attackRange;
-    [SerializeField] private Text attackRangeLevel;
-        
-    [SerializeField] private Text population;
-    [SerializeField] private Text populationLevel;
-
-    [SerializeField] private Text explain;
-
-    [SerializeField] private Text upGradeCost;
-    [SerializeField] private Image image;
-
-    [SerializeField] private UnitDataScriptableObject defaultUnit;
-    
+    [SerializeField] UnitStoreUI unitStoreUI;
+    [SerializeField] GameObject[] menuObjects;
     [SerializeField] private GameObject resetPanel;
-
-
-    private int unitType = 0;
-
-
-    //필요한게 코스트
-    //잠구고 열고 
-    public void OnClickUnit(UnitDataScriptableObject firstData)
+    public void OnClickReset()
     {
-        unitType = (int)firstData.unitType;
-        if (data[unitType] == null)
-        {
-            data[unitType] = firstData;
-        }
-
-        image.sprite = data[unitType].sprite;
-        level.text = data[unitType].level.ToString();
-        hp.text = data[unitType].hp.ToString();
-        df.text = data[unitType].df.ToString();
-        damage.text = data[unitType].damage.ToString();
-        attackSpeed.text = data[unitType].attackSpeed.ToString();
-        moveSpeed.text = data[unitType].moveSpeed.ToString();
-        attackRange.text = data[unitType].attackRange.ToString();
-        population.text = data[unitType].population.ToString(); 
-        explain.text = data[unitType].explain.ToString();
-
-        if( null == data[unitType].nextStat)
-        {
-            hpLevel.text = "";
-            dfLevel.text = "";
-            damageLevel.text = "";
-            attackSpeedLevel.text = "";
-            moveSpeedLevel.text = "";
-            attackRangeLevel.text = "";
-            populationLevel.text = "";
-            upGradeCost.text = "";
-            return;
-        }
-        hpLevel.text = (data[unitType].nextStat.hp - data[unitType].hp).ToString();
-        dfLevel.text = (data[unitType].nextStat.df - data[unitType].df).ToString();
-        damageLevel.text = (data[unitType].nextStat.damage - data[unitType].damage).ToString();
-        attackSpeedLevel.text = (data[unitType].nextStat.attackSpeed - data[unitType].attackSpeed).ToString();
-        moveSpeedLevel.text = (data[unitType].nextStat.moveSpeed - data[unitType].moveSpeed).ToString();
-        attackRangeLevel.text = (data[unitType].nextStat.attackRange - data[unitType].attackRange).ToString();
-        populationLevel.text = (data[unitType].nextStat.population - data[unitType].population).ToString();
-        upGradeCost.text = data[unitType].upgradeCost.ToString();
+        resetPanel.SetActive(true);
     }
 
     public void OnClickStore()
     {
-        OnClickUnit(defaultUnit);
         resetPanel.SetActive(false);
     }
 
-    public void OnClickUpGrade()
+
+    public void OnClickResetYes()
     {
-        if (null == data[unitType] || null == data[unitType].nextStat || lockImage[unitType].gameObject.activeSelf == true)
-            return;
-        
-        if(GameManager.instance.UseCost(data[unitType].upgradeCost))
-        {
 
-            data[unitType] = data[unitType].nextStat;
-            OnClickUnit(data[unitType]);
-            GameManager.instance.UpdateCostPanel();
-        }
-
+        unitStoreUI.OnClickReset();
+        GameManager.instance.ResetCost();
+        TowerManager.instance.ResetTowers();
+        resetPanel.SetActive(false);
     }
 
+    public void OnClickResetNo()
+    {
+        resetPanel.SetActive(false);
+    }
+
+    public void SelectMenu(int menu)
+    {
+        this.menuObjects[(int)StoreMenu.UNIT].SetActive(menu == (int)StoreMenu.UNIT);
+        this.menuObjects[(int)StoreMenu.TOWER].SetActive(menu == (int)StoreMenu.TOWER);
+    }
 
     public void OnClickBackButton()
     {
         GameStateManager.instance.gameState = GameState.READY;
         GameManager.instance.ReadyScene();
     }
-
-    public void OnClickResetYes()
-    {
-        for(int i =0; i < (int)UnitType.USER_UNIT_COUNT; i++)
-        {
-            data[i] = null;
-            lockImage[i].SetActive(true);
-            isBuy[i] = false;
-        }
-        OnClickUnit(defaultUnit);
-        GameManager.instance.ResetCost();
-        TowerManager.instance.ResetTowers();
-        resetPanel.SetActive(false);
-    }
-    
-    public void OnClickResetNo()
-    {
-        resetPanel.SetActive(false);
-    }
-    
-    public void OnClickReset()
-    {
-        resetPanel.SetActive(true);
-    }
-
-    public void OnClickBuy()
-    {
-        if( GameManager.instance.UseCost(10) && lockImage[unitType].gameObject.activeSelf == true)
-        {
-            isBuy[unitType] = true;
-            lockImage[unitType].SetActive(false);
-        }
-    }
-
-
-
-    public UnitDataScriptableObject[] GetScriptableData()
-    {
-        return data;
-    }
-
-    public bool[] GetIsBuys()
-    {
-        return isBuy;
-    }
-
-
 }

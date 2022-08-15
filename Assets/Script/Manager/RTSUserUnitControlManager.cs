@@ -7,7 +7,7 @@ public class RTSUserUnitControlManager : MonoBehaviour
     [SerializeField]
     private UserUnitSpawner unitSpawner;
     [SerializeField]
-    private StoreSceneUI storeSceneUI;
+    private UnitStoreUI unitStoreUI;
     private List<UnitController> selectedUnitList;          //플레이어가 클래기 or 드래그로 선택한 유닛
     public List<UnitController> unitList{private set; get;} //맵에 존재하는 모든 유닛
 
@@ -221,7 +221,7 @@ public class RTSUserUnitControlManager : MonoBehaviour
 
     public void InitUnit()
     {
-        unitList = unitSpawner.SpawnUnits(storeSceneUI.GetScriptableData(), storeSceneUI.GetIsBuys());
+        unitList = unitSpawner.SpawnUnits(unitStoreUI.GetScriptableData(), unitStoreUI.GetIsBuys());
 
         for (int i = 0; i < unitList.Count; i++)
         {

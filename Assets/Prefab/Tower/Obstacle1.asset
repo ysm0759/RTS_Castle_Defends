@@ -21,11 +21,11 @@ MonoBehaviour:
   attackRange: 0
   attackName: 0
   multiAttack: 0
-  nextData: {fileID: 11400000, guid: e37b8c3dbd1c626439c07262dad33418, type: 2}
+  nextData: {fileID: 11400000, guid: 9474c7a76fe6c8d4984d8af50203a6de, type: 2}
   upgradeCost: 5
   buyCost: 10
   level: 1
   prefab: {fileID: 4929235388335204972, guid: 834244d4c477b0344aa36598b9ee0a80, type: 3}
   modelIndex: 0
-  explain: "\uAE38\uC744 \uB9C9\uC2B5\uB2C8\uB2E4"
+  explain: "\uD06C\uACE0 \uB2E8\uB2E8\uD55C \uBB3C\uCCB4\uB85C \uAE38\uC744 \uB9C9\uC2B5\uB2C8\uB2E4."
   sprite: {fileID: 21300000, guid: 0fea2d29f0693f440b14b26523ccfab8, type: 3}

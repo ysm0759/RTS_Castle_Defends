@@ -178,7 +178,20 @@ public class TowerInfo : MonoBehaviour
     }
 
 
+    
+    [SerializeField]
+    private TowerIndex _towerIndex;
 
+    public TowerIndex towerIndex//멀티공격
+    {
+        get
+        {
+            return _towerIndex;
+        }
+    }
+
+
+    
 
     public void SetData(TowerScriptable data)
     {
@@ -192,7 +205,7 @@ public class TowerInfo : MonoBehaviour
         this._attackName = data.attackName;
         this._multiAttack = data.multiAttack;
         this._buyCost = data.buyCost;
-
+        this._towerIndex = data.towerIndex;
 
     }
 

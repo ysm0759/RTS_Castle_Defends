@@ -25,12 +25,12 @@ public class TowerManager : MonoBehaviour
     [Space(20)]
     [SerializeField] TowerScriptable towerData;
     [Space(20)]
-    [SerializeField] TowersList[] towersListNode;
+    [SerializeField] TowersList[] towersListNode; // 설치된 타워 노드
     [Space(20)]
     [SerializeField] GameObject explain;
     [SerializeField] GameObject onOffObject;
 
-    TowerNode[] towerNodes;
+    TowerNode[] towerNodes; //타워 기본 노드
 
     private Camera mainCamera;
     static public TowerManager instance;
@@ -185,15 +185,24 @@ public class TowerManager : MonoBehaviour
                         int idx = Int32.Parse(hit.collider.name);
                         if (towerNodes[idx].isEmpty)
                         {
-                            towerNodes[idx].isEmpty = false;
-                            hit.collider.GetComponent<MeshRenderer>().enabled = false;
-                            GameObject tower = Instantiate(towerData.prefab);
-                            towersListNode[(int)towerData.towerIndex].Towers.Add(hit.collider.gameObject);
-                            tower.transform.SetParent(hit.transform);
-                            tower.transform.position = hit.transform.position;
-                            tower.GetComponent<Tower>().SetTowerInfo(towerData);
-                            tower.transform.localScale *= 5;
-                            GameManager.instance.UseCost(towerData.buyCost);
+                            if(GameManager.instance.UseCost(towerData.buyCost)==false)
+                            {
+                                Debug.Log("돈이 부족함");
+                                yield return null;
+
+                            }
+                            else
+                            {
+                                towerNodes[idx].isEmpty = false;
+                                hit.collider.GetComponent<MeshRenderer>().enabled = false;
+                                GameObject tower = Instantiate(towerData.prefab);
+                                towersListNode[(int)towerData.towerIndex].Towers.Add(hit.collider.gameObject);
+                                tower.transform.SetParent(hit.transform);
+                                tower.transform.position = hit.transform.position;
+                                tower.GetComponent<Tower>().SetTowerInfo(towerData);
+                                tower.transform.localScale *= 5;
+                            }
+
                         }
                     }
                 }
@@ -213,10 +222,11 @@ public class TowerManager : MonoBehaviour
                     {
                         towerNodes[idx].isEmpty = true;
                         hit.collider.GetComponent<MeshRenderer>().enabled = true;
-                        Tower towerTmp =towerNodes[idx].node.GetComponentInChildren<Tower>();
-                        towersListNode[(int)towerData.towerIndex].Towers.Remove(hit.collider.gameObject);
-                        GameManager.instance.ReturnCost(towerData.buyCost);
+                        Tower towerTmp = towerNodes[idx].node.GetComponentInChildren<Tower>();
                         Destroy(towerTmp.gameObject);
+
+                        towersListNode[(int)towerTmp.GetTowerInfo().towerIndex].Towers.Remove(hit.collider.gameObject);
+                        GameManager.instance.ReturnCost(towerData.buyCost);
 
                     }
                 }

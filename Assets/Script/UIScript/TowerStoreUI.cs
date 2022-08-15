@@ -29,6 +29,8 @@ public class TowerStoreUI : MonoBehaviour
     private void Awake()
     {
         elementData = GetComponentsInChildren<TowerElementUI>();
+        data = defaultData[0];
+        SetInfo();
     }
     public void SetTowerData(TowerScriptable towerData)
     {

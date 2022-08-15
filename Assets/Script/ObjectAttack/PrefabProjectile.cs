@@ -38,6 +38,7 @@ public class PrefabProjectile : PrefabObject
         {
             dir = target.transform.position - gameObject.transform.position;
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target.transform.position, speed);
+            gameObject.transform.LookAt(target.transform);
         }
         else
         {
