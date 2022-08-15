@@ -86,7 +86,6 @@ public class TowerStoreUI : MonoBehaviour
             data = data.nextData;
             elementData[(int)data.towerIndex].SetData(data);
             TowerManager.instance.UpgradeTower(data);
-
         }
     }
 

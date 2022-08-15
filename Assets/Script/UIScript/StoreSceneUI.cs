@@ -128,6 +128,7 @@ public class StoreSceneUI : MonoBehaviour
         }
         OnClickUnit(defaultUnit);
         GameManager.instance.ResetCost();
+        TowerManager.instance.ResetTowers();
         resetPanel.SetActive(false);
     }
     

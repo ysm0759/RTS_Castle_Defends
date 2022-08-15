@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df48eaf52f8aedd4c85c0a2b9e362b3a, type: 3}
   m_Name: Catapult2
   m_EditorClassIdentifier: 
-  towerIndex: 0
+  towerIndex: 2
   maxHp: 150
   hp: 150
   df: 2
@@ -26,6 +26,6 @@ MonoBehaviour:
   buyCost: 5
   level: 2
   prefab: {fileID: 961652435454712152, guid: dbac2e475c6e95141ac1445d51e8a3b7, type: 3}
-  modelIndex: 2
+  modelIndex: 1
   explain: "\uD558\uC774"
   sprite: {fileID: 21300000, guid: 71c2b4cf23700ba48adb9a2295a87fa3, type: 3}

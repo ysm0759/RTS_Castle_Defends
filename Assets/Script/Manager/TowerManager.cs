@@ -30,8 +30,6 @@ public class TowerManager : MonoBehaviour
     [SerializeField] GameObject explain;
     [SerializeField] GameObject onOffObject;
 
-    GameObject nodeGameObject;
-
     TowerNode[] towerNodes;
 
     private Camera mainCamera;
@@ -76,16 +74,6 @@ public class TowerManager : MonoBehaviour
 
 
 
-    private void Update()
-    {
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            ResetTowers();
-        }
-    }
-
-
     private void InitTowers()
     {
 
@@ -110,7 +98,7 @@ public class TowerManager : MonoBehaviour
 
 
 
-    private void ResetTowers()
+    public void ResetTowers()
     {
 
         for(int i =0;i < towersListNode.Length;i++)
