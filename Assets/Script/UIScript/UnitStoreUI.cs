@@ -16,7 +16,9 @@ public class UnitStoreUI : MonoBehaviour
     /// <summary>
     /// TODO :: unit Store UI FIX !!
     /// </summary>
-    private UnitDataScriptableObject[] data = new UnitDataScriptableObject[(int)UnitType.USER_UNIT_COUNT];
+    private UnitDataScriptableObject[] data;
+
+    [SerializeField] private UnitDataScriptableObject[] defaultUnit;
 
     [SerializeField] private GameObject[] lockImage = new GameObject[(int)UnitType.USER_UNIT_COUNT];
 
@@ -50,13 +52,17 @@ public class UnitStoreUI : MonoBehaviour
     [SerializeField] private Text upGradeCost;
     [SerializeField] private Image image;
 
-    [SerializeField] private UnitDataScriptableObject defaultUnit;
 
 
 
     private int unitType = 0;
 
 
+    private void Awake()
+    {
+        data = new UnitDataScriptableObject[(int)UnitType.USER_UNIT_COUNT];
+        OnClickUnit(defaultUnit[0]);
+    }
 
     //필요한게 코스트
     //잠구고 열고 
@@ -110,7 +116,6 @@ public class UnitStoreUI : MonoBehaviour
 
         if (GameManager.instance.UseCost(data[unitType].upgradeCost))
         {
-
             data[unitType] = data[unitType].nextStat;
             OnClickUnit(data[unitType]);
             GameManager.instance.UpdateCostPanel();
@@ -131,10 +136,27 @@ public class UnitStoreUI : MonoBehaviour
                 isBuy[unitType] = true;
                 lockImage[unitType].SetActive(false);
             }
-
         }
     }
 
+
+    public void OnClickSell()
+    {
+        if (lockImage[unitType].gameObject.activeSelf == false)
+        {
+            GameManager.instance.ReturnCost(10);
+            UnitDataScriptableObject tmp = defaultUnit[unitType];
+            while (true)
+            {
+                if(tmp == data[unitType])
+                {
+                    return;
+                }
+                GameManager.instance.ReturnCost(tmp.upgradeCost);
+                tmp = tmp.nextStat;
+            }
+        }
+    }
 
 
     public UnitDataScriptableObject[] GetScriptableData()
@@ -156,6 +178,7 @@ public class UnitStoreUI : MonoBehaviour
             lockImage[i].SetActive(true);
             isBuy[i] = false;
         }
+        OnClickUnit(defaultUnit[0]);
     }
 
 

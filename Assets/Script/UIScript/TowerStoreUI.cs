@@ -78,13 +78,13 @@ public class TowerStoreUI : MonoBehaviour
 
     public void OnClickedUpgrade()
     {
-        if(data.nextData == null)
+        if(data.nextData == null  )
         {
             return;
         }
-        else
+        else if (GameManager.instance.UseCost(data.upgradeCost))
         {
-            GameManager.instance.UseCost(data.upgradeCost);
+            
             data = data.nextData;
             elementData[(int)data.towerIndex].SetData(data);
             TowerManager.instance.UpgradeTower(data);

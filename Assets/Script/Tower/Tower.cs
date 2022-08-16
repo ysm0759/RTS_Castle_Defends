@@ -4,7 +4,6 @@ using UnityEngine;
 
 
 // TODO :: Tower 설치 UI
-// TODO :: IN Game Interface 
 
 public class Tower : MonoBehaviour, IDamagable
 {

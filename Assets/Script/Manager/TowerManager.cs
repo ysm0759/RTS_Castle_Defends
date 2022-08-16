@@ -132,7 +132,6 @@ public class TowerManager : MonoBehaviour
         towerData = data;
         explain.gameObject.SetActive(true);
         onOffObject.SetActive(false);
-        //TODO 타워 만들고 세팅하는것 수정
 
         while (true)
         {

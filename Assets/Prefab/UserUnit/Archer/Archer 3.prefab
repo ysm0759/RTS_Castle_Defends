@@ -34,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 552802762737997199}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 196.19, y: 100, z: 179.46}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 3103632322007127402}
   - {fileID: 552802764044945788}
@@ -163,7 +163,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 013b486691485a64ab2e2332bbedacd4, type: 2}
-  enumType: 1
   _maxHp: 0
   _hp: 0
   _df: 0
@@ -172,6 +171,8 @@ MonoBehaviour:
   _damage: 0
   _attackRange: 0
   _upgradeCost: 0
+  _attackName: 
+  _multiAttack: 0
 --- !u!95 &-3553044458567482098
 Animator:
   serializedVersion: 3
@@ -203,8 +204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f25b8176c1fb4ea40a9bfa84c8f13d8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5478669512983264528, guid: a6149df73104bb440b82e5d8d41fc347, type: 3}
-  multiAttack: 1
 --- !u!1 &552802764044945778
 GameObject:
   m_ObjectHideFlags: 0

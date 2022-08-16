@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
         readyPanel.SetActive(false);
         storePanel.SetActive(false);
         RTSUserUnitControlManager.instance.InitUnit();
-        EnemySpwanManager.instance.SetEnemySpwan();
+        EnemySpawnManager.instance.SetEnemySpawn();
     }
 
     public void StoreScene()

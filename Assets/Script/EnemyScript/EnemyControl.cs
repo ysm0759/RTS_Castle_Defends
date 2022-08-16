@@ -40,11 +40,15 @@ public class EnemyControl : MonoBehaviour
 
 
         StartCoroutine(SetMultiAttackSize());
-        StartCoroutine(SetDestinationCastle());
+
         SetAnimAttackTime();
 
     }
 
+    private void Update()
+    {
+        Debug.Log(navMeshAgent.pathPending);
+    }
     IEnumerator SetMultiAttackSize()
     {
         yield return null;
@@ -54,7 +58,12 @@ public class EnemyControl : MonoBehaviour
 
     IEnumerator SearchTrace()
     {
+        NavMeshPath navMeshPath = new NavMeshPath();
+        navMeshAgent.CalculatePath(destination, navMeshPath);
 
+        yield return new WaitForSeconds(10.0f);
+
+        StartCoroutine(SetDestinationCastle());
         while (true)
         {
             if (!enemyUnit.unitInfo.isAlive)
@@ -105,7 +114,7 @@ public class EnemyControl : MonoBehaviour
         }
         
     }
-
+   
     IEnumerator Attack()
     {
         canAttack = false;
