@@ -15,6 +15,7 @@ public enum UnitTraceState
 {
     TRACE,
     ATTACK_TRACE,
+    ATTACK_FOCUS,
     NONE
 }
 public enum UnitAttackState

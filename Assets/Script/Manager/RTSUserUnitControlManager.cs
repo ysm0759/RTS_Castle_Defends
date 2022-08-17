@@ -8,7 +8,7 @@ public class RTSUserUnitControlManager : MonoBehaviour
     private UserUnitSpawner unitSpawner;
     [SerializeField]
     private UnitStoreUI unitStoreUI;
-    private List<UnitController> selectedUnitList;          //플레이어가 클래기 or 드래그로 선택한 유닛
+    private List<UnitController> selectedUnitList;          //플레이어가 클릭 or 드래그로 선택한 유닛
     public List<UnitController> unitList{private set; get;} //맵에 존재하는 모든 유닛
 
     static private RTSUserUnitControlManager Instance;
@@ -231,6 +231,16 @@ public class RTSUserUnitControlManager : MonoBehaviour
             }
         }
     }
+
+
+    public void AttackFocus(Collider hit)
+    {
+        for (int i = 0; i < selectedUnitList.Count; ++i)
+        {
+            selectedUnitList[i].AttackFocus(hit);
+        }
+    }
+
 }
 
 

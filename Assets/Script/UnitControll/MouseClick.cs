@@ -10,7 +10,6 @@ public class MouseClick : MonoBehaviour
     private LayerMask   layerGround;
 
     private Camera  mainCamera;
-    private RTSUserUnitControlManager rTSUnitControlManager;
     [SerializeField]
     private GameObject skillPoint;
 
@@ -18,7 +17,6 @@ public class MouseClick : MonoBehaviour
     private void Awake()
     {
         mainCamera = Camera.main;
-        rTSUnitControlManager = GetComponent<RTSUserUnitControlManager>();
 
     }
 
@@ -53,8 +51,19 @@ public class MouseClick : MonoBehaviour
             {
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerGround))
                 {
-                    rTSUnitControlManager.MoveSelectUnits(hit.point);
+                    RaycastHit enumyhit;
+                    if (Physics.Raycast(ray, out enumyhit, Mathf.Infinity, LayerMask.GetMask("Enemy")))
+                    {
+                        RTSUserUnitControlManager.instance.AttackFocus(enumyhit.collider);
+                    }
+                    else
+                    {
+                        RTSUserUnitControlManager.instance.MoveSelectUnits(hit.point);
+                    }
+
                     CursorManager.instance.SetCursor(CursorType.DEFAULT);
+
+
                     return;
                 }
             }
@@ -63,15 +72,15 @@ public class MouseClick : MonoBehaviour
                 if(hit.transform.GetComponent<UnitController>() == null) return;
 
                 if(Input.GetKey(KeyCode.LeftShift))
-                    rTSUnitControlManager.ShiftClickSelectUnit(hit.transform.GetComponent<UnitController>());
+                    RTSUserUnitControlManager.instance.ShiftClickSelectUnit(hit.transform.GetComponent<UnitController>());
                 else
-                    rTSUnitControlManager.ClickSelectUnit(hit.transform.GetComponent<UnitController>());
+                    RTSUserUnitControlManager.instance.ClickSelectUnit(hit.transform.GetComponent<UnitController>());
             }
             else
             {
                 if(!Input.GetKey(KeyCode.LeftShift))
                 {
-                    rTSUnitControlManager.DeselectAll();
+                    RTSUserUnitControlManager.instance.DeselectAll();
                 }
             }
         }
@@ -82,7 +91,7 @@ public class MouseClick : MonoBehaviour
             if( Physics.Raycast(ray, out hit , Mathf.Infinity,layerGround))
             {
                 KeyManager.instance.test++;
-                rTSUnitControlManager.MoveSelectUnits(hit.point);
+                RTSUserUnitControlManager.instance.MoveSelectUnits(hit.point);
             }
         }
         

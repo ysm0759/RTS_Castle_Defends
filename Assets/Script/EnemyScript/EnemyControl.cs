@@ -45,10 +45,6 @@ public class EnemyControl : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        Debug.Log(navMeshAgent.pathPending);
-    }
     IEnumerator SetMultiAttackSize()
     {
         yield return null;
@@ -72,6 +68,10 @@ public class EnemyControl : MonoBehaviour
                 yield break;
             }
             IsArrive();
+
+
+
+
             if (state.IsTraceState(UnitTraceState.TRACE)) //움직이다 적을 찾은 상태
             {
                 if (Physics.OverlapSphereNonAlloc(transform.position, UnitDataScriptableObject.traceRange, hit, LayerMask.GetMask("User")) >= 1)
@@ -112,9 +112,9 @@ public class EnemyControl : MonoBehaviour
 
             yield return new WaitForSeconds(0.3f);
         }
-        
+
     }
-   
+
     IEnumerator Attack()
     {
         canAttack = false;
