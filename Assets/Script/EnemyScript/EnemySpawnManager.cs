@@ -6,12 +6,14 @@ public class EnemySpawnManager : MonoBehaviour
 {
     public EnemyStageData stageData;
 
-    private int enemyNumbering;
-
     public static EnemySpawnManager instance;
 
     [SerializeField] private GameObject rangeObject;
     [SerializeField] private BoxCollider rangeCollider;
+
+
+
+
 
     private void Awake()
     {
@@ -48,11 +50,14 @@ public class EnemySpawnManager : MonoBehaviour
                 clone.GetComponent<UnitInfo>().SetData(stageData.EnemySpawnData[i].unitDataScriptableObject);
             } 
         }
-        
-        
+
     }
 
 
+    public void SetEnemyDestination()
+    { 
+        
+    }
     public void NextStage()
     {
 

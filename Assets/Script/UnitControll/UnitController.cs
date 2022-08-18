@@ -168,6 +168,34 @@ public class UnitController : MonoBehaviour
         yield return new WaitForSeconds(userUnit.unitInfo.attackSpeed);
         canAttack = true;
     }
+    
+
+    IEnumerator Attack(Collider hit)
+    {
+        canAttack = false;
+        if (state.IsMoveState(UnitMoveState.STOP))
+        {
+            anim.SetBool("Attack", false);
+        }
+        else if (state.IsAttackState(UnitAttackState.DO_ATTACK))
+        {
+            transform.LookAt(targetPosition);
+            anim.SetBool("Attack", true);
+
+            if (attackType != null)
+            {
+                //for (int i = 0; i < hitCount; i++)
+                //{
+                //    attackType?.Attack(hit[i], userUnit.unitInfo.damage, userUnit.unitInfo.attackName);
+                //}
+            }
+            else
+                Debug.Log("데이터 잘 못 넣음 확인바람!!!!!!!!!!!!!!!!!");
+
+        }
+        yield return new WaitForSeconds(userUnit.unitInfo.attackSpeed);
+        canAttack = true;
+    }
 
 
     public void SetAnimAttackTime()

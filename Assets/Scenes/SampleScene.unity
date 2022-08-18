@@ -20890,8 +20890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88510c35413e8064d812db0973aa1cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitPrefab:
-  - {fileID: 552802762737997199, guid: 6ea42f858d982204eb43809581e7936b, type: 3}
+  unitPrefab: []
   heroPrefab:
   - {fileID: 6087604062904522729, guid: 7988027adcb9d8041934c71a957b6289, type: 3}
   UnitIndex:

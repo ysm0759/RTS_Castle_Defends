@@ -11,7 +11,10 @@ public class EnemyControl : MonoBehaviour
     private Collider[] hit;
     private Enemy enemyUnit;
 
-    public Vector3 destination;
+    private Vector3 destination;
+    private GameObject destinationGameObject;
+    private Collider destinationCollider;
+
 
 
     private Animator anim;
@@ -27,13 +30,14 @@ public class EnemyControl : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.enabled = true;
-
         enemyUnit = GetComponent<Enemy>();
         anim = GetComponent<Animator>();
         attackType = GetComponent<ObjectAttack>();
 
-        destination = FindObjectOfType<Destination>().gameObject.transform.position;
-
+        destinationGameObject = FindObjectOfType<Destination>().gameObject;
+        destinationCollider = destinationGameObject.GetComponent<Collider>();
+        destination = destinationGameObject.transform.position;
+        SetDestinationRandom();
 
         state = new UnitState();
         hit = new Collider[enemyUnit.unitInfo.multiAttack];
@@ -54,12 +58,14 @@ public class EnemyControl : MonoBehaviour
 
     IEnumerator SearchTrace()
     {
-        NavMeshPath navMeshPath = new NavMeshPath();
-        navMeshAgent.CalculatePath(destination, navMeshPath);
-
+        //NavMeshPath navMeshPath = new NavMeshPath();
+        //navMeshAgent.CalculatePath(destination, navMeshPath);
+        navMeshAgent.destination = destination;
+        navMeshAgent.isStopped = true;
         yield return new WaitForSeconds(10.0f);
-
+        navMeshAgent.isStopped = false;
         StartCoroutine(SetDestinationCastle());
+
         while (true)
         {
             if (!enemyUnit.unitInfo.isAlive)
@@ -146,7 +152,7 @@ public class EnemyControl : MonoBehaviour
 
         if (navMeshAgent.velocity.sqrMagnitude <= 0.2f * 0.2f && navMeshAgent.remainingDistance <= 0.5f)
         {
-
+          
             anim.SetBool("IsMove", false);
             state.SetTraceState(UnitTraceState.TRACE);
 
@@ -203,5 +209,23 @@ public class EnemyControl : MonoBehaviour
         animAttackSpeed = animAttackTime / enemyUnit.unitInfo.attackSpeed;
 
     }
+
+
+    private void SetDestinationRandom()
+    {
+        
+        Vector3 originPosition = destination;
+        // 콜라이더의 사이즈를 가져오는 bound.size 사용
+        float range_X = destinationCollider.bounds.size.x;
+        float range_Z = destinationCollider.bounds.size.z;
+
+        range_X = Random.Range((range_X / 2) * -1, range_X / 2);
+        range_Z = Random.Range((range_Z / 2) * -1, range_Z / 2);
+        Vector3 RandomPostion = new Vector3(range_X, 0f, range_Z);
+        Vector3 respawnPosition = originPosition + RandomPostion;
+
+        destination = respawnPosition;
+    }
+
 
 }

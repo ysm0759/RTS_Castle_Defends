@@ -89,7 +89,7 @@ public class RTSUserUnitControlManager : MonoBehaviour
         int dir = 0;
         int max = 2;
         int dirCnt = 0;
-        float place = 1f;
+        float place = 4f;
         // dir 0 오른쪽 
         // dir 1 아래
         // dir 2 왼쪽
@@ -112,6 +112,7 @@ public class RTSUserUnitControlManager : MonoBehaviour
                 tmpVec.z += place;
                 dirCnt = 1;
                 continue;
+                
             }
             else
             {
