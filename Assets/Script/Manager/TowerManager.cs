@@ -37,23 +37,6 @@ public class TowerManager : MonoBehaviour
     TowerStatu towerStatu = TowerStatu.NONE;
 
 
-    private void Awake()
-    {
-        mainCamera = Camera.main;
-        instance = this;
-        
-
-        Transform[] tmp = GetComponentsInChildren<Transform>();
-        towerNodes = new TowerNode[tmp.Length - 1];
-
-
-        for (int i = 1; i < tmp.Length; i++)
-        {
-            towerNodes[i-1] = new TowerNode();
-            towerNodes[i - 1].node = tmp[i].gameObject;
-        }
-    }
-
     [Serializable]
     public class TowersList
     {
@@ -71,6 +54,25 @@ public class TowerManager : MonoBehaviour
             isEmpty = true;
         }
     }
+
+
+    private void Awake()
+    {
+        mainCamera = Camera.main;
+        instance = this;
+        
+
+        Transform[] tmp = GetComponentsInChildren<Transform>();
+        towerNodes = new TowerNode[tmp.Length - 1];
+
+
+        for (int i = 1; i < tmp.Length; i++)
+        {
+            towerNodes[i-1] = new TowerNode();
+            towerNodes[i - 1].node = tmp[i].gameObject;
+        }
+    }
+
 
 
 
@@ -96,8 +98,37 @@ public class TowerManager : MonoBehaviour
     }
 
 
+    public void StartGame()
+    {
+        if(GameStateManager.instance.gameState == GameState.GAME_START ||
+           GameStateManager.instance.gameState == GameState.MAIN)
+        {
 
+        }
+        else
+        {
 
+        }
+    }
+
+    public void DisplayNode(bool isVisible)
+    {
+        for(int i = 0; i<towerNodes.Length;i++)
+        {
+            towerNodes[i].node.SetActive(!(towerNodes[i].isEmpty && !isVisible));
+        }
+    }
+
+    bool test = true;
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+
+            DisplayNode(test);
+            test = !test;
+        }
+    }
     public void ResetTowers()
     {
 
@@ -148,7 +179,7 @@ public class TowerManager : MonoBehaviour
                 Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
 
-                //if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("TowerArea")))
+                //if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("TowerArea"))) // 타워 배치 가생성 코드 
                 //{
                 //    int idx = Int32.Parse(hit.collider.name);
 

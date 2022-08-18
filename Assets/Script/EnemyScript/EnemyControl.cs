@@ -11,9 +11,13 @@ public class EnemyControl : MonoBehaviour
     private Collider[] hit;
     private Enemy enemyUnit;
 
+
+    bool moveType;
+    private Destination dest;
     private Vector3 destination;
-    private GameObject destinationGameObject;
     private Collider destinationCollider;
+    List<Transform> node;
+    int nodeIndex;
 
 
 
@@ -34,10 +38,13 @@ public class EnemyControl : MonoBehaviour
         anim = GetComponent<Animator>();
         attackType = GetComponent<ObjectAttack>();
 
-        destinationGameObject = FindObjectOfType<Destination>().gameObject;
-        destinationCollider = destinationGameObject.GetComponent<Collider>();
-        destination = destinationGameObject.transform.position;
+
+
+        moveType = true;
+        dest = FindObjectOfType<Destination>();
         SetDestinationRandom();
+
+
 
         state = new UnitState();
         hit = new Collider[enemyUnit.unitInfo.multiAttack];
@@ -46,6 +53,21 @@ public class EnemyControl : MonoBehaviour
         StartCoroutine(SetMultiAttackSize());
 
         SetAnimAttackTime();
+
+    }
+
+    public void MoveTypeDense()
+    {
+        destinationCollider = dest.GetComponent<Collider>();
+        destination = dest.transform.position;
+    }
+
+    public void MoveTypeOnlyDestination()
+    {
+        destinationCollider = dest.GetComponent<Collider>();
+        destination = dest.transform.position;
+        node = dest.NodeTypeLeft;
+        nodeIndex = 0;
 
     }
 

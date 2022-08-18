@@ -5,4 +5,13 @@ using UnityEngine;
 public class Destination : MonoBehaviour
 {
 
+    public List<Transform> NodeTypeLeft;
+    public List<Transform> NodeTypeRight;
+
+
+    
+
+
+    
+
 }

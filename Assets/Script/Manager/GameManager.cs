@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
         mainPanel.SetActive(true);
         readyPanel.SetActive(false);
         storePanel.SetActive(false);
+        TowerManager.instance.DisplayNode(false);
 
     }
 
@@ -67,7 +68,6 @@ public class GameManager : MonoBehaviour
         mainPanel.SetActive(true);
         readyPanel.SetActive(false);
         storePanel.SetActive(false);
-
     }
 
     public void ReadyScene()
@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviour
         storePanel.SetActive(false);
         RTSUserUnitControlManager.instance.InitUnit();
         EnemySpawnManager.instance.SetEnemySpawn();
+        TowerManager.instance.DisplayNode(false);
     }
 
     public void StoreScene()
@@ -110,6 +111,7 @@ public class GameManager : MonoBehaviour
         readyPanel.SetActive(false);
         storePanel.SetActive(true);
         UpdateCostPanel();
+        TowerManager.instance.DisplayNode(true);
     }
 
 
