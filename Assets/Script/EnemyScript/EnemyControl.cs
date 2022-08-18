@@ -42,8 +42,8 @@ public class EnemyControl : MonoBehaviour
 
         moveType = true;
         dest = FindObjectOfType<Destination>();
+        MoveTypeOnlyDestination();
         SetDestinationRandom();
-
 
 
         state = new UnitState();
@@ -65,11 +65,11 @@ public class EnemyControl : MonoBehaviour
     public void MoveTypeOnlyDestination()
     {
         destinationCollider = dest.GetComponent<Collider>();
-        destination = dest.transform.position;
+        destination = dest.NodeTypeLeft[0].transform.position;
         node = dest.NodeTypeLeft;
         nodeIndex = 0;
-
     }
+
 
     IEnumerator SetMultiAttackSize()
     {
@@ -84,7 +84,7 @@ public class EnemyControl : MonoBehaviour
         //navMeshAgent.CalculatePath(destination, navMeshPath);
         navMeshAgent.destination = destination;
         navMeshAgent.isStopped = true;
-        yield return new WaitForSeconds(10.0f);
+        yield return new WaitForSeconds(2.0f);
         navMeshAgent.isStopped = false;
         StartCoroutine(SetDestinationCastle());
 
@@ -171,10 +171,25 @@ public class EnemyControl : MonoBehaviour
 
     private void IsArrive()
     {
+        if (nodeIndex != node.Count)
+        {
 
+            Vector3 dir = destination - gameObject.transform.position;
+            if (dir.sqrMagnitude <= 300)
+            {
+                destination = node[nodeIndex].gameObject.transform.position;
+                SetDestinationRandom();
+                ++nodeIndex;
+                if (nodeIndex == node.Count)
+                {
+                    destination = dest.transform.position;
+                }
+                MoveTo(destination);
+            }
+        }
         if (navMeshAgent.velocity.sqrMagnitude <= 0.2f * 0.2f && navMeshAgent.remainingDistance <= 0.5f)
         {
-          
+            
             anim.SetBool("IsMove", false);
             state.SetTraceState(UnitTraceState.TRACE);
 
