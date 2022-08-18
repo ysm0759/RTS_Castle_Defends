@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitType: 0
   maxHp: 1000
-  hp: 100
+  hp: 1000
   df: 100
   moveSpeed: 0.5
   attackSpeed: 0.5
   damage: 2
-  attackRange: 3
+  attackRange: 5
   upgradeCost: 1
   population: 0
   level: 0

@@ -13,14 +13,9 @@ public class MouseDrag : MonoBehaviour
 
 
     private Camera mainCamera;
-    private RTSUserUnitControlManager rtsUnitControlManager;
-
-
     private void Awake()
     {
         mainCamera = Camera.main;
-        rtsUnitControlManager = GetComponent<RTSUserUnitControlManager>();
-
         //start , end 가 ( 0, 0 )인 상태로 이미지의 크기를 (0,0) 으로 설정해 화면에 보이지 않도록 함
         DrawDragRectangle();
     }
@@ -89,14 +84,15 @@ public class MouseDrag : MonoBehaviour
 
     private void SelectUnits()
     {
-        if ( rtsUnitControlManager.unitList == null)
+        
+        if (RTSUserUnitControlManager.instance.unitList == null)
             return;
-        foreach (UnitController unit in rtsUnitControlManager.unitList)
+        foreach (UnitController unit in RTSUserUnitControlManager.instance.unitList)
         {
             // 유닛의 월드 좌표를 화면 좌표로 변환해 드래그 범위 내에 있는지 검사
             if (dragRect.Contains(mainCamera.WorldToScreenPoint(unit.transform.position)))
             {
-                rtsUnitControlManager.DragSelectUnit(unit);
+                RTSUserUnitControlManager.instance.DragSelectUnit(unit);
             }
         }
     }

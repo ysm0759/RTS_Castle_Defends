@@ -16,13 +16,14 @@ public class UnitStoreUI : MonoBehaviour
     /// <summary>
     /// TODO :: unit Store UI FIX !!
     /// </summary>
-    private UnitDataScriptableObject[] data;
+    private UnitDataScriptableObject[] data = new UnitDataScriptableObject[(int)UnitType.USER_UNIT_COUNT];
+    private bool[] isBuy = new bool[(int)UnitType.USER_UNIT_COUNT];
+
 
     [SerializeField] private UnitDataScriptableObject[] defaultUnit;
 
     [SerializeField] private GameObject[] lockImage = new GameObject[(int)UnitType.USER_UNIT_COUNT];
 
-    private bool[] isBuy = new bool[(int)UnitType.USER_UNIT_COUNT];
 
     [SerializeField] private Text level;
 
@@ -54,14 +55,15 @@ public class UnitStoreUI : MonoBehaviour
 
 
 
-
     private int unitType = 0;
 
 
     private void Awake()
     {
-        data = new UnitDataScriptableObject[(int)UnitType.USER_UNIT_COUNT];
+
         OnClickUnit(defaultUnit[0]);
+
+
     }
 
     //필요한게 코스트

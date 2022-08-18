@@ -27,7 +27,12 @@ public class MouseClick : MonoBehaviour
         {
             RaycastHit hit;
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
+            
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("UI")))
+            {
+                Debug.Log("???");
+                return;
+            }
             if (KeyManager.instance.skill == Skill.SKILL_SHOW && RTSUserUnitControlManager.instance.isSelectedHero())
             {
                 Debug.Log(KeyManager.instance.skill);
@@ -90,7 +95,6 @@ public class MouseClick : MonoBehaviour
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             if( Physics.Raycast(ray, out hit , Mathf.Infinity,layerGround))
             {
-                KeyManager.instance.test++;
                 RTSUserUnitControlManager.instance.MoveSelectUnits(hit.point);
             }
         }

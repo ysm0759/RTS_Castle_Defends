@@ -97,7 +97,7 @@ public class WarriorSkill2_1 : MonoBehaviour, IWarriorSkill
 
             tmpCool += Time.deltaTime;
             isCoolDown = true;
-            InGameSkillUI.instance.skillUI[1].fillAmount = (float)(tmpCool / cool);
+            InGameUI.instance.skillUI[1].fillAmount = (float)(tmpCool / cool);
             waitTime += Time.deltaTime;
             moveDelay += Time.deltaTime;
 

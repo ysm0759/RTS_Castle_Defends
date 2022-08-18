@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InGameSkillUI : MonoBehaviour
+public class InGameUI : MonoBehaviour
 {
 
     public Image[] skillUI;
 
 
-    static private InGameSkillUI Instance;
-    static public InGameSkillUI instance
+    static private InGameUI Instance;
+    static public InGameUI instance
     {
         get
         {

@@ -13,6 +13,9 @@ public class UserUnitSpawner : MonoBehaviour
 
     [SerializeField]
     private List<Transform> unitPrefabPosition;
+    
+    [SerializeField]
+    private InGameUnitSelectButtons inGameUnitSelectButtons;
 
     //오브젝트 풀링
     //오브젝트 풀링 하면서 
@@ -46,6 +49,9 @@ public class UserUnitSpawner : MonoBehaviour
                 continue;
             }
 
+            //생성되는 부분
+            inGameUnitSelectButtons.AddButton(tmpData[i]);
+
             Vector3 tmpVec = unitPrefabPosition[i].position;
             int dir = 0;
             int max = 2;
@@ -60,7 +66,7 @@ public class UserUnitSpawner : MonoBehaviour
                 clone.GetComponent<UnitInfo>().SetData(tmpData[i]);
                 UnitController unit = clone.GetComponent<UnitController>();
                 unitList.Add(unit);
-
+                inGameUnitSelectButtons.AddGroup(unit);
                 if (0 == j)
                 {
                     clone.transform.position = tmpVec;

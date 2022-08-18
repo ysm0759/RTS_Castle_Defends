@@ -229,7 +229,9 @@ public class RTSUserUnitControlManager : MonoBehaviour
             if (unitList[i].tag == "Hero")
             {
                 hero = unitList[i];
+                break;
             }
+
         }
     }
 
