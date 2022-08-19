@@ -50,7 +50,7 @@ public class UnitDataScriptableObject : ScriptableObject
 
     [TextArea]
     public string explain; // 유닛 설명
-    public Sprite sprite;
-
+    public Sprite sprite; //유닛 초상화
+    public Sprite buttonSprite; //인게임 유닛 클릭 버튼
 }
 

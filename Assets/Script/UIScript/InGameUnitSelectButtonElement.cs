@@ -33,12 +33,13 @@ public class InGameUnitSelectButtonElement : MonoBehaviour
     {
         for(int i =0; i < unitController.Count;i++)
         {
-            RTSUserUnitControlManager.instance.ShiftClickSelectUnit(unitController[i]);
+            RTSUserUnitControlManager.instance.DragSelectUnit(unitController[i]);
         }
     }
 
     public void UpdateUI()
     {
+        Debug.Log(unitController.Count);
         text.text = unitController.Count.ToString();
     }
 
