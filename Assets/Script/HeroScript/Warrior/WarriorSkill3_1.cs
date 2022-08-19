@@ -92,7 +92,7 @@ public class WarriorSkill3_1 : MonoBehaviour, IWarriorSkill
         while (tmpCool < cool)
         {
             isCoolDown = true;
-            InGameUI.instance.skillUI[2].fillAmount = (float)(tmpCool / cool);
+            InGameSkillUI.instance.skillUI[2].fillAmount = (float)(tmpCool / cool);
             tmpCool += Time.deltaTime;
             waitTime += Time.deltaTime;
 

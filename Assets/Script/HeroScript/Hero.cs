@@ -69,9 +69,8 @@ public abstract class Hero : MonoBehaviour
         {
             UseSkill((int)KeyManager.instance.keyState);
         }
-
-
-
     }
+
+
 
 }

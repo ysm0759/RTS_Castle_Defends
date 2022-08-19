@@ -67,6 +67,14 @@ public class UserUnitSpawner : MonoBehaviour
                 UnitController unit = clone.GetComponent<UnitController>();
                 unitList.Add(unit);
                 inGameUnitSelectButtons.AddGroup(unit);
+
+
+                GameObject hpBar = ObjectPool.GetObject("hpBar");
+                hpBar.GetComponent<InGameUnitHpBar>().SetData(tmpData[i]);
+                hpBar.transform.SetParent(clone.transform);
+                hpBar.transform.localPosition = Vector3.up;
+
+
                 if (0 == j)
                 {
                     clone.transform.position = tmpVec;
