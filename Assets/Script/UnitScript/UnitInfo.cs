@@ -24,8 +24,19 @@ public class UnitInfo : MonoBehaviour
     }
 
 
+    public UnitDataScriptableObject _data;
     [SerializeField]
-    private UnitDataScriptableObject data;
+    public UnitDataScriptableObject data
+    {
+        get
+        {
+            return _data;
+        }
+        private set
+        {
+            _data = value;
+        }
+    }
 
     [SerializeField]
     private float _maxHp; //최대체력
@@ -171,20 +182,20 @@ public class UnitInfo : MonoBehaviour
 
 
 
-    private void Awake()
-    {
+    //private void Awake()
+    //{
 
-        this._maxHp         = data.maxHp;
-        this._hp            = data.hp;
-        this._df            = data.df;
-        this._moveSpeed     = data.moveSpeed;
-        this._attackSpeed   = data.attackSpeed;
-        this._damage        = data.damage;
-        this._attackRange   = data.attackRange;
-        this._upgradeCost   = data.upgradeCost;
-        this._attackName    = data.attackName;
-        this._multiAttack   = data.multiAttack;
-    }
+    //    this._maxHp         = data.maxHp;
+    //    this._hp            = data.hp;
+    //    this._df            = data.df;
+    //    this._moveSpeed     = data.moveSpeed;
+    //    this._attackSpeed   = data.attackSpeed;
+    //    this._damage        = data.damage;
+    //    this._attackRange   = data.attackRange;
+    //    this._upgradeCost   = data.upgradeCost;
+    //    this._attackName    = data.attackName;
+    //    this._multiAttack   = data.multiAttack;
+    //}
 
     public void SetData(UnitDataScriptableObject data)
     {

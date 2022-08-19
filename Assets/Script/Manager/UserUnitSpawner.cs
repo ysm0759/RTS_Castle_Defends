@@ -70,8 +70,8 @@ public class UserUnitSpawner : MonoBehaviour
 
 
                 GameObject hpBar = ObjectPool.GetObject("hpBar");
-                hpBar.GetComponent<InGameUnitHpBar>().SetData(tmpData[i]);
                 hpBar.transform.SetParent(clone.transform);
+                hpBar.GetComponent<InGameUnitHpBar>().SetData(tmpData[i]);
                 hpBar.transform.localPosition = Vector3.up;
 
 
@@ -128,17 +128,20 @@ public class UserUnitSpawner : MonoBehaviour
 
 
 
-        for (int i = 0 ; i < unitPrefab.Count ; ++i)
-        {
-
-            GameObject clone = Instantiate(unitPrefab[i],position,Quaternion.identity);
-            UnitController unit = clone.GetComponent<UnitController>();
-            unitList.Add(unit);
-        }
-
         GameObject heroClone = Instantiate(heroPrefab[0], position, Quaternion.identity);
+
         UnitController heroUnitController = heroClone.GetComponent<UnitController>();
         unitList.Add(heroUnitController);
+
+
+        UnitInfo heroInfo = heroClone.GetComponent<UnitInfo>();
+        heroClone.GetComponent<UnitInfo>().SetData(heroInfo.data);
+
+        
+        InGameUnitHeroHpBar heroHpBar = FindObjectOfType<InGameUnitHeroHpBar>();
+        Debug.Log(heroHpBar);
+
+        //heroHpBar.GetComponent<InGameUnitHeroHpBar>().SetData(heroInfo.data);
 
         return unitList;
 

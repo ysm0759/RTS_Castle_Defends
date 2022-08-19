@@ -7,7 +7,7 @@ public class UserUnit: MonoBehaviour , IDamagable
     [SerializeField]
     private UnitInfo _unitInfo;
 
-    public InGameUnitHpBar _inGameUnitHpBar;
+    public InGameUnitHeroHpBar _inGameUnitHpBar;
 
 
     public UnitInfo unitInfo
@@ -38,7 +38,7 @@ public class UserUnit: MonoBehaviour , IDamagable
 
     }
 
-    public InGameUnitHpBar inGameUnitHpBar
+    public InGameUnitHeroHpBar inGameUnitHpBar
     {
         get
         {

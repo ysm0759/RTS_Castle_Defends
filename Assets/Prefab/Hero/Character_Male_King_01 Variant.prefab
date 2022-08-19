@@ -2950,6 +2950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitInfo: {fileID: 7042130958290885268}
+  _inGameUnitHpBar: {fileID: 0}
 --- !u!114 &5703198482497666396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2975,7 +2976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e254313afb46cc4498dbb52226ce7a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 09abc6c7b42834a4e8c81e800026b255, type: 2}
+  _data: {fileID: 11400000, guid: 09abc6c7b42834a4e8c81e800026b255, type: 2}
   _maxHp: 0
   _hp: 0
   _df: 0
@@ -2999,6 +3000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maker: {fileID: 5606158806665095527}
+  inGameUnitHeroHpBar: {fileID: 0}
 --- !u!114 &826510537593067530
 MonoBehaviour:
   m_ObjectHideFlags: 0

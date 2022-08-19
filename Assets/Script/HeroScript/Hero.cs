@@ -16,6 +16,9 @@ public abstract class Hero : MonoBehaviour
     private GameObject maker;
     private int prevSkill = 0;
 
+    [SerializeField]
+    public InGameUnitHeroHpBar inGameUnitHeroHpBar;
+
     private void Update()
     {
         if (KeyManager.instance.skill == Skill.SKILL_USING_CANT_MOVE || KeyManager.instance.skill == Skill.SKILL_USING_CAN_MOVE)

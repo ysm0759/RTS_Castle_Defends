@@ -24,8 +24,8 @@ public class Enemy : MonoBehaviour, IDamagable
         }
     }
 
-    public InGameUnitHpBar _inGameUnitHpBar;
-    public InGameUnitHpBar inGameUnitHpBar { 
+    public InGameUnitHeroHpBar _inGameUnitHpBar;
+    public InGameUnitHeroHpBar inGameUnitHpBar { 
         get
         {
             return _inGameUnitHpBar;

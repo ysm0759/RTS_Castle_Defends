@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class InGameUnitHpBar : MonoBehaviour
+public class InGameUnitHpBar : InGameUnitHeroHpBar
 {
-    [SerializeField] Slider slider;
+
+
     static public bool _uiOnOff = true;
     static public bool uiOnOff
     {
@@ -25,7 +26,7 @@ public class InGameUnitHpBar : MonoBehaviour
     static public UnityAction<bool> uiOnOffEvent;
 
 
-    public void SetData(UnitDataScriptableObject data)
+    override public void SetData(UnitDataScriptableObject data)
     {
         slider.maxValue = data.maxHp;
         slider.value = data.hp;
@@ -35,23 +36,23 @@ public class InGameUnitHpBar : MonoBehaviour
     }
 
 
-    public void ReturnObject()
+    override public void ReturnObject()
     {
         uiOnOffEvent -= SetHide;
         ObjectPool.ReturnObject("hpBar",gameObject);
     }
 
-    public void SetHide(bool isHide)
+    override public void SetHide(bool isHide)
     {
 
         Debug.Log(isHide);
         this.gameObject.SetActive(isHide);
     }
 
-    public void UpdateHpBar(float hp)
-    {
-        slider.value = hp;
-    }
+    //public void UpdateHpBar(float hp)
+    //{
+    //    slider.value = hp;
+    //}
 
     private void LateUpdate()
     {

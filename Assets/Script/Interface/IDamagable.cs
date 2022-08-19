@@ -7,7 +7,7 @@ using UnityEngine;
 
 public interface IDamagable
 {
-    InGameUnitHpBar inGameUnitHpBar
+    InGameUnitHeroHpBar inGameUnitHpBar
     {
         get;
         set;

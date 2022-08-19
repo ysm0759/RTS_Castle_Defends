@@ -224,15 +224,18 @@ public class RTSUserUnitControlManager : MonoBehaviour
     {
         unitList = unitSpawner.SpawnUnits(unitStoreUI.GetScriptableData(), unitStoreUI.GetIsBuys());
 
-        for (int i = 0; i < unitList.Count; i++)
+        if (unitList[unitList.Count-1].tag !="Hero")
         {
-            if (unitList[i].tag == "Hero")
-            {
-                hero = unitList[i];
-                break;
-            }
-
+            Debug.Log("잘못됨!!!!!!!!!!!!!!!!!!!!!!! 에러");
         }
+        else
+        {
+            hero = unitList[unitList.Count - 1];
+            InGameUnitHeroHpBar inGameUnitHeroHpBar = hero.GetComponent<Hero>().inGameUnitHeroHpBar;
+            hero.GetComponent<IDamagable>().inGameUnitHpBar = hero.GetComponent<Hero>().inGameUnitHeroHpBar;
+        }
+
+
     }
 
 
