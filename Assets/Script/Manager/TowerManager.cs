@@ -120,15 +120,7 @@ public class TowerManager : MonoBehaviour
     }
 
     bool test = true;
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
 
-            DisplayNode(test);
-            test = !test;
-        }
-    }
     public void ResetTowers()
     {
 

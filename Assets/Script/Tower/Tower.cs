@@ -133,4 +133,17 @@ public class Tower : MonoBehaviour, IDamagable
         //Mat.color = matColor;
 
     }
+
+    public InGameUnitHpBar _inGameUnitHpBar;
+    public InGameUnitHpBar inGameUnitHpBar
+    {
+        get
+        {
+            return _inGameUnitHpBar;
+        }
+        set
+        {
+            _inGameUnitHpBar = value;
+        }
+    }
 }

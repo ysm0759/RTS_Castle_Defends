@@ -110,6 +110,7 @@ public class KeyManager : MonoBehaviour
             keyState = KeyState.TAB;
             if (Skill.SKILL_SHOW == skill)
                 skill = Skill.SKILL_SHOW_CANCEL;
+            InGameUnitHpBar.uiOnOff = !InGameUnitHpBar.uiOnOff;
         }
 
         else if (Input.GetKeyDown(KeyCode.A))
@@ -157,12 +158,19 @@ public class KeyManager : MonoBehaviour
         {
             RTSUserUnitControlManager.instance.SelectHero();
         }
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            EnemySpawnManager.instance.SetEnemySpawn();
+            
+        }
         else if (Input.anyKeyDown)
         {
             keyState = KeyState.NONE;
             if (Skill.SKILL_SHOW == skill)
                 skill = Skill.SKILL_SHOW_CANCEL;
         }
+
+        
 
         //SkillState();
 

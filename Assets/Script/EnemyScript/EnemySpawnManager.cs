@@ -48,7 +48,15 @@ public class EnemySpawnManager : MonoBehaviour
                 GameObject clone = Instantiate(stageData.EnemySpawnData[i].PrefabObject, transform.position, Quaternion.identity);
                 clone.transform.position = respawnPosition;
                 clone.GetComponent<UnitInfo>().SetData(stageData.EnemySpawnData[i].unitDataScriptableObject);
-            } 
+
+                GameObject hpBar = ObjectPool.GetObject("hpBar");
+                hpBar.transform.SetParent(clone.transform);
+                hpBar.GetComponent<InGameUnitHpBar>().SetData(stageData.EnemySpawnData[i].unitDataScriptableObject);
+                hpBar.transform.localPosition = Vector3.up *2;
+
+
+
+            }
         }
 
     }
