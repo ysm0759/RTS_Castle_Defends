@@ -6,7 +6,7 @@ public class ReadySceneUI : MonoBehaviour
 {
     [SerializeField]
     public GameObject[] season;
-
+    
 
     public void Season()
     {
@@ -41,4 +41,18 @@ public class ReadySceneUI : MonoBehaviour
         GameManager.instance.HeroSelectScene();
     }
 
+    public void OnClickedBack()
+    {
+        GameStateManager.instance.gameState = GameState.MAIN;
+        GameManager.instance.MainScene();
+    }
+
+    public void UpdateEnemyPanel()
+    {
+        //for(int i =0; i < EnemySpawnManager.instance.stageData.EnemySpawnData.Length;i++)
+        //{
+        //    EnemySpawnManager.instance.stageData.EnemySpawnData[i].unitDataScriptableObject.sprite;
+
+        //}
+    }
 }
