@@ -16,8 +16,7 @@ public abstract class Hero : MonoBehaviour
     private GameObject maker;
     private int prevSkill = 0;
 
-    [SerializeField]
-    public InGameUnitHeroHpBar inGameUnitHeroHpBar;
+    public InGameUnitHP inGameHeroHpBar = new InGameUnitHP();
 
     private void Update()
     {

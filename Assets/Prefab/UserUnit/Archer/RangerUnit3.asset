@@ -21,7 +21,7 @@ MonoBehaviour:
   damage: 4
   attackRange: 10
   upgradeCost: 1
-  population: 1
+  population: 10
   level: 3
   attackName: arrow
   multiAttack: 1
@@ -30,3 +30,4 @@ MonoBehaviour:
     \uD6C4\uBC29\uC5D0\uC11C \uC9C0\uC6D0\uD574\uC90D\uB2C8\uB2E4. \uACF5\uC911 \uC720\uB2DB\uC744
     \uACF5\uACA9\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
   sprite: {fileID: 21300000, guid: 2ccc19bf80f70a941be817d941e4241f, type: 3}
+  buttonSprite: {fileID: 0}

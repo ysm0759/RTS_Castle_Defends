@@ -231,8 +231,8 @@ public class RTSUserUnitControlManager : MonoBehaviour
         else
         {
             hero = unitList[unitList.Count - 1];
-            InGameUnitHeroHpBar inGameUnitHeroHpBar = hero.GetComponent<Hero>().inGameUnitHeroHpBar;
-            hero.GetComponent<IDamagable>().inGameUnitHpBar = hero.GetComponent<Hero>().inGameUnitHeroHpBar;
+            InGameUnitHP inGameHeroHpBar = hero.GetComponent<Hero>().inGameHeroHpBar;
+            hero.GetComponent<IDamagable>().inGameUnitHP = hero.GetComponent<Hero>().inGameHeroHpBar;
         }
 
 

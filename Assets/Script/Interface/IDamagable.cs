@@ -7,11 +7,11 @@ using UnityEngine;
 
 public interface IDamagable
 {
-    InGameUnitHeroHpBar inGameUnitHpBar
+    InGameUnitHP inGameUnitHP
     {
         get;
         set;
     }
 
     void Hit(float damage);
-}
+}   

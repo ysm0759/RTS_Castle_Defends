@@ -24,30 +24,30 @@ public class Enemy : MonoBehaviour, IDamagable
         }
     }
 
-    public InGameUnitHeroHpBar _inGameUnitHpBar;
-    public InGameUnitHeroHpBar inGameUnitHpBar { 
+    public InGameUnitHP _inGameUnitHP;
+    public InGameUnitHP inGameUnitHP
+    {
         get
         {
-            return _inGameUnitHpBar;
+            return _inGameUnitHP;
         }
         set
         {
-            _inGameUnitHpBar = value;
+            _inGameUnitHP = value;
         }
     }
-
     public void Hit(float damage)
     {
         if (unitInfo.hp <= 0)
         {
             OnDead();
-            inGameUnitHpBar.ReturnObject();
+            inGameUnitHP.ReturnObject();
             Destroy(gameObject);
 
         }
         unitInfo.hp -= (damage - unitInfo.df) >= 0 ? (damage - unitInfo.df) : 1;
-        Debug.Log(inGameUnitHpBar);
-        inGameUnitHpBar?.UpdateHpBar(unitInfo.hp);
+        Debug.Log(inGameUnitHP);
+        inGameUnitHP?.UpdateHpBar(unitInfo.hp);
     }
 
 

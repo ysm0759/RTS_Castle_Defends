@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class InGameUnitHpBar : InGameUnitHeroHpBar
+public class InGameUnitHpBar : InGameUnitHP
 {
-
-
     static public bool _uiOnOff = true;
     static public bool uiOnOff
     {
@@ -31,7 +29,7 @@ public class InGameUnitHpBar : InGameUnitHeroHpBar
         slider.maxValue = data.maxHp;
         slider.value = data.hp;
         this.gameObject.SetActive(true);
-        GetComponentInParent<IDamagable>().inGameUnitHpBar = this;
+        GetComponentInParent<IDamagable>().inGameUnitHP = this;
         uiOnOffEvent += SetHide;
     }
 
@@ -49,11 +47,10 @@ public class InGameUnitHpBar : InGameUnitHeroHpBar
         this.gameObject.SetActive(isHide);
     }
 
-    //public void UpdateHpBar(float hp)
-    //{
-    //    slider.value = hp;
-    //}
-
+    override public void UpdateHpBar(float hp)
+    {
+        slider.value = hp;
+    }
     private void LateUpdate()
     {
         transform.LookAt(transform.position + Camera.main.transform.forward);

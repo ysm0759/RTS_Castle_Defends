@@ -7,7 +7,6 @@ public class UserUnit: MonoBehaviour , IDamagable
     [SerializeField]
     private UnitInfo _unitInfo;
 
-    public InGameUnitHeroHpBar _inGameUnitHpBar;
 
 
     public UnitInfo unitInfo
@@ -24,11 +23,11 @@ public class UserUnit: MonoBehaviour , IDamagable
         
         if(unitInfo.hp <= 0)
         {
-            inGameUnitHpBar?.ReturnObject();
+            inGameUnitHP?.ReturnObject();
             Die();
         }
         unitInfo.hp -= (damage - unitInfo.df) >= 0 ? (damage - unitInfo.df) : 1;
-        inGameUnitHpBar?.UpdateHpBar(unitInfo.hp);
+        inGameUnitHP?.UpdateHpBar(unitInfo.hp);
     }
 
     private void Die()
@@ -38,16 +37,18 @@ public class UserUnit: MonoBehaviour , IDamagable
 
     }
 
-    public InGameUnitHeroHpBar inGameUnitHpBar
+
+
+    public InGameUnitHP _inGameUnitHP;
+    public InGameUnitHP inGameUnitHP
     {
         get
         {
-            return _inGameUnitHpBar;
+            return _inGameUnitHP;
         }
         set
         {
-            _inGameUnitHpBar = value;
+            _inGameUnitHP = value;
         }
     }
-
 }

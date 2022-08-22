@@ -68,7 +68,7 @@ public class Tower : MonoBehaviour, IDamagable
     public void Hit(float damage) // 쳐 맞기 구현
     {
         towerInfo.hp -= damage;
-        inGameUnitHpBar?.UpdateHpBar(towerInfo.hp);
+        inGameUnitHP?.UpdateHpBar(towerInfo.hp);
 
         if (towerInfo.hp <= burnHp && isBurn == false)
         {
@@ -84,7 +84,7 @@ public class Tower : MonoBehaviour, IDamagable
             destroy = ObjectPool.GetObject("destroy");
             destroy.transform.position = transform.position;
             destroy.SetActive(true);
-            inGameUnitHpBar.ReturnObject();
+            inGameUnitHP.ReturnObject();
             Invoke("returnDestroyObject", 3f);
         }
 
@@ -141,16 +141,16 @@ public class Tower : MonoBehaviour, IDamagable
 
     }
 
-    public InGameUnitHeroHpBar _inGameUnitHpBar;
-    public InGameUnitHeroHpBar inGameUnitHpBar
+    public InGameUnitHP _inGameUnitHP;
+    public InGameUnitHP inGameUnitHP
     {
         get
         {
-            return _inGameUnitHpBar;
+            return _inGameUnitHP;
         }
         set
         {
-            _inGameUnitHpBar = value;
+            _inGameUnitHP = value;
         }
     }
 }
