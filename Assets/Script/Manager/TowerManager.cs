@@ -119,7 +119,6 @@ public class TowerManager : MonoBehaviour
         }
     }
 
-    bool test = true;
 
     public void ResetTowers()
     {

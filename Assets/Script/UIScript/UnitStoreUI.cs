@@ -96,17 +96,18 @@ public class UnitStoreUI : MonoBehaviour
             moveSpeedLevel.text = "";
             attackRangeLevel.text = "";
             populationLevel.text = "";
-            upGradeCost.text = "";
+            upGradeCost.text = "MAX";
             return;
         }
-        hpLevel.text = (data[unitType].nextStat.hp - data[unitType].hp).ToString();
-        dfLevel.text = (data[unitType].nextStat.df - data[unitType].df).ToString();
-        damageLevel.text = (data[unitType].nextStat.damage - data[unitType].damage).ToString();
-        attackSpeedLevel.text = (data[unitType].nextStat.attackSpeed - data[unitType].attackSpeed).ToString();
-        moveSpeedLevel.text = (data[unitType].nextStat.moveSpeed - data[unitType].moveSpeed).ToString();
-        attackRangeLevel.text = (data[unitType].nextStat.attackRange - data[unitType].attackRange).ToString();
-        populationLevel.text = (data[unitType].nextStat.population - data[unitType].population).ToString();
-        upGradeCost.text = data[unitType].upgradeCost.ToString();
+        hpLevel.text = string.Format("{0}", (data[unitType].nextStat.hp - data[unitType].hp));
+        dfLevel.text = string.Format("{0}", (data[unitType].nextStat.df - data[unitType].df));
+        damageLevel.text = string.Format("{0}", (data[unitType].nextStat.damage - data[unitType].damage));
+        attackSpeedLevel.text = string.Format("{0}", (data[unitType].nextStat.attackSpeed - data[unitType].attackSpeed));
+        moveSpeedLevel.text = string.Format("{0}", (data[unitType].nextStat.moveSpeed - data[unitType].moveSpeed));
+        attackRangeLevel.text = string.Format("{0}", (data[unitType].nextStat.attackRange - data[unitType].attackRange));
+        populationLevel.text = string.Format("{0}", (data[unitType].nextStat.population - data[unitType].population));
+        upGradeCost.text = string.Format("{0}", data[unitType].upgradeCost);
+
     }
 
 

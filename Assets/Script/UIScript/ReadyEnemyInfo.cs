@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ReadyEnemyInfo : MonoBehaviour
 {
     [SerializeField] Image image;
-    [SerializeField] Text name;
+    [SerializeField] Text enemyName;
     [SerializeField] Text hp;
     [SerializeField] Text df;
     [SerializeField] Text damage;
@@ -22,7 +22,7 @@ public class ReadyEnemyInfo : MonoBehaviour
     public void SetData(UnitDataScriptableObject data,Transform transform)
     {
         image.sprite = data.sprite;
-        name.text = data.name;
+        enemyName.text = data.name;
         hp.text = data.maxHp.ToString();
         df.text = data.df.ToString();
 

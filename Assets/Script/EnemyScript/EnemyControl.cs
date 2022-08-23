@@ -12,7 +12,6 @@ public class EnemyControl : MonoBehaviour
     private Enemy enemyUnit;
 
 
-    bool moveType;
     private Destination dest;
     private Vector3 destination;
     private Collider destinationCollider;
@@ -41,7 +40,6 @@ public class EnemyControl : MonoBehaviour
 
         navMeshAgent.speed = enemyUnit.unitInfo.moveSpeed;
 
-        moveType = true;
         dest = FindObjectOfType<Destination>();
         MoveTypeOnlyDestination();
         SetDestinationRandom();

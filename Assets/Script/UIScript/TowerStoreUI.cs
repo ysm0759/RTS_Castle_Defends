@@ -52,10 +52,11 @@ public class TowerStoreUI : MonoBehaviour
         
         if(data.nextData != null)
         {
-            nextHp.text = ( data.nextData.hp- data.hp).ToString();
-            nextDf.text = ( data.nextData.df- data.df).ToString();
-            nextAttackDamage.text = (data.nextData.damage- data.damage).ToString();
-            nextAttackSpeed.text = (data.nextData.attackSpeed- data.attackSpeed).ToString();
+            nextHp.text = string.Format("{0}", (data.nextData.hp- data.hp));
+            nextDf.text = string.Format("{0}", (data.nextData.df- data.df));
+            nextAttackDamage.text = string.Format("{0}", (data.nextData.damage- data.damage));
+            nextAttackSpeed.text = string.Format("{0}", (data.nextData.attackSpeed- data.attackSpeed));
+            upgradeCost.text = string.Format("{0}", (data.nextData.upgradeCost - data.upgradeCost));
         }
         else
         {
@@ -63,6 +64,7 @@ public class TowerStoreUI : MonoBehaviour
             nextDf.text = "";
             nextAttackDamage.text = "";
             nextAttackSpeed.text = "";
+            upgradeCost.text = "MAX";
         }
     }
 
