@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5209b45c3f67535469ffcfd9602ff3dd, type: 3}
-  m_Name: SlimeMelee
+  m_Name: Slime
   m_EditorClassIdentifier: 
   unitType: 0
   maxHp: 50
@@ -27,4 +27,5 @@ MonoBehaviour:
   multiAttack: 1
   nextStat: {fileID: 0}
   explain: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: f645ae8a8ddd9f947be5ef826336f0a7, type: 3}
+  buttonSprite: {fileID: 0}

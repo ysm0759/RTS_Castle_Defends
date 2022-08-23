@@ -156,17 +156,6 @@ public class GameManager : MonoBehaviour
         UpdateCostPanel();
     }
 
-    public void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            gameSeason++;
-
-            if (gameSeason == GameSeason.CNT)
-                gameSeason = GameSeason.SPRING;
-            readySceneUI.Season();
-        }
-    }
 
 
 

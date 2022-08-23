@@ -39,6 +39,7 @@ public class EnemyControl : MonoBehaviour
         attackType = GetComponent<ObjectAttack>();
 
 
+        navMeshAgent.speed = enemyUnit.unitInfo.moveSpeed;
 
         moveType = true;
         dest = FindObjectOfType<Destination>();

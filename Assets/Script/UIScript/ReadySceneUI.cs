@@ -4,23 +4,10 @@ using UnityEngine;
 
 public class ReadySceneUI : MonoBehaviour
 {
-    [SerializeField]
-    public GameObject[] season;
-    
-
-    public void Season()
-    {
-        for(int i =0; i < (int)GameSeason.CNT;i++)
-        {
-            if(i < (int)GameManager.instance.gameSeason)
-               season[i].SetActive(true);
-            else
-                season[i].SetActive(false);
-        }
-
-        season[(int)GameSeason.BOSS].SetActive(true);
-    }
-
+    [SerializeField] GameObject enemyPortraitPerfab;
+    [SerializeField] GameObject enemyPanel;
+    [SerializeField] ReadyEnemyInfo readyEnemyInfo;
+    [SerializeField] ReadyEnemyPortrait readyEnemyPortrait;
 
     public void OnClickGameStart()
     {
@@ -41,6 +28,10 @@ public class ReadySceneUI : MonoBehaviour
         GameManager.instance.HeroSelectScene();
     }
 
+    public void Start()
+    {
+        UpdateEnemyPanel();
+    }
     public void OnClickedBack()
     {
         GameStateManager.instance.gameState = GameState.MAIN;
@@ -49,10 +40,14 @@ public class ReadySceneUI : MonoBehaviour
 
     public void UpdateEnemyPanel()
     {
-        //for(int i =0; i < EnemySpawnManager.instance.stageData.EnemySpawnData.Length;i++)
-        //{
-        //    EnemySpawnManager.instance.stageData.EnemySpawnData[i].unitDataScriptableObject.sprite;
+        for (int i = 0; i < EnemySpawnManager.instance.stageData.EnemySpawnData.Length; i++)
+        {
+            GameObject clone =Instantiate(enemyPortraitPerfab);
+            clone.transform.SetParent(enemyPanel.transform);
 
-        //}
+            readyEnemyPortrait = clone.GetComponent<ReadyEnemyPortrait>();
+            readyEnemyPortrait.SetData(EnemySpawnManager.instance.stageData.EnemySpawnData[i].unitDataScriptableObject, EnemySpawnManager.instance.stageData.EnemySpawnData[i].EA, readyEnemyInfo);
+
+        }
     }
 }

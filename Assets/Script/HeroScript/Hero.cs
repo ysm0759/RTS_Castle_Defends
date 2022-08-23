@@ -16,7 +16,7 @@ public abstract class Hero : MonoBehaviour
     private GameObject maker;
     private int prevSkill = 0;
 
-    public InGameUnitHP inGameHeroHpBar = new InGameUnitHP();
+    public InGameUnitHP inGameHeroHpBar;
 
     private void Update()
     {

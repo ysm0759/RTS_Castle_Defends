@@ -22,7 +22,7 @@ public class InGameUnitHpBar : InGameUnitHP
 
 
     static public UnityAction<bool> uiOnOffEvent;
-
+    [SerializeField] Image hpBar;
 
     override public void SetData(UnitDataScriptableObject data)
     {
@@ -31,6 +31,7 @@ public class InGameUnitHpBar : InGameUnitHP
         this.gameObject.SetActive(true);
         GetComponentInParent<IDamagable>().inGameUnitHP = this;
         uiOnOffEvent += SetHide;
+        hpBar.color = GetComponentInParent<Enemy>() != null ? Color.red : Color.green;
     }
 
 

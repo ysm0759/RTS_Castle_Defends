@@ -36,7 +36,7 @@ public class UnitController : MonoBehaviour
         attackType = GetComponent<ObjectAttack>();
 
         state = new UnitState();
-
+        navMeshAgent.speed = userUnit.unitInfo.moveSpeed;
         StartCoroutine(SetMultiAttackSize());
         SetAnimAttackTime();
     }

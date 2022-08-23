@@ -136,13 +136,7 @@ public class UserUnitSpawner : MonoBehaviour
 
         UnitInfo heroInfo = heroClone.GetComponent<UnitInfo>();
         heroClone.GetComponent<UnitInfo>().SetData(heroInfo.data);
-
-        
         InGameHeroHpBar heroHpBar = FindObjectOfType<InGameHeroHpBar>();
-
-        Debug.Log(heroHpBar);
-        Debug.Log(heroInfo);
-        Debug.Log(heroInfo.data);
         heroHpBar.GetComponent<InGameUnitHP>().SetData(heroInfo.data);
 
         return unitList;
