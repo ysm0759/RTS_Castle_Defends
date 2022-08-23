@@ -16,7 +16,7 @@ MonoBehaviour:
   maxHp: 1000
   hp: 1000
   df: 100
-  moveSpeed: 0.5
+  moveSpeed: 15
   attackSpeed: 0.5
   damage: 2
   attackRange: 5
@@ -28,3 +28,4 @@ MonoBehaviour:
   nextStat: {fileID: 0}
   explain: 
   sprite: {fileID: 0}
+  buttonSprite: {fileID: 0}

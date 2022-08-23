@@ -27,12 +27,16 @@ public class ReadySceneUI : MonoBehaviour
         GameStateManager.instance.gameState = GameState.HERO_SELECT;
         GameManager.instance.HeroSelectScene();
     }
-
+    public void OnClickBackButton()
+    {
+        GameStateManager.instance.gameState = GameState.MAIN;
+        GameManager.instance.MainScene();
+    }
     public void Start()
     {
         UpdateEnemyPanel();
     }
-    public void OnClickedBack()
+    public void OnClickBack()
     {
         GameStateManager.instance.gameState = GameState.MAIN;
         GameManager.instance.MainScene();

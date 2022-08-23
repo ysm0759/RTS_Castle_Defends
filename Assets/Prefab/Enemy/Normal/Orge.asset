@@ -16,7 +16,7 @@ MonoBehaviour:
   maxHp: 200
   hp: 200
   df: 3
-  moveSpeed: 4
+  moveSpeed: 8
   attackSpeed: 2
   damage: 5
   attackRange: 2
@@ -26,5 +26,6 @@ MonoBehaviour:
   attackName: 
   multiAttack: 1
   nextStat: {fileID: 0}
-  explain: 
-  sprite: {fileID: 0}
+  explain: "\uCCB4\uB825\uC774 \uB192\uACE0 \uACF5\uACA9\uB825\uC774 \uB192\uC2B5\uB2C8\uB2E4."
+  sprite: {fileID: 21300000, guid: 33c2f559db468fa4e91a29bc9bac7a7a, type: 3}
+  buttonSprite: {fileID: 0}

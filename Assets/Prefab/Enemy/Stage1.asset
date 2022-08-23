@@ -25,7 +25,7 @@ MonoBehaviour:
       type: 2}
   - PrefabObject: {fileID: 996953596124978157, guid: 20da5c48fd4c5964bb802b2e2a4ddfb6,
       type: 3}
-    EA: 0
+    EA: 2
     unitDataScriptableObject: {fileID: 11400000, guid: 1e755739ca2da6945911b822ed93bb6e,
       type: 2}
   NextStage: {fileID: 0}

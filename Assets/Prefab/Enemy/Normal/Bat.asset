@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5209b45c3f67535469ffcfd9602ff3dd, type: 3}
-  m_Name: BatMelee
+  m_Name: Bat
   m_EditorClassIdentifier: 
   unitType: 0
   maxHp: 10
   hp: 10
   df: 1
-  moveSpeed: 8
+  moveSpeed: 10
   attackSpeed: 1
   damage: 3
   attackRange: 2
@@ -26,5 +26,8 @@ MonoBehaviour:
   attackName: bat
   multiAttack: 1
   nextStat: {fileID: 0}
-  explain: 
-  sprite: {fileID: 0}
+  explain: "EvilMage\uAC00 \uC18C\uD658\uD558\uB294 \uBC15\uC950\uC785\uB2C8\uB2E4.
+    \uAE30\uBCF8\uC801\uC778 \uC2A4\uD15F\uC740 \uB0AB\uC9C0\uB9CC \uBB49\uCE58\uBA74
+    \uAC15\uB825\uD574\uC9D1\uB2C8\uB2E4."
+  sprite: {fileID: 21300000, guid: e9889f10a52c0554d8cdd63af077e60b, type: 3}
+  buttonSprite: {fileID: 0}
