@@ -52,11 +52,11 @@ public class TowerStoreUI : MonoBehaviour
         
         if(data.nextData != null)
         {
-            nextHp.text = string.Format("{0}", (data.nextData.hp- data.hp));
-            nextDf.text = string.Format("{0}", (data.nextData.df- data.df));
-            nextAttackDamage.text = string.Format("{0}", (data.nextData.damage- data.damage));
-            nextAttackSpeed.text = string.Format("{0}", (data.nextData.attackSpeed- data.attackSpeed));
-            upgradeCost.text = string.Format("{0}", (data.nextData.upgradeCost - data.upgradeCost));
+            nextHp.text = string.Format("{0:0.#}", (data.nextData.hp- data.hp));
+            nextDf.text = string.Format("{0:0.#}", (data.nextData.df- data.df));
+            nextAttackDamage.text = string.Format("{0:0.#}", (data.nextData.damage- data.damage));
+            nextAttackSpeed.text = string.Format("{0:0.#}", (data.nextData.attackSpeed- data.attackSpeed));
+            upgradeCost.text = string.Format("{0:0.#}", (data.nextData.upgradeCost - data.upgradeCost));
         }
         else
         {
