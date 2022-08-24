@@ -14,6 +14,7 @@ public enum GameState
     GAME_START,
     STORE,
     EXIT,
+    TOWER_SETTING,
     CNT,
 }
 

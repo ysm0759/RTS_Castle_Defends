@@ -19,20 +19,24 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject mouseDrag;
     [SerializeField] private GameObject skillUI;
+
+    [Header("Scenes")]
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private ReadySceneUI readySceneUI;
     [SerializeField] private GameObject readyPanel;
     [SerializeField] private GameObject storePanel;
+    
+    
+    [Header("Cost")]
     [SerializeField] private Text costPanel;
-
-
     [SerializeField] private int maxCost;
     [SerializeField] private int curCost;
 
 
+    [Header("Camera")]
+    [SerializeField] GameObject mainCamera;
+    [SerializeField] GameObject readyCamera;
 
-    public GameSeason gameSeason;
-    public int gameYear;
 
 
 
@@ -50,12 +54,13 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Instance = this;
-        gameSeason = GameSeason.SPRING;
         mouseDrag.SetActive(false);
         skillUI.SetActive(false);
         mainPanel.SetActive(true);
         readyPanel.SetActive(false);
         storePanel.SetActive(false);
+        mainCamera.SetActive(false);
+        readyCamera.SetActive(true);
         TowerManager.instance.DisplayNode(false);
 
     }
@@ -68,6 +73,8 @@ public class GameManager : MonoBehaviour
         mainPanel.SetActive(true);
         readyPanel.SetActive(false);
         storePanel.SetActive(false);
+        mainCamera.SetActive(false);
+        readyCamera.SetActive(true);
     }
 
     public void ReadyScene()
@@ -77,7 +84,8 @@ public class GameManager : MonoBehaviour
         mainPanel.SetActive(false);
         readyPanel.SetActive(true);
         storePanel.SetActive(false);
-
+        mainCamera.SetActive(true);
+        readyCamera.SetActive(false);
     }
 
 

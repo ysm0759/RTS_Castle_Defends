@@ -7,7 +7,11 @@ public class MainSceneUI : MonoBehaviour
 
     public void OnClickQuit()
     {
-        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+         Application.Quit();
+#endif
     }
 
 

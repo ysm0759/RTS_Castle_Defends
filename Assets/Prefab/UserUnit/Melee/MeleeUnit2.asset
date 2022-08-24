@@ -16,7 +16,7 @@ MonoBehaviour:
   maxHp: 110
   hp: 110
   df: 1
-  moveSpeed: 5
+  moveSpeed: 12
   attackSpeed: 1
   damage: 7
   attackRange: 2
@@ -30,3 +30,4 @@ MonoBehaviour:
     \uACF5\uC911 \uC720\uB2DB\uC744 \uACF5\uACA9 \uBABB\uD558\uC9C0\uB9CC \uBB50\uB77C
     \uC4F8\uB9D0\uC774 \uC5C6\uC2B5\uB2C8\uB2E4."
   sprite: {fileID: 21300000, guid: 416299654ac94e3409c0066ef724e3b0, type: 3}
+  buttonSprite: {fileID: 0}

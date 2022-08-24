@@ -25,21 +25,17 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
 
-        if (GameStateManager.instance.gameState != GameState.GAME_START)
+        if (GameStateManager.instance.gameState == GameState.GAME_START || GameStateManager.instance.gameState == GameState.TOWER_SETTING)
         {
-            return;
+
+            pos = transform.position;
+
+            CameraZoom();
+            CameraMove();
+
+            transform.position = pos;
         }
 
-        pos = transform.position;
-
-        CameraZoom();
-        CameraMove();
-        
-
-        
-
-
-        transform.position = pos;
 
     }
 

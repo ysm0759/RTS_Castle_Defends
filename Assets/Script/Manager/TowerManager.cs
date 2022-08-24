@@ -146,6 +146,7 @@ public class TowerManager : MonoBehaviour
     {
         towerStatu = TowerStatu.BUY;
         StartCoroutine(TowerSetting(data));
+        GameStateManager.instance.gameState = GameState.TOWER_SETTING;
     }
 
 
@@ -154,13 +155,15 @@ public class TowerManager : MonoBehaviour
         towerData = data;
         explain.gameObject.SetActive(true);
         onOffObject.SetActive(false);
-
+        GameStateManager.instance.gameState = GameState.TOWER_SETTING;
         while (true)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 onOffObject.gameObject.SetActive(true);
                 explain.gameObject.SetActive(false);
+                GameStateManager.instance.gameState = GameState.STORE;
+
                 yield break;
             }
 
