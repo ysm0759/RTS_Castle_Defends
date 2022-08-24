@@ -29,8 +29,8 @@ public class TowerStoreUI : MonoBehaviour
     private void Awake()
     {
         elementData = GetComponentsInChildren<TowerElementUI>();
-        data = defaultData[0];
-        SetInfo();
+        OnClickedReset();
+
     }
     public void SetTowerData(TowerScriptable towerData)
     {
@@ -99,6 +99,9 @@ public class TowerStoreUI : MonoBehaviour
         {
             elementData[i].SetData(defaultData[i]);
         }
+
+        data = defaultData[0];
+        SetInfo();
     }
 
 }

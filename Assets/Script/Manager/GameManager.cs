@@ -31,7 +31,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text costPanel;
     [SerializeField] private int maxCost;
     [SerializeField] private int curCost;
-
+    [SerializeField] private Canvas noMoneyPanel;
+    
 
     [Header("Camera")]
     [SerializeField] GameObject mainCamera;
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+       
         Instance = this;
         mouseDrag.SetActive(false);
         skillUI.SetActive(false);
@@ -133,6 +135,7 @@ public class GameManager : MonoBehaviour
     {
         if(curCost - cost < 0)
         {
+            noMoneyPanel.gameObject.SetActive(true);
             return false; //돈 없음
         }
         else

@@ -211,7 +211,6 @@ public class TowerManager : MonoBehaviour
                         {
                             if(GameManager.instance.UseCost(towerData.buyCost)==false)
                             {
-                                Debug.Log("돈이 부족함");
                                 yield return null;
 
                             }
