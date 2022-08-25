@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UserUnit: MonoBehaviour , IDamagable
 {
     [SerializeField]
     private UnitInfo _unitInfo;
-
+    public UnityAction<GameObject> unityAction;
 
 
     public UnitInfo unitInfo
@@ -17,24 +18,27 @@ public class UserUnit: MonoBehaviour , IDamagable
         }
     }
 
+    
+
 
     public void Hit(float damage)
     {
-        
-        if(unitInfo.hp <= 0)
-        {
-            inGameUnitHP?.ReturnObject();
-            Die();
-        }
         unitInfo.hp -= (damage - unitInfo.df) >= 0 ? (damage - unitInfo.df) : 1;
+
+        if (unitInfo.isAlive == false)
+        {
+            OnDead();
+        }
+        
         inGameUnitHP?.UpdateHpBar(unitInfo.hp);
     }
 
-    private void Die()
+    private void OnDead()
     {
-
-        //죽었을 때
-
+        inGameUnitHP?.ReturnObject();
+        GetComponent<Collider>().enabled= false;
+        unityAction.Invoke(gameObject);
+        Destroy(gameObject,2f);
     }
 
 

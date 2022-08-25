@@ -6,7 +6,7 @@ public class InGameUnitSelectButtons : MonoBehaviour
 {
     [SerializeField] GameObject buttonPrefab;
 
-    InGameUnitSelectButtonElement inGameUnitSelectButtonElement;
+    public InGameUnitSelectButtonElement inGameUnitSelectButtonElement;
     public void AddButton(UnitDataScriptableObject unit)
     {
         GameObject button = Instantiate(buttonPrefab);

@@ -38,26 +38,25 @@ public class Enemy : MonoBehaviour, IDamagable
     }
     public void Hit(float damage)
     {
-        if (unitInfo.hp <= 0)
+        unitInfo.hp -= (damage - unitInfo.df) >= 0 ? (damage - unitInfo.df) : 1;
+        if (unitInfo.isAlive == false)
         {
             OnDead();
-            inGameUnitHP.ReturnObject();
-            Destroy(gameObject);
-
         }
-        unitInfo.hp -= (damage - unitInfo.df) >= 0 ? (damage - unitInfo.df) : 1;
-        Debug.Log(inGameUnitHP);
         inGameUnitHP?.UpdateHpBar(unitInfo.hp);
     }
 
 
     public void OnDead()
     {
-        Debug.Log(onDead);
-        if(onDead !=null)
+        inGameUnitHP.ReturnObject();
+        GetComponent<Collider>().enabled = false;
+
+        if (onDead !=null)
         {
             onDead.Invoke(col);
         }
+        Destroy(gameObject, 2f);
     }
 
 

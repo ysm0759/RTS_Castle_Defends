@@ -63,10 +63,15 @@ public class UserUnitSpawner : MonoBehaviour
 
 
                 GameObject clone = Instantiate(UnitIndex[i].LevelObjects[tmpData[i].level - 1], position, Quaternion.identity);
+                UserUnit userUnit = clone.GetComponent<UserUnit>();
+
                 clone.GetComponent<UnitInfo>().SetData(tmpData[i]);
                 UnitController unit = clone.GetComponent<UnitController>();
                 unitList.Add(unit);
                 inGameUnitSelectButtons.AddGroup(unit);
+
+                userUnit.unityAction += RTSUserUnitControlManager.instance.OnDead;
+                userUnit.unityAction += inGameUnitSelectButtons.inGameUnitSelectButtonElement.RemoveObject;
 
 
                 GameObject hpBar = ObjectPool.GetObject("hpBar");

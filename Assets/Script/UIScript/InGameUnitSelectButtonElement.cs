@@ -13,7 +13,6 @@ public class InGameUnitSelectButtonElement : MonoBehaviour
 
     public void Init()
     {
-
         unitController = new List<UnitController>();
         button.onClick.AddListener(SelectUnits);
     }
@@ -23,11 +22,17 @@ public class InGameUnitSelectButtonElement : MonoBehaviour
         UpdateUI();
     }
 
-    public void RemoveObject(UnitController controller)
+    public void RemoveObject(GameObject deathUnit)
     {
-        unitController.Remove(controller);
-        UpdateUI();
+        for (int i = 0; i < unitController.Count; i++)
+        {
+            if (unitController[i].gameObject == deathUnit)
+            {
+                unitController.RemoveAt(i);
+            }
+        }
 
+        UpdateUI();
     }
     public void SelectUnits()
     {
@@ -39,7 +44,6 @@ public class InGameUnitSelectButtonElement : MonoBehaviour
 
     public void UpdateUI()
     {
-        Debug.Log(unitController.Count);
         text.text = unitController.Count.ToString();
     }
 

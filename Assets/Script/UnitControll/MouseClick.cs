@@ -31,7 +31,6 @@ public class MouseClick : MonoBehaviour
 
             if (EventSystem.current.IsPointerOverGameObject())
             {
-                Debug.Log("???");
                 return;
             }
             if (KeyManager.instance.skill == Skill.SKILL_SHOW && RTSUserUnitControlManager.instance.isSelectedHero())

@@ -13,7 +13,6 @@ public class ObjectSummoner : ObjectAttack
         {
             GameObject clone = ObjectPool.GetObject(name);
             clone.SetActive(true);
-
             clone.transform.position = transform.position;
         }
     }

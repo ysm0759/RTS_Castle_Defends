@@ -29,7 +29,10 @@ public class EnemyControl : MonoBehaviour
     bool canAttack = true;
     private Vector3 targetPosition;
     int hitCount = 0;
-    public void Start()
+
+
+   
+    void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.enabled = true;
@@ -91,9 +94,10 @@ public class EnemyControl : MonoBehaviour
         {
             if (!enemyUnit.unitInfo.isAlive)
             {
-                Debug.Log("디짐");
+                anim.SetTrigger("OnDead");
                 yield break;
-            }
+            } 
+
             IsArrive();
 
 
@@ -214,6 +218,10 @@ public class EnemyControl : MonoBehaviour
     {
         while (true)
         {
+            if (!enemyUnit.unitInfo.isAlive)
+            {
+                yield break;
+            }
             if (state.IsTraceState(UnitTraceState.TRACE))
             {
                 MoveTo(destination);

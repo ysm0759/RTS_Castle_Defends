@@ -6,16 +6,18 @@ public class PrefabMeteor : PrefabObject
 {
     Collider[] hit;
     int layer;
-    private void Awake()
+    private void OnEnable()
     {
         hit = new Collider[10];
         if(gameObject.layer == LayerMask.GetMask("Enemy"))
         {
-            layer = LayerMask.GetMask("Enemy");
+            layer = LayerMask.GetMask("User");
+            Debug.Log("공격대상 아군");
         }
         else
         {
-            layer = LayerMask.GetMask("User");
+            layer = LayerMask.GetMask("Enemy");
+            Debug.Log("적군");
         }
     }
 
@@ -26,8 +28,10 @@ public class PrefabMeteor : PrefabObject
 
         if (dir.sqrMagnitude < 0.0001)
         {
-            for(int i =0;i < Physics.OverlapSphereNonAlloc(gameObject.transform.position,5,hit, layer);i++)
+            int count = Physics.OverlapSphereNonAlloc(gameObject.transform.position, 5, hit, layer);
+            for (int i =0;i < count;i++)
             {
+                Debug.Log(layer);
                 hit[i].GetComponent<IDamagable>().Hit(damage);
             }
 

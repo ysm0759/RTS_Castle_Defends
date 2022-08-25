@@ -135,7 +135,6 @@ public class UnitStoreUI : MonoBehaviour
         {
             if (GameManager.instance.UseCost(10))
             {
-                Debug.Log(lockImage[unitType].gameObject.activeSelf);
                 isBuy[unitType] = true;
                 lockImage[unitType].SetActive(false);
             }

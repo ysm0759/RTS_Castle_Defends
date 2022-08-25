@@ -27,7 +27,7 @@ public class UnitController : MonoBehaviour
 
     private Collider enemyFocus;
 
-
+    
     private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -51,6 +51,11 @@ public class UnitController : MonoBehaviour
     {
         while (true)
         {
+            if (!userUnit.unitInfo.isAlive)
+            {
+                anim.SetTrigger("OnDead");
+                yield break;
+            }
 
             IsArrive();
             if (state.IsMoveState(UnitMoveState.STOP) || KeyManager.instance.skill == Skill.SKILL_USING_CANT_MOVE || KeyManager.instance.skill == Skill.SKILL_USING_CAN_MOVE )

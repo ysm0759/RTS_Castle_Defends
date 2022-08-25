@@ -8,7 +8,6 @@ public class StatExplainPanel : MonoBehaviour
     [SerializeField] Text explain;
     private void Awake()
     {
-        Debug.Log("?!!!!?");
         this.gameObject.SetActive(false);
     }
     public void SetData(string text)

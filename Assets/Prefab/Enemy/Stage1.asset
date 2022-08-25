@@ -15,7 +15,7 @@ MonoBehaviour:
   EnemySpawnData:
   - PrefabObject: {fileID: 996953596124978157, guid: a116ce76b85db8543aa6540b8139e70b,
       type: 3}
-    EA: 30
+    EA: 1
     unitDataScriptableObject: {fileID: 11400000, guid: e3c48d42f5ec5044ca15ba23600bfbb3,
       type: 2}
   - PrefabObject: {fileID: 996953596124978157, guid: 98d57cebbb8de844bbdbe263e006f78e,

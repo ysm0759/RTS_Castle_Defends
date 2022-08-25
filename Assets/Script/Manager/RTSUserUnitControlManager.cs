@@ -29,7 +29,30 @@ public class RTSUserUnitControlManager : MonoBehaviour
         }
     }
 
+    public void OnDead(GameObject deadUnit)
+    {
+        int i;
 
+        for(i =0; i < selectedUnitList.Count;i++)
+        {
+            if(selectedUnitList[i].gameObject == deadUnit)
+            {
+                selectedUnitList[i].DeselectUnit();
+                selectedUnitList.RemoveAt(i);
+            }
+            
+        } 
+      
+        for(i =0; i < unitList.Count;i++)
+        {
+            if(unitList[i].gameObject == deadUnit)
+            {
+                unitList.RemoveAt(i);
+            }
+            
+        }
+
+    }
 
     private void Awake()
     {
