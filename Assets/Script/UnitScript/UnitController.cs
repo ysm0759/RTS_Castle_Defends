@@ -27,13 +27,17 @@ public class UnitController : MonoBehaviour
 
     private Collider enemyFocus;
 
-    
-    private void Start()
+    private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         userUnit = GetComponent<UserUnit>();
         anim = GetComponent<Animator>();
         attackType = GetComponent<ObjectAttack>();
+    }
+
+    private void Start()
+    {
+
 
         state = new UnitState();
         navMeshAgent.speed = userUnit.unitInfo.moveSpeed;

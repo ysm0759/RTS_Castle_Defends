@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitInfo: {fileID: 996953596124978149}
+  _inGameUnitHP: {fileID: 0}
 --- !u!114 &996953596124978147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,7 +136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbc9fffab1bd07f43b65e13e51dd397c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destination: {x: 0, y: 0, z: 0}
 --- !u!114 &996953596124978149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e254313afb46cc4498dbb52226ce7a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 1e755739ca2da6945911b822ed93bb6e, type: 2}
+  _data: {fileID: 0}
   _maxHp: 0
   _hp: 0
   _df: 0
@@ -204,7 +204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5f547ed763fe714bab5e8b44322757d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EA: 10
+  EA: 3
+  data: {fileID: 11400000, guid: 494b05f3ab031f943a08eacc998ff91a, type: 2}
 --- !u!54 &5965399887489831356
 Rigidbody:
   m_ObjectHideFlags: 0

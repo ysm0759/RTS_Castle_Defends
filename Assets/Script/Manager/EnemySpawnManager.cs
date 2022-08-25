@@ -49,6 +49,9 @@ public class EnemySpawnManager : MonoBehaviour
                 clone.transform.position = respawnPosition;
                 clone.GetComponent<UnitInfo>().SetData(stageData.EnemySpawnData[i].unitDataScriptableObject);
 
+
+
+
                 GameObject hpBar = ObjectPool.GetObject("hpBar");
                 hpBar.transform.SetParent(clone.transform);
                 hpBar.GetComponent<InGameUnitHpBar>().SetData(stageData.EnemySpawnData[i].unitDataScriptableObject);

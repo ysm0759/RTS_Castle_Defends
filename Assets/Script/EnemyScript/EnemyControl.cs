@@ -16,14 +16,11 @@ public class EnemyControl : MonoBehaviour
     private Vector3 destination;
     private Collider destinationCollider;
     List<Transform> node;
-    int nodeIndex;
-
-
+    int nodeIndex = 0;
 
     private Animator anim;
     private float animAttackTime;
     private float animAttackSpeed;
-
     private ObjectAttack attackType;
 
     bool canAttack = true;
@@ -31,33 +28,46 @@ public class EnemyControl : MonoBehaviour
     int hitCount = 0;
 
 
-   
-    void Start()
+    private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        navMeshAgent.enabled = true;
         enemyUnit = GetComponent<Enemy>();
         anim = GetComponent<Animator>();
         attackType = GetComponent<ObjectAttack>();
-
-
-        navMeshAgent.speed = enemyUnit.unitInfo.moveSpeed;
-
         dest = FindObjectOfType<Destination>();
-        MoveTypeOnlyDestination();
-        SetDestinationRandom();
+    }
 
-
-        state = new UnitState();
-        hit = new Collider[enemyUnit.unitInfo.multiAttack];
-
-
-        StartCoroutine(SetMultiAttackSize());
-
-        SetAnimAttackTime();
+    
+    private void OnEnable()
+    {
 
     }
 
+
+    void Start()
+    {
+        navMeshAgent.enabled = true;
+        navMeshAgent.speed = enemyUnit.unitInfo.moveSpeed;
+        MoveTypeOnlyDestination();
+        SetDestinationRandom();
+        state = new UnitState();
+        hit = new Collider[enemyUnit.unitInfo.multiAttack];
+        StartCoroutine(SetMultiAttackSize());
+        SetAnimAttackTime();
+        Debug.Log("start");
+
+    }
+
+
+    public void SetNodeIndex(int idx)
+    {
+        nodeIndex = idx;
+    }
+
+    public int GetNodeIndex()
+    {
+        return nodeIndex;
+    }
     public void MoveTypeDense()
     {
         destinationCollider = dest.GetComponent<Collider>();
@@ -67,9 +77,8 @@ public class EnemyControl : MonoBehaviour
     public void MoveTypeOnlyDestination()
     {
         destinationCollider = dest.GetComponent<Collider>();
-        destination = dest.NodeTypeLeft[0].transform.position;
+        destination = dest.NodeTypeLeft[nodeIndex].transform.position;
         node = dest.NodeTypeLeft;
-        nodeIndex = 0;
     }
 
 
@@ -92,15 +101,16 @@ public class EnemyControl : MonoBehaviour
 
         while (true)
         {
+            Debug.Log("trace");
+
             if (!enemyUnit.unitInfo.isAlive)
             {
+                navMeshAgent.isStopped = true;
                 anim.SetTrigger("OnDead");
                 yield break;
             } 
 
             IsArrive();
-
-
 
 
             if (state.IsTraceState(UnitTraceState.TRACE)) //움직이다 적을 찾은 상태
@@ -201,9 +211,10 @@ public class EnemyControl : MonoBehaviour
 
     public void MoveTo(Vector3 end)
     {
+        Debug.Log("moveto");
+
         if (!enemyUnit.unitInfo.isAlive)
         {
-            Debug.Log("디짐2");
             return;
         }
         navMeshAgent.isStopped = false;
@@ -218,11 +229,13 @@ public class EnemyControl : MonoBehaviour
     {
         while (true)
         {
+            Debug.Log("destk");
+
             if (!enemyUnit.unitInfo.isAlive)
             {
                 yield break;
             }
-            if (state.IsTraceState(UnitTraceState.TRACE))
+            if (state.IsTraceState(UnitTraceState.TRACE) && !state.IsAttackState(UnitAttackState.DO_ATTACK))
             {
                 MoveTo(destination);
                 state.SetMoveState(UnitMoveState.MOVE);
