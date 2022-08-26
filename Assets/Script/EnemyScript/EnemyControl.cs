@@ -77,8 +77,19 @@ public class EnemyControl : MonoBehaviour
     public void MoveTypeOnlyDestination()
     {
         destinationCollider = dest.GetComponent<Collider>();
-        destination = dest.NodeTypeLeft[nodeIndex].transform.position;
+
+
+
         node = dest.NodeTypeLeft;
+        if (nodeIndex == node.Count)
+        {
+            destination = dest.transform.position;
+        }
+        else
+        {
+            destination = dest.NodeTypeLeft[nodeIndex].transform.position;
+
+        }
     }
 
 

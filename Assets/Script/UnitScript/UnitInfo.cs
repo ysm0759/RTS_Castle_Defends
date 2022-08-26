@@ -16,7 +16,7 @@ public class UnitInfo : MonoBehaviour
         {
             return _isAlive;
         }
-        private set
+        set
         {
             _isAlive = value;
         }

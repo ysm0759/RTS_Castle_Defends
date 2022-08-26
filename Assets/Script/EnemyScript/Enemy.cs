@@ -10,11 +10,12 @@ public class Enemy : MonoBehaviour, IDamagable
     private UnitInfo _unitInfo;
 
     public UnityAction<Collider> onDead;
-
+    public PrefabObject prefabObject;
     private Collider col;
     private void Awake()
     {
         col = GetComponent<Collider>();
+        prefabObject = GetComponent<PrefabObject>();
     }
     public UnitInfo unitInfo
     {
@@ -56,10 +57,27 @@ public class Enemy : MonoBehaviour, IDamagable
         {
             onDead.Invoke(col);
         }
-        Destroy(gameObject, 2f);
+
+        if (prefabObject == null)
+        {
+            Destroy(gameObject, 2f);
+
+        }
+        else
+        {
+            StartCoroutine(ReturnSummon());
+
+        }
     }
 
+    IEnumerator ReturnSummon()
+    {
 
+
+        yield return new WaitForSeconds(2f);
+        ObjectPool.ReturnObject("bat", this.gameObject);
+        unitInfo.isAlive = true;
+    }
 
 }
 
