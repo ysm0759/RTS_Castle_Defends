@@ -10,12 +10,15 @@ public class Enemy : MonoBehaviour, IDamagable
     private UnitInfo _unitInfo;
 
     public UnityAction<Collider> onDead;
-    public PrefabObject prefabObject;
     private Collider col;
     private void Awake()
     {
         col = GetComponent<Collider>();
-        prefabObject = GetComponent<PrefabObject>();
+    }
+
+    private void OnEnable()
+    {
+        col.enabled = true;
     }
     public UnitInfo unitInfo
     {
@@ -51,14 +54,13 @@ public class Enemy : MonoBehaviour, IDamagable
     public void OnDead()
     {
         inGameUnitHP.ReturnObject();
-        GetComponent<Collider>().enabled = false;
-
+        col.enabled = false;
         if (onDead !=null)
         {
             onDead.Invoke(col);
         }
 
-        if (prefabObject == null)
+        if (unitInfo.data.unitType != UnitType.ENEMY_SUMMON)
         {
             Destroy(gameObject, 2f);
 

@@ -28,7 +28,7 @@ public class EnemyControl : MonoBehaviour
     int hitCount = 0;
 
 
-    private void Awake()
+    void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         enemyUnit = GetComponent<Enemy>();
@@ -37,15 +37,16 @@ public class EnemyControl : MonoBehaviour
         dest = FindObjectOfType<Destination>();
     }
 
-    
     private void OnEnable()
     {
+        StartCoroutine(DelayOneFrame());
 
     }
 
 
-    void Start()
+    IEnumerator DelayOneFrame()
     {
+        yield return null;
         navMeshAgent.enabled = true;
         navMeshAgent.speed = enemyUnit.unitInfo.moveSpeed;
         MoveTypeOnlyDestination();
@@ -54,11 +55,8 @@ public class EnemyControl : MonoBehaviour
         hit = new Collider[enemyUnit.unitInfo.multiAttack];
         StartCoroutine(SetMultiAttackSize());
         SetAnimAttackTime();
-        Debug.Log("start");
 
     }
-
-
     public void SetNodeIndex(int idx)
     {
         nodeIndex = idx;
@@ -67,11 +65,6 @@ public class EnemyControl : MonoBehaviour
     public int GetNodeIndex()
     {
         return nodeIndex;
-    }
-    public void MoveTypeDense()
-    {
-        destinationCollider = dest.GetComponent<Collider>();
-        destination = dest.transform.position;
     }
 
     public void MoveTypeOnlyDestination()
@@ -93,17 +86,15 @@ public class EnemyControl : MonoBehaviour
     }
 
 
-    IEnumerator SetMultiAttackSize()
+    private IEnumerator SetMultiAttackSize()
     {
         yield return null;
         hit = new Collider[enemyUnit.unitInfo.multiAttack];
         StartCoroutine(SearchTrace());
     }
 
-    IEnumerator SearchTrace()
+    private IEnumerator SearchTrace()
     {
-        //NavMeshPath navMeshPath = new NavMeshPath();
-        //navMeshAgent.CalculatePath(destination, navMeshPath);
         navMeshAgent.destination = destination;
         navMeshAgent.isStopped = true;
         yield return new WaitForSeconds(2.0f);
@@ -112,17 +103,23 @@ public class EnemyControl : MonoBehaviour
 
         while (true)
         {
-            Debug.Log("trace");
 
             if (!enemyUnit.unitInfo.isAlive)
             {
                 navMeshAgent.isStopped = true;
                 anim.SetTrigger("OnDead");
+                navMeshAgent.enabled = false;
                 yield break;
-            } 
+            }
 
+
+            if(!canAttack)
+            {
+                yield return null;
+                continue;
+            }
             IsArrive();
-
+            
 
             if (state.IsTraceState(UnitTraceState.TRACE)) //움직이다 적을 찾은 상태
             {
@@ -213,7 +210,7 @@ public class EnemyControl : MonoBehaviour
         }
         if (navMeshAgent.velocity.sqrMagnitude <= 0.2f * 0.2f && navMeshAgent.remainingDistance <= 0.5f)
         {
-            
+
             anim.SetBool("IsMove", false);
             state.SetTraceState(UnitTraceState.TRACE);
 
@@ -222,8 +219,6 @@ public class EnemyControl : MonoBehaviour
 
     public void MoveTo(Vector3 end)
     {
-        Debug.Log("moveto");
-
         if (!enemyUnit.unitInfo.isAlive)
         {
             return;
@@ -240,12 +235,13 @@ public class EnemyControl : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("destk");
+
 
             if (!enemyUnit.unitInfo.isAlive)
             {
                 yield break;
             }
+
             if (state.IsTraceState(UnitTraceState.TRACE) && !state.IsAttackState(UnitAttackState.DO_ATTACK))
             {
                 MoveTo(destination);
@@ -281,7 +277,7 @@ public class EnemyControl : MonoBehaviour
 
     private void SetDestinationRandom()
     {
-        
+
         Vector3 originPosition = destination;
         // 콜라이더의 사이즈를 가져오는 bound.size 사용
         float range_X = destinationCollider.bounds.size.x;

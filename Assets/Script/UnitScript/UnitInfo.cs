@@ -38,6 +38,20 @@ public class UnitInfo : MonoBehaviour
         }
     }
 
+    public UnitType _type;
+    [SerializeField]
+    public UnitType type
+    {
+        get
+        {
+            return _type;
+        }
+        private set
+        {
+            _type = value;
+        }
+    }
+
     [SerializeField]
     private float _maxHp; //최대체력
     public float maxHp//최대체력
@@ -199,6 +213,7 @@ public class UnitInfo : MonoBehaviour
 
     public void SetData(UnitDataScriptableObject data)
     {
+        this._type = data.unitType;
         this._maxHp = data.maxHp;
         this._hp = data.hp;
         this._df = data.df;

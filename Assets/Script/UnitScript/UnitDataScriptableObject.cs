@@ -20,6 +20,7 @@ public enum UnitType
     ENEMY_MAGICIAN,
     ENEMY_TANKER,
     ENEMY_AIR,
+    ENEMY_SUMMON,
 
 
     HERO_WARRIOR

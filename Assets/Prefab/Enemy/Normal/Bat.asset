@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5209b45c3f67535469ffcfd9602ff3dd, type: 3}
   m_Name: Bat
   m_EditorClassIdentifier: 
-  unitType: 0
+  unitType: 11
   maxHp: 10
   hp: 10
   df: 1
