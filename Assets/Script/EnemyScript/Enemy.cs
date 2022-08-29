@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour, IDamagable
         unitInfo.hp -= (damage - unitInfo.df) >= 0 ? (damage - unitInfo.df) : 1;
         if (unitInfo.isAlive == false)
         {
-            OnDead();
+             OnDead();
         }
         inGameUnitHP?.UpdateHpBar(unitInfo.hp);
     }
@@ -53,17 +53,24 @@ public class Enemy : MonoBehaviour, IDamagable
 
     public void OnDead()
     {
-        inGameUnitHP.ReturnObject();
-        col.enabled = false;
+
+        Debug.Log("??");
         if (onDead !=null)
         {
             onDead.Invoke(col);
+            onDead = null;
         }
+        else
+        {
+            return;
+        }
+        inGameUnitHP.ReturnObject();
+        col.enabled = false;
+        EnemySpawnManager.instance.enemyEA--;
 
         if (unitInfo.data.unitType != UnitType.ENEMY_SUMMON)
         {
             Destroy(gameObject, 2f);
-
         }
         else
         {

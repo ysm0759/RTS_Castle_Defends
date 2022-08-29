@@ -24,7 +24,7 @@ public class ObjectSummoner : ObjectAttack
             GameObject clone = ObjectPool.GetObject(name);
             clone.SetActive(true);
             clone.GetComponent<UnitInfo>().SetData(data);
-
+            EnemySpawnManager.instance.enemyEA++;
 
 
             Vector3 dir = new Vector3(0, 0, 0);
@@ -61,7 +61,7 @@ public class ObjectSummoner : ObjectAttack
     {
         GameObject hpBar = ObjectPool.GetObject("hpBar");
         hpBar.transform.SetParent(transform);
-        hpBar.GetComponent<InGameUnitHpBar>().SetData(data);
+        hpBar.GetComponent<InGameUnitHpBar>().SetData(data.maxHp , data.hp);
         hpBar.transform.localPosition = Vector3.up * 2;
 
     }

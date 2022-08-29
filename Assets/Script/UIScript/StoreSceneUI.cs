@@ -41,7 +41,6 @@ public class StoreSceneUI : MonoBehaviour
 
     public void OnClickBackButton()
     {
-        GameStateManager.instance.gameState = GameState.READY;
         GameManager.instance.ReadyScene();
     }
 }

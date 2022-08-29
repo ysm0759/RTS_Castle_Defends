@@ -24,17 +24,34 @@ public class InGameUnitHpBar : InGameUnitHP
     static public UnityAction<bool> uiOnOffEvent;
     [SerializeField] Image hpBar;
 
-    override public void SetData(UnitDataScriptableObject data)
+    override public void SetData(float maxHP, float hp)
     {
-        slider.maxValue = data.maxHp;
-        slider.value = data.hp;
+        slider.maxValue = maxHP;
+        slider.value = hp;
         this.gameObject.SetActive(true);
         GetComponentInParent<IDamagable>().inGameUnitHP = this;
         uiOnOffEvent += SetHide;
-        hpBar.color = GetComponentInParent<Enemy>() != null ? Color.red : Color.green;
+        hpBar.color = HPColor();
     }
 
-
+    Color HPColor()
+    {
+        if (GetComponentInParent<Enemy>() != null)
+        {
+            return Color.red;
+        }
+        else
+        {
+            if (GetComponentInParent<Tower>() != null)
+            {
+                return Color.cyan;
+            }
+            else
+            {
+                return Color.green;
+            }
+        }
+    }
     override public void ReturnObject()
     {
         uiOnOffEvent -= SetHide;

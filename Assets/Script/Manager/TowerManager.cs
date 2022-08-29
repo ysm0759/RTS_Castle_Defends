@@ -100,8 +100,8 @@ public class TowerManager : MonoBehaviour
 
     public void StartGame()
     {
-        if(GameStateManager.instance.gameState == GameState.GAME_START ||
-           GameStateManager.instance.gameState == GameState.MAIN)
+        if(GameManager.instance.gameState == GameState.GAME_START ||
+           GameManager.instance.gameState == GameState.MAIN)
         {
 
         }
@@ -146,7 +146,7 @@ public class TowerManager : MonoBehaviour
     {
         towerStatu = TowerStatu.BUY;
         StartCoroutine(TowerSetting(data));
-        GameStateManager.instance.gameState = GameState.TOWER_SETTING;
+        GameManager.instance.gameState = GameState.TOWER_SETTING;
     }
 
 
@@ -155,14 +155,14 @@ public class TowerManager : MonoBehaviour
         towerData = data;
         explain.gameObject.SetActive(true);
         onOffObject.SetActive(false);
-        GameStateManager.instance.gameState = GameState.TOWER_SETTING;
+        GameManager.instance.gameState = GameState.TOWER_SETTING;
         while (true)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 onOffObject.gameObject.SetActive(true);
                 explain.gameObject.SetActive(false);
-                GameStateManager.instance.gameState = GameState.STORE;
+                GameManager.instance.gameState = GameState.STORE;
 
                 yield break;
             }
@@ -224,6 +224,17 @@ public class TowerManager : MonoBehaviour
                                 tower.transform.position = hit.transform.position;
                                 tower.GetComponent<Tower>().SetTowerInfo(towerData);
                                 tower.transform.localScale *= 5;
+
+
+                                
+                                GameObject hpBar = ObjectPool.GetObject("hpBar");
+                                hpBar.transform.SetParent(tower.transform);
+                                hpBar.GetComponent<InGameUnitHpBar>().SetData(towerData.maxHp , towerData.hp);
+                                hpBar.transform.localPosition = Vector3.up * 9  ;
+
+
+
+
                             }
 
                         }

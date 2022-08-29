@@ -17,7 +17,6 @@ public class MainSceneUI : MonoBehaviour
 
     public void OnClickStart()
     {
-        GameStateManager.instance.gameState = GameState.READY;
         GameManager.instance.ReadyScene();
     }
 

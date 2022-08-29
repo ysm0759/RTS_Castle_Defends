@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
 
-        if (GameStateManager.instance.gameState == GameState.GAME_START || GameStateManager.instance.gameState == GameState.TOWER_SETTING)
+        if (GameManager.instance.gameState == GameState.GAME_START || GameManager.instance.gameState == GameState.TOWER_SETTING)
         {
 
             pos = transform.position;

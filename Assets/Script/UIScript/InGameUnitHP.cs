@@ -8,7 +8,7 @@ public class InGameUnitHP : MonoBehaviour
 
     [SerializeField] protected Slider slider;
 
-    virtual public void SetData(UnitDataScriptableObject data) { }
+    virtual public void SetData(float maxHp, float hp) { }
     virtual public void UpdateHpBar(float hp){ }
 
     virtual public void ReturnObject() { }

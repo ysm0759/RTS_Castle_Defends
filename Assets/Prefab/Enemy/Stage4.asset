@@ -10,17 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a965c8e2dc0d9b4fbf5e3140e793ca8, type: 3}
-  m_Name: Stage1
+  m_Name: Stage4
   m_EditorClassIdentifier: 
   EnemySpawnData:
   - PrefabObject: {fileID: 996953596124978157, guid: f97c5710073be7e498e1d2014f432cd9,
       type: 3}
-    EA: 20
+    EA: 30
     unitDataScriptableObject: {fileID: 11400000, guid: 4034047a52f22ad4c81659a2bd7288c9,
       type: 2}
   - PrefabObject: {fileID: 996953596124978157, guid: 98d57cebbb8de844bbdbe263e006f78e,
       type: 3}
-    EA: 20
+    EA: 10
     unitDataScriptableObject: {fileID: 11400000, guid: fef2f0ed1565cbc47afdadcd8f7bbe06,
       type: 2}
-  NextStage: {fileID: 11400000, guid: d70fab95b2df3bd4794bff77d9d2bb87, type: 2}
+  - PrefabObject: {fileID: 996953596124978157, guid: 9e1fabb9b55d7f6479c5fae9faf05a4f,
+      type: 3}
+    EA: 5
+    unitDataScriptableObject: {fileID: 11400000, guid: a0ba3639c6e3dcf488ab88fa0e72a79b,
+      type: 2}
+  - PrefabObject: {fileID: 996953596124978157, guid: a116ce76b85db8543aa6540b8139e70b,
+      type: 3}
+    EA: 7
+    unitDataScriptableObject: {fileID: 11400000, guid: e3c48d42f5ec5044ca15ba23600bfbb3,
+      type: 2}
+  - PrefabObject: {fileID: 996953596124978157, guid: 20da5c48fd4c5964bb802b2e2a4ddfb6,
+      type: 3}
+    EA: 7
+    unitDataScriptableObject: {fileID: 11400000, guid: 1e755739ca2da6945911b822ed93bb6e,
+      type: 2}
+  NextStage: {fileID: 0}

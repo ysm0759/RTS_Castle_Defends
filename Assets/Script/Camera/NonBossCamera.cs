@@ -30,7 +30,7 @@ public class NonBossCamera : MonoBehaviour
     void MainCameraRotate()
     {
         transform.LookAt(foucs);
-        if (GameState.MAIN == GameStateManager.instance.gameState)
+        if (GameState.MAIN == GameManager.instance.gameState)
             transform.RotateAround(foucs.position, Vector3.up, 30f * Time.deltaTime);
 
     }
@@ -45,7 +45,7 @@ public class NonBossCamera : MonoBehaviour
     }
     void CameraZoom()
     {
-        if(GameStateManager.instance.gameState != GameState.GAME_START)
+        if(GameManager.instance.gameState != GameState.GAME_START)
         {
             return;
         }

@@ -72,8 +72,15 @@ public class EnemyControl : MonoBehaviour
         destinationCollider = dest.GetComponent<Collider>();
 
 
+        if( Random.Range(0, 2) == 1)
+        {
+            node = dest.NodeTypeLeft;
+        }
+        else
+        {
+            node = dest.NodeTypeRight; 
+        }
 
-        node = dest.NodeTypeLeft;
         if (nodeIndex == node.Count)
         {
             destination = dest.transform.position;

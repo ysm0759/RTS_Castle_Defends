@@ -55,8 +55,6 @@ public class AttackTower : MonoBehaviour
     {
         enemyList.Add(other);
 
-        Debug.Log(attackDamage);
-
         other.GetComponent<Enemy>().onDead += RemoveInListOfTower;
 
         if (canAttack)
@@ -72,10 +70,10 @@ public class AttackTower : MonoBehaviour
     }
 
 
-    public void RemoveEnemyList(Collider other)
-    {
-        enemyList.Remove(other);
-    }
+    //public void RemoveEnemyList(Collider other)
+    //{
+    //    enemyList.Remove(other);
+    //}
 
     IEnumerator Attack()
     {
@@ -99,7 +97,6 @@ public class AttackTower : MonoBehaviour
 
     public void RemoveInListOfTower(Collider enemy)
     {
-        Debug.Log(enemyList.Count);
         enemyList.Remove(enemy);
     }
 

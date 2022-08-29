@@ -11,25 +11,21 @@ public class ReadySceneUI : MonoBehaviour
 
     public void OnClickGameStart()
     {
-        GameStateManager.instance.gameState = GameState.GAME_START;
         GameManager.instance.GameStart();
     }
 
     public void OnClickStore()
     {
-        GameStateManager.instance.gameState = GameState.STORE;
         GameManager.instance.StoreScene();
     }
 
 
     public void OnClickHeroSelect()
     {
-        GameStateManager.instance.gameState = GameState.HERO_SELECT;
         GameManager.instance.HeroSelectScene();
     }
     public void OnClickBackButton()
     {
-        GameStateManager.instance.gameState = GameState.MAIN;
         GameManager.instance.MainScene();
     }
     public void Start()
@@ -38,15 +34,33 @@ public class ReadySceneUI : MonoBehaviour
     }
     public void OnClickBack()
     {
-        GameStateManager.instance.gameState = GameState.MAIN;
         GameManager.instance.MainScene();
     }
 
     public void UpdateEnemyPanel()
     {
+
+        ClearPanel();
+        AddEnemyPortraitPerfab();
+
+    }
+
+    public void ClearPanel()
+    {
+       Transform[]tmp = enemyPanel.GetComponentsInChildren<Transform>();
+
+        for(int i =1; i < tmp.Length;i++)
+        {
+            Destroy(tmp[i].gameObject);
+        }
+    }
+
+    public void AddEnemyPortraitPerfab()
+    {
+
         for (int i = 0; i < EnemySpawnManager.instance.stageData.EnemySpawnData.Length; i++)
         {
-            GameObject clone =Instantiate(enemyPortraitPerfab);
+            GameObject clone = Instantiate(enemyPortraitPerfab);
             clone.transform.SetParent(enemyPanel.transform);
 
             readyEnemyPortrait = clone.GetComponent<ReadyEnemyPortrait>();
@@ -54,4 +68,5 @@ public class ReadySceneUI : MonoBehaviour
 
         }
     }
+
 }

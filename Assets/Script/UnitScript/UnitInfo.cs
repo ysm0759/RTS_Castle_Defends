@@ -213,6 +213,7 @@ public class UnitInfo : MonoBehaviour
 
     public void SetData(UnitDataScriptableObject data)
     {
+        this._data = data;
         this._type = data.unitType;
         this._maxHp = data.maxHp;
         this._hp = data.hp;

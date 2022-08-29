@@ -76,7 +76,7 @@ public class UserUnitSpawner : MonoBehaviour
 
                 GameObject hpBar = ObjectPool.GetObject("hpBar");
                 hpBar.transform.SetParent(clone.transform);
-                hpBar.GetComponent<InGameUnitHpBar>().SetData(tmpData[i]);
+                hpBar.GetComponent<InGameUnitHpBar>().SetData(tmpData[i].maxHp , tmpData[i].hp);
                 hpBar.transform.localPosition = Vector3.up;
 
 
@@ -142,7 +142,7 @@ public class UserUnitSpawner : MonoBehaviour
         UnitInfo heroInfo = heroClone.GetComponent<UnitInfo>();
         heroClone.GetComponent<UnitInfo>().SetData(heroInfo.data);
         InGameHeroHpBar heroHpBar = FindObjectOfType<InGameHeroHpBar>();
-        heroHpBar.GetComponent<InGameUnitHP>().SetData(heroInfo.data);
+        heroHpBar.GetComponent<InGameUnitHP>().SetData(heroInfo.maxHp , heroInfo.hp);
 
         return unitList;
 

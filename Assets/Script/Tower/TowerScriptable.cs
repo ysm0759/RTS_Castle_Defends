@@ -8,10 +8,10 @@ using UnityEngine;
 public class TowerScriptable : ScriptableObject
 {
     public TowerIndex towerIndex;
-    public int maxHp;
-    public int hp;
-    public int df;
-    public int damage;
+    public float maxHp;
+    public float hp;
+    public float df;
+    public float damage;
     public float attackSpeed;
     public float attackRange;
     public string attackName;

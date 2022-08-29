@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum GameSeason
+
+public enum GameState
 {
-    SPRING,
-    SUMMER,
-    FALL,
-    WINTER,
-    BOSS,
+    MAIN,
+    TUTORAIL,
+    READY,
+    HERO_SELECT,
+    GAME_START,
+    STORE,
+    EXIT,
+    TOWER_SETTING,
     CNT,
 }
+
+
 
 
 public class GameManager : MonoBehaviour
@@ -21,10 +27,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject skillUI;
 
     [Header("Scenes")]
-    [SerializeField] private GameObject mainPanel;
-    [SerializeField] private ReadySceneUI readySceneUI;
-    [SerializeField] private GameObject readyPanel;
-    [SerializeField] private GameObject storePanel;
+    [SerializeField] private MainSceneUI mainPanel;
+    [SerializeField] private ReadySceneUI readyPanel;
+    [SerializeField] private StoreSceneUI storePanel;
     
     
     [Header("Cost")]
@@ -40,7 +45,7 @@ public class GameManager : MonoBehaviour
 
 
 
-
+    public GameState gameState;
     static private GameManager Instance;
 
     static public GameManager instance
@@ -50,44 +55,58 @@ public class GameManager : MonoBehaviour
             return Instance;
         }
     }
+    private void Awake()
+    {
+        Instance = this;
 
+    }
 
     private void Start()
     {
        
-        Instance = this;
         mouseDrag.SetActive(false);
         skillUI.SetActive(false);
-        mainPanel.SetActive(true);
-        readyPanel.SetActive(false);
-        storePanel.SetActive(false);
+        mainPanel.gameObject.SetActive(true);
+        readyPanel.gameObject.SetActive(false);
+        storePanel.gameObject.SetActive(false);
         mainCamera.SetActive(false);
         readyCamera.SetActive(true);
         TowerManager.instance.DisplayNode(false);
+        gameState = GameState.MAIN;
+
 
     }
 
+    public void NextStage()
+    {
+        readyPanel.UpdateEnemyPanel();
+        ReadyScene();
+
+    }
 
     public void MainScene()
     {
         mouseDrag.SetActive(false);
         skillUI.SetActive(false);
-        mainPanel.SetActive(true);
-        readyPanel.SetActive(false);
-        storePanel.SetActive(false);
+        mainPanel.gameObject.SetActive(true);
+        readyPanel.gameObject.SetActive(false);
+        storePanel.gameObject.SetActive(false);
         mainCamera.SetActive(false);
         readyCamera.SetActive(true);
-    }
+        gameState = GameState.MAIN;
 
+    }
+    
     public void ReadyScene()
     {
         mouseDrag.SetActive(false);
         skillUI.SetActive(false);
-        mainPanel.SetActive(false);
-        readyPanel.SetActive(true);
-        storePanel.SetActive(false);
+        mainPanel.gameObject.SetActive(false);
+        readyPanel.gameObject.SetActive(true);
+        storePanel.gameObject.SetActive(false);
         mainCamera.SetActive(true);
         readyCamera.SetActive(false);
+        gameState = GameState.READY;
     }
 
 
@@ -95,9 +114,11 @@ public class GameManager : MonoBehaviour
     {
         mouseDrag.SetActive(false);
         skillUI.SetActive(false);
-        mainPanel.SetActive(false);
-        readyPanel.SetActive(true);
-        storePanel.SetActive(false);
+        mainPanel.gameObject.SetActive(false);
+        readyPanel.gameObject.SetActive(true);
+        storePanel.gameObject.SetActive(false);
+        gameState = GameState.HERO_SELECT;
+
 
     }
 
@@ -105,9 +126,11 @@ public class GameManager : MonoBehaviour
     {
         mouseDrag.SetActive(true);
         skillUI.SetActive(true);
-        mainPanel.SetActive(false);
-        readyPanel.SetActive(false);
-        storePanel.SetActive(false);
+        mainPanel.gameObject.SetActive(false);
+        readyPanel.gameObject.SetActive(false);
+        storePanel.gameObject.SetActive(false);
+        gameState = GameState.GAME_START;
+
         RTSUserUnitControlManager.instance.InitUnit();
         EnemySpawnManager.instance.SetEnemySpawn();
         TowerManager.instance.DisplayNode(false);
@@ -117,11 +140,14 @@ public class GameManager : MonoBehaviour
     {
         mouseDrag.SetActive(false);
         skillUI.SetActive(false);
-        mainPanel.SetActive(false);
-        readyPanel.SetActive(false);
-        storePanel.SetActive(true);
+        mainPanel.gameObject.SetActive(false);
+        readyPanel.gameObject.SetActive(false);
+        storePanel.gameObject.SetActive(true);
+        gameState = GameState.STORE;
+
         UpdateCostPanel();
         TowerManager.instance.DisplayNode(true);
+
     }
 
 

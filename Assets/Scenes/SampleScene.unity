@@ -24005,7 +24005,6 @@ GameObject:
   - component: {fileID: 1001416595}
   - component: {fileID: 1001416594}
   - component: {fileID: 1001416597}
-  - component: {fileID: 1001416599}
   - component: {fileID: 1001416598}
   m_Layer: 0
   m_Name: GameManager
@@ -24046,16 +24045,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseDrag: {fileID: 1394642117}
   skillUI: {fileID: 142449015}
-  mainPanel: {fileID: 1107636744}
-  readySceneUI: {fileID: 1783707716}
-  readyPanel: {fileID: 1783707711}
-  storePanel: {fileID: 788760628}
+  mainPanel: {fileID: 1107636749}
+  readyPanel: {fileID: 1783707716}
+  storePanel: {fileID: 788760633}
   costPanel: {fileID: 218901858}
   maxCost: 100
   curCost: 100
   noMoneyPanel: {fileID: 1941873525}
   mainCamera: {fileID: 963194225}
   readyCamera: {fileID: 2138009120}
+  gameState: 0
 --- !u!4 &1001416596
 Transform:
   m_ObjectHideFlags: 0
@@ -24120,19 +24119,6 @@ MonoBehaviour:
       type: 3}
   - name: summon
     PrefabObject: {fileID: 100010, guid: c98be9ff8d0b99c4f8857faf470634cf, type: 3}
---- !u!114 &1001416599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1001416593}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4669c57a019a1241ad8160951f26ea8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameState: 0
 --- !u!4 &1002289183 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 430254, guid: f21c48374d4fdc4489f7894214718503,
