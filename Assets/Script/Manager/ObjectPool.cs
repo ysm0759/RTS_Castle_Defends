@@ -49,6 +49,7 @@ public class ObjectPool : MonoBehaviour
             prefabDic.Add(poolingObjectPrefab[i].name, poolingObjectPrefab[i].PrefabObject);
             poolingObjectQueues.Add(poolingObjectPrefab[i].name, new Queue<GameObject>());
         }
+
     }
 
     private GameObject CreateNewObject(string name)

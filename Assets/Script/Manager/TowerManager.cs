@@ -230,7 +230,22 @@ public class TowerManager : MonoBehaviour
                                 GameObject hpBar = ObjectPool.GetObject("hpBar");
                                 hpBar.transform.SetParent(tower.transform);
                                 hpBar.GetComponent<InGameUnitHpBar>().SetData(towerData.maxHp , towerData.hp);
-                                hpBar.transform.localPosition = Vector3.up * 9  ;
+                                
+                                if(towerData.towerIndex == TowerIndex.BLOCK)
+                                {
+                                    hpBar.transform.localPosition = Vector3.up * 5;
+
+                                }
+                                else if(towerData.towerIndex == TowerIndex.ARCHER)
+                                {
+                                    hpBar.transform.localPosition = Vector3.up * 8.7f;
+
+                                }
+                                if(towerData.towerIndex == TowerIndex.CATAPULT)
+                                {
+                                    hpBar.transform.localPosition = Vector3.up *3;
+
+                                }
 
 
 
@@ -241,7 +256,7 @@ public class TowerManager : MonoBehaviour
                     }
                 }
             }
-
+            // 5 , 8.7 , 3
 
 
 
