@@ -7,6 +7,8 @@ public class InGameUnitSelectButtons : MonoBehaviour
     [SerializeField] GameObject buttonPrefab;
 
     public InGameUnitSelectButtonElement inGameUnitSelectButtonElement;
+
+    public List<InGameUnitSelectButtonElement> buttonList;
     public void AddButton(UnitDataScriptableObject unit)
     {
         GameObject button = Instantiate(buttonPrefab);
@@ -14,6 +16,7 @@ public class InGameUnitSelectButtons : MonoBehaviour
         inGameUnitSelectButtonElement = button.GetComponent<InGameUnitSelectButtonElement>();
         inGameUnitSelectButtonElement.Init();
         inGameUnitSelectButtonElement.SetImage(unit.sprite);
+        buttonList.Add(inGameUnitSelectButtonElement);
     }
 
     public void AddGroup(UnitController unitController)
@@ -23,7 +26,11 @@ public class InGameUnitSelectButtons : MonoBehaviour
 
     public void Clear()
     {
-
+        foreach(InGameUnitSelectButtonElement tmp in buttonList)
+        {
+            Destroy(tmp.gameObject);
+        }
+        buttonList.Clear();
     }
-   
+
 }

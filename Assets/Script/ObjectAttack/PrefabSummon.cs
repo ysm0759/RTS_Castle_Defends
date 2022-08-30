@@ -14,7 +14,6 @@ public class PrefabSummon : PrefabObject
     {
         yield return new WaitForSeconds(2.0f);
         ObjectPool.ReturnObject("summon", gameObject);
-        Debug.Log("삭제");
         
 
     }

@@ -77,11 +77,21 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void NextStage()
+    public void StageClear()
     {
-        readyPanel.UpdateEnemyPanel();
         ReadyScene();
+        readyPanel.UpdateEnemyPanel();
+        RTSUserUnitControlManager.instance.StageFinish();
+        TowerManager.instance.InitTowers();
 
+
+    }
+    public void StageLose()
+    {
+        ReadyScene();
+        EnemySpawnManager.instance.RemoveAllEnemy();
+        RTSUserUnitControlManager.instance.StageFinish();
+        TowerManager.instance.InitTowers();
     }
 
     public void MainScene()

@@ -270,6 +270,20 @@ public class RTSUserUnitControlManager : MonoBehaviour
         }
     }
 
+
+
+    public void StageFinish()
+    {
+        
+        foreach(UnitController tmp in unitList)
+        {
+            Destroy(tmp.gameObject);
+        }
+        unitList.Clear();
+        selectedUnitList.Clear();
+        hero = null;
+        unitSpawner.GetInGameUnitSelectButtons().Clear();
+    }
 }
 
 

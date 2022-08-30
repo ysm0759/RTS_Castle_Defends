@@ -49,7 +49,11 @@ public class PrefabProjectile : PrefabObject
 
         if (dir.sqrMagnitude < 3)
         {
-            target?.GetComponent<IDamagable>().Hit(damage);
+            if(target.enabled == true)
+            {
+                target?.GetComponent<IDamagable>().Hit(damage);
+            }
+
             ObjectPool.ReturnObject("arrow", gameObject);
         }
     }

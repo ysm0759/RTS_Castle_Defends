@@ -29,7 +29,6 @@ public class TowerManager : MonoBehaviour
     [Space(20)]
     [SerializeField] GameObject explain;
     [SerializeField] GameObject onOffObject;
-
     TowerNode[] towerNodes; //타워 기본 노드
 
     private Camera mainCamera;
@@ -60,7 +59,7 @@ public class TowerManager : MonoBehaviour
     {
         mainCamera = Camera.main;
         instance = this;
-        
+
 
         Transform[] tmp = GetComponentsInChildren<Transform>();
         towerNodes = new TowerNode[tmp.Length - 1];
@@ -68,25 +67,35 @@ public class TowerManager : MonoBehaviour
 
         for (int i = 1; i < tmp.Length; i++)
         {
-            towerNodes[i-1] = new TowerNode();
+            towerNodes[i - 1] = new TowerNode();
             towerNodes[i - 1].node = tmp[i].gameObject;
         }
+
+
     }
 
 
 
 
-    private void InitTowers()
+    public void InitTowers()
     {
 
         for (int i = 0; i < towersListNode.Length; i++)
         {
+            Debug.Log(towersListNode[i].Towers.Count);
             foreach (GameObject tmp in towersListNode[i].Towers)
             {
-                towerNodes[Int32.Parse(tmp.name)].node.GetComponentInChildren<Tower>().InitTower();
+                Debug.Log(tmp.name);
+                //towerNodes[Int32.Parse(tmp.name)].node.GetComponentInChildren<Tower>().InitTower();
+                Debug.Log(tmp);
+                Debug.Log(tmp.GetComponentsInChildren<Transform>().Length);
+                Debug.Log(tmp.GetComponentInChildren<Tower>());
+
+                //tmp.GetComponentInChildren<Tower>().InitTower();
             }
         }
     }
+
 
     public void UpgradeTower(TowerScriptable towerData)
     {
@@ -100,7 +109,7 @@ public class TowerManager : MonoBehaviour
 
     public void StartGame()
     {
-        if(GameManager.instance.gameState == GameState.GAME_START ||
+        if (GameManager.instance.gameState == GameState.GAME_START ||
            GameManager.instance.gameState == GameState.MAIN)
         {
 
@@ -113,7 +122,7 @@ public class TowerManager : MonoBehaviour
 
     public void DisplayNode(bool isVisible)
     {
-        for(int i = 0; i<towerNodes.Length;i++)
+        for (int i = 0; i < towerNodes.Length; i++)
         {
             towerNodes[i].node.SetActive(!(towerNodes[i].isEmpty && !isVisible));
         }
@@ -123,9 +132,9 @@ public class TowerManager : MonoBehaviour
     public void ResetTowers()
     {
 
-        for(int i =0;i < towersListNode.Length;i++)
+        for (int i = 0; i < towersListNode.Length; i++)
         {
-            foreach(GameObject tmp in towersListNode[i].Towers)
+            foreach (GameObject tmp in towersListNode[i].Towers)
             {
                 int index = Int32.Parse(tmp.name);
                 towerNodes[index].SetClear();
@@ -209,7 +218,7 @@ public class TowerManager : MonoBehaviour
                         int idx = Int32.Parse(hit.collider.name);
                         if (towerNodes[idx].isEmpty)
                         {
-                            if(GameManager.instance.UseCost(towerData.buyCost)==false)
+                            if (GameManager.instance.UseCost(towerData.buyCost) == false)
                             {
                                 yield return null;
 
@@ -226,24 +235,26 @@ public class TowerManager : MonoBehaviour
                                 tower.transform.localScale *= 5;
 
 
-                                
+
                                 GameObject hpBar = ObjectPool.GetObject("hpBar");
                                 hpBar.transform.SetParent(tower.transform);
-                                hpBar.GetComponent<InGameUnitHpBar>().SetData(towerData.maxHp , towerData.hp);
-                                
-                                if(towerData.towerIndex == TowerIndex.BLOCK)
+                                hpBar.GetComponent<InGameUnitHpBar>().SetData(towerData.maxHp, towerData.hp);
+
+
+                                //TODO :: 더 좋은 방법 있으면 바꾸기
+                                if (towerData.towerIndex == TowerIndex.BLOCK)
                                 {
                                     hpBar.transform.localPosition = Vector3.up * 5;
 
                                 }
-                                else if(towerData.towerIndex == TowerIndex.ARCHER)
+                                else if (towerData.towerIndex == TowerIndex.ARCHER)
                                 {
                                     hpBar.transform.localPosition = Vector3.up * 8.7f;
 
                                 }
-                                if(towerData.towerIndex == TowerIndex.CATAPULT)
+                                if (towerData.towerIndex == TowerIndex.CATAPULT)
                                 {
-                                    hpBar.transform.localPosition = Vector3.up *3;
+                                    hpBar.transform.localPosition = Vector3.up * 3;
 
                                 }
 

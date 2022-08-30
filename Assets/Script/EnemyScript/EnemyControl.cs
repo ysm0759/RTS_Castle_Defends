@@ -110,8 +110,12 @@ public class EnemyControl : MonoBehaviour
 
         while (true)
         {
+            if(GameManager.instance.gameState != GameState.GAME_START)
+            {
+                yield break;
 
-            if (!enemyUnit.unitInfo.isAlive)
+            }
+            if (!enemyUnit.unitInfo.isAlive )
             {
                 navMeshAgent.isStopped = true;
                 anim.SetTrigger("OnDead");

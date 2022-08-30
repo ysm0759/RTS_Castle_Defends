@@ -42,10 +42,11 @@ public class Enemy : MonoBehaviour, IDamagable
     }
     public void Hit(float damage)
     {
-        unitInfo.hp -= (damage - unitInfo.df) >= 0 ? (damage - unitInfo.df) : 1;
+        unitInfo.hp -= (damage - unitInfo.df) > 1 ? (damage - unitInfo.df) : 1;
+
         if (unitInfo.isAlive == false)
         {
-             OnDead();
+            OnDead();
         }
         inGameUnitHP?.UpdateHpBar(unitInfo.hp);
     }
@@ -54,20 +55,17 @@ public class Enemy : MonoBehaviour, IDamagable
     public void OnDead()
     {
 
-        Debug.Log("??");
-        if (onDead !=null)
+
+        if(onDead != null)
         {
+
             onDead.Invoke(col);
             onDead = null;
-        }
-        else
-        {
-            return;
+
         }
         inGameUnitHP.ReturnObject();
         col.enabled = false;
-        EnemySpawnManager.instance.enemyEA--;
-
+        EnemySpawnManager.instance.EnemyListRemove(this);
         if (unitInfo.data.unitType != UnitType.ENEMY_SUMMON)
         {
             Destroy(gameObject, 2f);
@@ -75,18 +73,36 @@ public class Enemy : MonoBehaviour, IDamagable
         else
         {
             StartCoroutine(ReturnSummon());
-
         }
     }
 
     IEnumerator ReturnSummon()
     {
 
-
         yield return new WaitForSeconds(2f);
         ObjectPool.ReturnObject("bat", this.gameObject);
         unitInfo.isAlive = true;
     }
 
+    public void StageLose()
+    {
+        inGameUnitHP.ReturnObject();
+        if (unitInfo.data.unitType != UnitType.ENEMY_SUMMON)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            StartCoroutine(ObjectPoolStageLose());
+        }
+    }
+
+    IEnumerator ObjectPoolStageLose()
+    {
+
+        ObjectPool.ReturnObject("bat", this.gameObject);
+        unitInfo.isAlive = true;
+        yield return null;
+    }
 }
 

@@ -13,7 +13,7 @@ public class UserUnitSpawner : MonoBehaviour
 
     [SerializeField]
     private List<Transform> unitPrefabPosition;
-    
+
     [SerializeField]
     private InGameUnitSelectButtons inGameUnitSelectButtons;
 
@@ -31,6 +31,10 @@ public class UserUnitSpawner : MonoBehaviour
         public GameObject[] LevelObjects;
     }
 
+    public InGameUnitSelectButtons GetInGameUnitSelectButtons()
+    {
+        return inGameUnitSelectButtons;
+    }
 
 
     public List<UnitController> SpawnUnits(UnitDataScriptableObject[] tmpData, bool[] isBuys)
@@ -41,7 +45,7 @@ public class UserUnitSpawner : MonoBehaviour
 
 
 
-        for (int i =0; i < tmpData.Length; i++)
+        for (int i = 0; i < tmpData.Length; i++)
         {
 
             if (isBuys[i] == false)
@@ -58,7 +62,7 @@ public class UserUnitSpawner : MonoBehaviour
             int dirCnt = 0;
             float place = 4f;
 
-            for (int j = 0;  j < tmpData[i].population;j++)
+            for (int j = 0; j < tmpData[i].population; j++)
             {
 
 
@@ -76,7 +80,7 @@ public class UserUnitSpawner : MonoBehaviour
 
                 GameObject hpBar = ObjectPool.GetObject("hpBar");
                 hpBar.transform.SetParent(clone.transform);
-                hpBar.GetComponent<InGameUnitHpBar>().SetData(tmpData[i].maxHp , tmpData[i].hp);
+                hpBar.GetComponent<InGameUnitHpBar>().SetData(tmpData[i].maxHp, tmpData[i].hp);
                 hpBar.transform.localPosition = Vector3.up;
 
 
@@ -142,14 +146,12 @@ public class UserUnitSpawner : MonoBehaviour
         UnitInfo heroInfo = heroClone.GetComponent<UnitInfo>();
         heroClone.GetComponent<UnitInfo>().SetData(heroInfo.data);
         InGameHeroHpBar heroHpBar = FindObjectOfType<InGameHeroHpBar>();
-        heroHpBar.GetComponent<InGameUnitHP>().SetData(heroInfo.maxHp , heroInfo.hp);
+        heroHpBar.GetComponent<InGameUnitHP>().SetData(heroInfo.maxHp, heroInfo.hp);
 
         return unitList;
 
-
-
-
     }
+
 
 
 }

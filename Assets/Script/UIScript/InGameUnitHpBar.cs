@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class InGameUnitHpBar : InGameUnitHP
 {
-    static public bool _uiOnOff = true;
+    static public bool _uiOnOff = false;
     static public bool uiOnOff
     {
         get

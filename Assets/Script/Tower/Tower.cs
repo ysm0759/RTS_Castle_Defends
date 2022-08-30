@@ -50,10 +50,15 @@ public class Tower : MonoBehaviour, IDamagable
     public void InitTower()
     {
         this.gameObject.SetActive(true);
+        Debug.Log("1");
         this.towerInfo.hp = towerInfo.maxHp;
+        Debug.Log("2");
         burnHp = towerInfo.maxHp * 0.5f;
+        Debug.Log("3");
         isBurn = false;
+        Debug.Log("4");
         isDestroy = false;
+        Debug.Log("5");
         isSetTower = true;
 
         if (attackTower != null)
@@ -65,9 +70,11 @@ public class Tower : MonoBehaviour, IDamagable
 
 
 
-    public void Hit(float damage) // 쳐 맞기 구현
+    public void Hit(float damage) 
     {
-        towerInfo.hp -= damage;
+        towerInfo.hp -= (damage - towerInfo.df) > 1 ? (damage - towerInfo.df) : 1;
+
+
         inGameUnitHP?.UpdateHpBar(towerInfo.hp);
 
         if (towerInfo.hp <= burnHp && isBurn == false)
@@ -121,25 +128,6 @@ public class Tower : MonoBehaviour, IDamagable
         }
     }
 
-    private void Update()
-    {
-        test();
-    }
-
-    public void test()
-    {
-        //Renderer ObstacleRenderer;
-        //ObstacleRenderer = towerModel[0].gameObject.GetComponentInChildren<Renderer>();
-
-        //Material Mat = ObstacleRenderer.material;
-
-        //Color matColor = Mat.color;
-
-        //matColor.a = 0.5f;
-
-        //Mat.color = matColor;
-
-    }
 
     public InGameUnitHP _inGameUnitHP;
     public InGameUnitHP inGameUnitHP

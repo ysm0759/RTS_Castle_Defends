@@ -24,7 +24,7 @@ public class ObjectSummoner : ObjectAttack
             GameObject clone = ObjectPool.GetObject(name);
             clone.SetActive(true);
             clone.GetComponent<UnitInfo>().SetData(data);
-            EnemySpawnManager.instance.enemyEA++;
+            EnemySpawnManager.instance.EnemyListAdd(clone.GetComponent<Enemy>());
 
 
             Vector3 dir = new Vector3(0, 0, 0);
@@ -49,7 +49,6 @@ public class ObjectSummoner : ObjectAttack
 
     void OnEffect(Vector3 pos)
     {
-        Debug.Log("On");
         gameObjectEffect = ObjectPool.GetObject("summon");
         gameObjectEffect.transform.position = pos;
         gameObjectEffect.SetActive(true);

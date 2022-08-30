@@ -55,6 +55,10 @@ public class UnitController : MonoBehaviour
     {
         while (true)
         {
+            if(GameManager.instance.gameState != GameState.GAME_START)
+            {
+                yield break;
+            }
             if (!userUnit.unitInfo.isAlive)
             {
                 anim.SetTrigger("OnDead");
@@ -287,7 +291,7 @@ public class UnitController : MonoBehaviour
     {
         //if(navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
         //if(navMeshAgent.velocity == Vector3.zero)
-
+        
         if (navMeshAgent.velocity.sqrMagnitude <= 0.2f * 0.2f && navMeshAgent.remainingDistance <= 0.5f
             && navMeshAgent.velocity == Vector3.zero)
         {
