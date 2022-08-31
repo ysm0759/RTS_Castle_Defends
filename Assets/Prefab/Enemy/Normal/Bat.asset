@@ -18,7 +18,7 @@ MonoBehaviour:
   df: 1
   moveSpeed: 10
   attackSpeed: 1
-  damage: 3
+  damage: 100
   attackRange: 2
   upgradeCost: 0
   population: 0

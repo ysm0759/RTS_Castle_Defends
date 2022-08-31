@@ -25,7 +25,7 @@ public class TowerManager : MonoBehaviour
     [Space(20)]
     [SerializeField] TowerScriptable towerData;
     [Space(20)]
-    [SerializeField] TowersList[] towersListNode; // 설치된 타워 노드
+    [SerializeField] TowersList[] installTowerData; 
     [Space(20)]
     [SerializeField] GameObject explain;
     [SerializeField] GameObject onOffObject;
@@ -39,7 +39,7 @@ public class TowerManager : MonoBehaviour
     [Serializable]
     public class TowersList
     {
-        public List<GameObject> Towers;
+        public List<Tower> Towers;
     }
 
     public class TowerNode
@@ -53,6 +53,7 @@ public class TowerManager : MonoBehaviour
             isEmpty = true;
         }
     }
+
 
 
     private void Awake()
@@ -80,18 +81,11 @@ public class TowerManager : MonoBehaviour
     public void InitTowers()
     {
 
-        for (int i = 0; i < towersListNode.Length; i++)
+        for (int i = 0; i < installTowerData.Length; i++)
         {
-            Debug.Log(towersListNode[i].Towers.Count);
-            foreach (GameObject tmp in towersListNode[i].Towers)
+            foreach (Tower tmp in installTowerData[i].Towers)
             {
-                Debug.Log(tmp.name);
-                //towerNodes[Int32.Parse(tmp.name)].node.GetComponentInChildren<Tower>().InitTower();
-                Debug.Log(tmp);
-                Debug.Log(tmp.GetComponentsInChildren<Transform>().Length);
-                Debug.Log(tmp.GetComponentInChildren<Tower>());
-
-                //tmp.GetComponentInChildren<Tower>().InitTower();
+                tmp.InitTower();
             }
         }
     }
@@ -99,10 +93,9 @@ public class TowerManager : MonoBehaviour
 
     public void UpgradeTower(TowerScriptable towerData)
     {
-        foreach (GameObject tmp in towersListNode[(int)towerData.towerIndex].Towers)
+        foreach (Tower tmp in installTowerData[(int)towerData.towerIndex].Towers)
         {
-            Tower towerTmp = tmp.GetComponentInChildren<Tower>();
-            towerTmp.SetTowerInfo(towerData);
+            tmp.SetTowerInfo(towerData);
         }
     }
 
@@ -131,17 +124,18 @@ public class TowerManager : MonoBehaviour
 
     public void ResetTowers()
     {
-
-        for (int i = 0; i < towersListNode.Length; i++)
+        for(int i =0; i < installTowerData.Length; i++)
         {
-            foreach (GameObject tmp in towersListNode[i].Towers)
-            {
-                int index = Int32.Parse(tmp.name);
-                towerNodes[index].SetClear();
-                towerNodes[index].node.GetComponent<MeshRenderer>().enabled = true;
-            }
-            towersListNode[i].Towers.Clear();
+            towerNodes[i].SetClear();
+            towerNodes[i].node.GetComponent<MeshRenderer>().enabled = true;
         }
+
+        for(int i =0; i < installTowerData.Length;i++)
+        {
+            installTowerData[i].Towers.Clear();
+        }
+
+
     }
 
 
@@ -228,10 +222,11 @@ public class TowerManager : MonoBehaviour
                                 towerNodes[idx].isEmpty = false;
                                 hit.collider.GetComponent<MeshRenderer>().enabled = false;
                                 GameObject tower = Instantiate(towerData.prefab);
-                                towersListNode[(int)towerData.towerIndex].Towers.Add(hit.collider.gameObject);
                                 tower.transform.SetParent(hit.transform);
                                 tower.transform.position = hit.transform.position;
-                                tower.GetComponent<Tower>().SetTowerInfo(towerData);
+                                Tower tmp = tower.GetComponent<Tower>();
+                                tmp.SetTowerInfo(towerData);
+                                installTowerData[(int)towerData.towerIndex].Towers.Add(tmp);
                                 tower.transform.localScale *= 5;
 
 
@@ -285,7 +280,7 @@ public class TowerManager : MonoBehaviour
                         Tower towerTmp = towerNodes[idx].node.GetComponentInChildren<Tower>();
                         Destroy(towerTmp.gameObject);
 
-                        towersListNode[(int)towerTmp.GetTowerInfo().towerIndex].Towers.Remove(hit.collider.gameObject);
+                        installTowerData[(int)towerTmp.GetTowerInfo().towerIndex].Towers.Remove(towerTmp);
                         GameManager.instance.ReturnCost(towerData.buyCost);
 
                     }

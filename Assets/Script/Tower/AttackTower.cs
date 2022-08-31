@@ -33,6 +33,7 @@ public class AttackTower : MonoBehaviour
     {
         StartCoroutine(InitTowerData());
     }
+ 
 
     IEnumerator InitTowerData()
     {
@@ -44,8 +45,9 @@ public class AttackTower : MonoBehaviour
         attackSpeed = tower.GetTowerInfo().attackSpeed;
         multiAttack = tower.GetTowerInfo().multiAttack;
         attackName = tower.GetTowerInfo().attackName;
-
-        //GetComponent<Collider>().transform.localScale = attackRange; //콜라이더 크기 바꿔주기
+        enemyList.Clear();
+        canAttack = true;
+        //GetComponent<Collider>().transform.localScale = attackRange; //콜라이더 크기 바꿔주기 TODO::
 
 
     }
