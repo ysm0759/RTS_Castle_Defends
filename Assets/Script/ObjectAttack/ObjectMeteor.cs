@@ -10,7 +10,9 @@ public class ObjectMeteor : ObjectAttack
         GameObject clone = ObjectPool.GetObject(name);
         clone.SetActive(true);
         clone.transform.position = hit.transform.position + (Vector3.up * 20);
-        clone.GetComponent<PrefabObject>().SetDestinationDamage(hit.transform.position, damage);
+        PrefabObject tmp = clone.GetComponent<PrefabObject>();
+        tmp.SetDestinationDamage(hit.transform.position, damage);
+        tmp.SetName(name);
 
     }
 }

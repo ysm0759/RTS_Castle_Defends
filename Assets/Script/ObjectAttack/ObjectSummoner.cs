@@ -27,6 +27,10 @@ public class ObjectSummoner : ObjectAttack
             EnemySpawnManager.instance.EnemyListAdd(clone.GetComponent<Enemy>());
 
 
+
+
+
+
             Vector3 dir = new Vector3(0, 0, 0);
             float x = Random.Range(-radius, radius);
             float y = Mathf.Sqrt(radius * radius - x * x);

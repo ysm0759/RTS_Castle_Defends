@@ -4486,7 +4486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerData: {fileID: 11400000, guid: 8a620c517416beb4582a90b09681270b, type: 2}
-  towersListNode:
+  installTowerData:
   - Towers: []
   - Towers: []
   - Towers: []

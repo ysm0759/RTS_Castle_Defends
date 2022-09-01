@@ -8,17 +8,12 @@ public class PrefabProjectile : PrefabObject
 
     public TrailRenderer trailRenderer;
 
-    private void Awake()
-    {
-        //trailRenderer = GetComponent<TrailRenderer>();
-    }
+
 
     private void OnEnable()
     {
         trailRenderer.gameObject.SetActive(true);
-        //trailRenderer.enabled = true;
 
-    
     }
 
     private void OnDisable()
@@ -26,9 +21,6 @@ public class PrefabProjectile : PrefabObject
 
         trailRenderer.Clear();
         trailRenderer.gameObject.SetActive(false);
-
-        //trailRenderer.enabled = false;
-
     }
 
     private void Update()
@@ -42,19 +34,19 @@ public class PrefabProjectile : PrefabObject
         }
         else
         {
-            ObjectPool.ReturnObject("arrow", gameObject);
+            ObjectPool.ReturnObject(objectPoolName, gameObject);
             return;
         }
 
 
         if (dir.sqrMagnitude < 3)
         {
-            if(target.enabled == true)
+            if (target.enabled == true)
             {
                 target?.GetComponent<IDamagable>().Hit(damage);
             }
 
-            ObjectPool.ReturnObject("arrow", gameObject);
+            ObjectPool.ReturnObject(objectPoolName, gameObject);
         }
     }
 

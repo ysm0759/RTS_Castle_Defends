@@ -35,7 +35,7 @@ public class PrefabMeteor : PrefabObject
                 hit[i].GetComponent<IDamagable>().Hit(damage);
             }
 
-            ObjectPool.ReturnObject("meteor", gameObject);
+            ObjectPool.ReturnObject(objectPoolName, gameObject);
         }
 
     }

@@ -5,60 +5,75 @@ using UnityEngine;
 public class PrefabParabola : PrefabObject
 {
 
-
-    //private void Update()
-    //{
-
-    //    transform.position = Vector3.Slerp(transform.position, destination, 3+);
-    //}
-
-
     float maxHeight = 30;
     float time = 0f;
     Vector3 startPosition;
-    private void Start()
+    Collider[] hit;
+    private void Awake()
     {
+        hit = new Collider[40];
+    }
+    private void OnEnable()
+    {
+        //startPosition = transform.position;
+        //time = 0;
 
         StartCoroutine(Parabola());
     }
 
+
+    //private void Update()
+    //{
+
+
+    //    // TODO : 포물선 완성 위치 이동
+    //    time += Time.deltaTime;
+    //    //transform.position = Vector3.Slerp(startPosition, destination, Time.deltaTime);
+    //    transform.position = Vector3.Lerp(startPosition, destination, time);//Vector3.MoveTowards(transform.position, destination, tmp * Time.deltaTime);
+    //    Vector3.Lerp(startPosition, destination, time);
+    //    transform.position = new Vector3(transform.position.x, -4 * time * (time - 1) * maxHeight, transform.position.z);
+
+    //    dir = destination - gameObject.transform.position;
+
+
+    //}
     IEnumerator Parabola()
     {
         yield return null;
 
-        dir = target.transform.position - gameObject.transform.position;
-        float tmp = dir.magnitude;
         startPosition = transform.position;
-        //float tmptime = 0f;
-        Destroy(gameObject, 1f);
-
+        time = 0;
+        StartCoroutine(ReturnObject());
         while (true)
         {
-            
+
             // TODO : 포물선 완성 위치 이동
             time += Time.deltaTime;
             //transform.position = Vector3.Slerp(startPosition, destination, Time.deltaTime);
             transform.position = Vector3.Lerp(startPosition, destination, time);//Vector3.MoveTowards(transform.position, destination, tmp * Time.deltaTime);
             Vector3.Lerp(startPosition, destination, time);
             transform.position = new Vector3(transform.position.x, -4 * time * (time - 1) * maxHeight, transform.position.z);
-            //tmptime += Time.deltaTime;
-            //maxHeight -= Time.deltaTime * 40;
 
-            //transform.position += Vector3.up * maxHeight;
-            ////Debug.Log(maxHeight);
-            //if (tmptime <= 0.5f)
-            //{
-
-            //    transform.position += Vector3.up * maxHeight;
-            //}
-            //else if (tmptime >= 0.5f)
-            //{
-            //    transform.position -= Vector3.up * maxHeight;
-            //}
+            dir = destination - gameObject.transform.position;
 
 
             yield return null;
         }
+
+    }
+    IEnumerator ReturnObject()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        int count = Physics.OverlapSphereNonAlloc(transform.position, 10, hit, LayerMask.GetMask("Enemy"));
+        if (count >= 1)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                hit[i].GetComponent<IDamagable>().Hit(damage);
+            }
+        }
+        ObjectPool.ReturnObject(objectPoolName, gameObject);
 
     }
 

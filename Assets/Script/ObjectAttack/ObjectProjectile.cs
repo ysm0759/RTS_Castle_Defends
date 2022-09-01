@@ -8,8 +8,10 @@ public class ObjectProjectile : ObjectAttack
     {
         GameObject clone = ObjectPool.GetObject(name);
         clone.SetActive(true);
-
         clone.transform.position = transform.position;
-        clone.GetComponent<PrefabObject>().SetDestinationDamage(hit.transform.position, damage,hit);
+
+        PrefabObject tmp = clone.GetComponent<PrefabObject>();
+        tmp.SetDestinationDamage(hit.transform.position, damage,hit);
+        tmp.SetName(name);
     }
 }

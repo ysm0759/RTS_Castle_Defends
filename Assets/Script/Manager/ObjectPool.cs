@@ -32,8 +32,8 @@ public class ObjectPool : MonoBehaviour
     public SerializeFieldDictionary[] poolingObjectPrefab;
 
 
-    Dictionary<string, GameObject> prefabDic;
-    Dictionary<string, Queue<GameObject>> poolingObjectQueues;
+    [SerializeField]Dictionary<string, GameObject> prefabDic;
+    [SerializeField]Dictionary<string, Queue<GameObject>> poolingObjectQueues;
 
 
     private void Awake()
@@ -66,7 +66,6 @@ public class ObjectPool : MonoBehaviour
     public static GameObject GetObject(string name)
     {
 
-
         if (Instance.poolingObjectQueues[name]?.Count > 0)
         {
             var obj = Instance.poolingObjectQueues[name].Dequeue();
@@ -85,6 +84,7 @@ public class ObjectPool : MonoBehaviour
 
     public static void ReturnObject(string name ,GameObject obj)
     {
+
         obj.gameObject.SetActive(false);
         obj.transform.SetParent(Instance.transform);
         Instance.poolingObjectQueues[name].Enqueue(obj);
