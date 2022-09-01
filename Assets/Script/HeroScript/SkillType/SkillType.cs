@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum SkillKind
+{
+    IMMEDIATE,
+    RANGE,
+    TARGETING,
+    NONE,
+}
 public abstract class SkillType : MonoBehaviour
 {
 

@@ -17,7 +17,7 @@ public class WarriorSkill1_1 : MonoBehaviour, IWarriorSkill
     [SerializeField] 
     float skillRange; // 내 사거리
     [SerializeField]
-    float damage = 100f;
+    float damage = 10;
 
     [SerializeField]
     float cool;
@@ -44,6 +44,7 @@ public class WarriorSkill1_1 : MonoBehaviour, IWarriorSkill
         immediateSkill = GetComponent<Immediate>();
         isCoolDown = false;
         anim = GetComponent<Animator>();
+        hit = new Collider[40];
     }
     
     // 이벤트를 만들고
@@ -134,11 +135,11 @@ public class WarriorSkill1_1 : MonoBehaviour, IWarriorSkill
 
     private void Attack()
     {
-        hit = Physics.OverlapSphere(transform.position, skillRange, LayerMask.GetMask("Enemy"));
-        foreach (var tmp in hit)
+        int count = Physics.OverlapSphereNonAlloc(transform.position, skillRange, hit, LayerMask.GetMask("Enemy"));
+       
+        for(int i =0;i < count; i++)
         {
-            IDamagable target = tmp.transform.GetComponent<IDamagable>();
-            target?.Hit(damage);
+            hit[i].GetComponent<IDamagable>().Hit(damage);
         }
 
     }

@@ -58,7 +58,7 @@ public class Tower : MonoBehaviour, IDamagable
         isDestroy = false;
         isSetTower = true;
 
-
+        inGameUnitHP?.SetData(towerInfo.maxHp, towerInfo.hp);
         inGameUnitHP?.UpdateHpBar(towerInfo.hp);
 
         if (attackTower != null)

@@ -41,11 +41,14 @@ public class MouseClick : MonoBehaviour
                     KeyManager.instance.skill = Skill.SKILL_USE; 
                 }
 
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerGround))
+                if(KeyManager.instance.skillKind == SkillKind.RANGE)
                 {
-                    skillPoint.SetActive(true);
-                    skillPoint.transform.position = hit.point;
-                    RTSUserUnitControlManager.instance.hero.MoveTo(hit.point);
+                    if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerGround))
+                    {
+                        skillPoint.SetActive(true);
+                        skillPoint.transform.position = hit.point;
+                        RTSUserUnitControlManager.instance.hero.MoveTo(hit.point);
+                    }
                 }
 
                 return;

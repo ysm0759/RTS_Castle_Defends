@@ -49,8 +49,13 @@ public class TowerManager : MonoBehaviour
 
         public void SetClear()
         {
-            Destroy(node.GetComponentInChildren<Tower>().gameObject);
-            isEmpty = true;
+            Tower tmp = node?.GetComponentInChildren<Tower>();
+            if (tmp!=null)
+            {
+                Destroy(tmp.gameObject);
+                isEmpty = true;
+            }
+
         }
     }
 
@@ -124,10 +129,11 @@ public class TowerManager : MonoBehaviour
 
     public void ResetTowers()
     {
-        for(int i =0; i < installTowerData.Length; i++)
+        for(int i =0; i < towerNodes.Length; i++)
         {
             towerNodes[i].SetClear();
             towerNodes[i].node.GetComponent<MeshRenderer>().enabled = true;
+
         }
 
         for(int i =0; i < installTowerData.Length;i++)

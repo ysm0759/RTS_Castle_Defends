@@ -9,8 +9,8 @@ public enum KeyState
     NUM1,
     NUM2,
     NUM3,
-    NUM4,
-    NUM5,
+    //NUM4,
+    //NUM5,
     SKILL_COUNT, 
     TAB,
     Q,
@@ -29,6 +29,7 @@ public enum Skill
     SKILL_SHOW,
     SKILL_SHOW_CANCEL,
     SKILL_USE,
+    SKILL_TRACE,
     SKILL_USING_CANT_MOVE,
     SKILL_USING_CAN_MOVE,
     SKILL_DONE,
@@ -54,12 +55,14 @@ public class KeyManager : MonoBehaviour
 
     public KeyState keyState;
     public Skill skill;
+    public SkillKind skillKind;
 
     private void Awake()
     {
         Instance = this;
         keyState = KeyState.NONE;
         skill = Skill.SKILL_NONE;
+        skillKind = SkillKind.NONE;
     }
 
     private void Update()
@@ -89,22 +92,22 @@ public class KeyManager : MonoBehaviour
             if (RTSUserUnitControlManager.instance.isSelectedHero())
                 skill = Skill.SKILL_SHOW;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            if (Skill.SKILL_USING_CANT_MOVE == skill || Skill.SKILL_USING_CAN_MOVE == skill)
-                return;
-            keyState = KeyState.NUM4;
-            if (RTSUserUnitControlManager.instance.isSelectedHero())
-                skill = Skill.SKILL_SHOW;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            if (Skill.SKILL_USING_CANT_MOVE == skill || Skill.SKILL_USING_CAN_MOVE == skill)
-                return;
-            keyState = KeyState.NUM5;
-            if (RTSUserUnitControlManager.instance.isSelectedHero())
-                skill = Skill.SKILL_SHOW;
-        }
+        //else if (Input.GetKeyDown(KeyCode.Alpha4))
+        //{
+        //    if (Skill.SKILL_USING_CANT_MOVE == skill || Skill.SKILL_USING_CAN_MOVE == skill)
+        //        return;
+        //    keyState = KeyState.NUM4;
+        //    if (RTSUserUnitControlManager.instance.isSelectedHero())
+        //        skill = Skill.SKILL_SHOW;
+        //}
+        //else if (Input.GetKeyDown(KeyCode.Alpha5))
+        //{
+        //    if (Skill.SKILL_USING_CANT_MOVE == skill || Skill.SKILL_USING_CAN_MOVE == skill)
+        //        return;
+        //    keyState = KeyState.NUM5;
+        //    if (RTSUserUnitControlManager.instance.isSelectedHero())
+        //        skill = Skill.SKILL_SHOW;
+        //}
         else if (Input.GetKeyDown(KeyCode.Tab))
         {
             keyState = KeyState.TAB;

@@ -2846,6 +2846,7 @@ GameObject:
   - component: {fileID: 8105033391311037277}
   - component: {fileID: 8863499585369033003}
   - component: {fileID: -7686078681677695323}
+  - component: {fileID: 3386321035489563864}
   m_Layer: 8
   m_Name: Character_Male_King_01 Variant
   m_TagString: Hero
@@ -2950,7 +2951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitInfo: {fileID: 7042130958290885268}
-  _inGameUnitHpBar: {fileID: 0}
+  _inGameUnitHP: {fileID: 0}
 --- !u!114 &5703198482497666396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2977,6 +2978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: 09abc6c7b42834a4e8c81e800026b255, type: 2}
+  _type: 0
   _maxHp: 0
   _hp: 0
   _df: 0
@@ -3000,7 +3002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maker: {fileID: 5606158806665095527}
-  inGameUnitHeroHpBar: {fileID: 0}
+  inGameHeroHpBar: {fileID: 0}
 --- !u!114 &826510537593067530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3032,6 +3034,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillScope: 20
   skillRange: 20
+  damage: 10
   cool: 5
   skillPoint: {fileID: 0}
 --- !u!114 &1782507086791935160
@@ -3046,8 +3049,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87846d4a0730f9248aed37fc4acbd701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillScope: 30
-  skillRange: 30
+  skillScope: 5
+  skillRange: 5
   cool: 10
   skillPoint: {fileID: 0}
 --- !u!114 &8105033391311037277
@@ -3076,6 +3079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 438f40a7a12d3ba42af11f8d54830e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projector: []
 --- !u!114 &-7686078681677695323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3086,6 +3090,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2003740e0a738b74184938252231d701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3386321035489563864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6087604062904522729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd5581b39db3aba49b2c352da06aa20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6087604062904522987

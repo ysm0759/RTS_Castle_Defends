@@ -16,6 +16,9 @@ public class WarriorSkill2_1 : MonoBehaviour, IWarriorSkill
     float skillScope; // 스킬 범위
     [SerializeField]
     float skillRange; // 내 사거리
+    [SerializeField]
+    float damage = 10;
+
 
     [SerializeField]
     float cool;
@@ -34,6 +37,7 @@ public class WarriorSkill2_1 : MonoBehaviour, IWarriorSkill
     float moveDelayTime = 0.5f;
 
     Animator anim;
+    Collider[] hit;
     private void Start()
     {
         rangeSkill = GetComponent<Range>();
@@ -41,6 +45,8 @@ public class WarriorSkill2_1 : MonoBehaviour, IWarriorSkill
         anim = GetComponent<Animator>();
 
         skillPoint = FindObjectOfType < SkillPoint>();
+
+        hit = new Collider[40];
     }
 
     // 이벤트를 만들고
@@ -112,7 +118,15 @@ public class WarriorSkill2_1 : MonoBehaviour, IWarriorSkill
                 skillDone = true;
                 KeyManager.instance.skill = Skill.SKILL_DONE;
 
-                //데미지 주고 
+
+
+                int count = Physics.OverlapSphereNonAlloc(transform.position, skillRange, hit, LayerMask.GetMask("Enemy"));
+
+                for (int i = 0; i < count; i++)
+                {
+                    hit[i].GetComponent<IDamagable>().Hit(damage);
+                }
+
             }
 
 
@@ -125,6 +139,7 @@ public class WarriorSkill2_1 : MonoBehaviour, IWarriorSkill
 
 
 }
+
 
 
 

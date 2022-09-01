@@ -24,7 +24,7 @@ public class WarriorSkill3_1 : MonoBehaviour, IWarriorSkill
 
     bool skillDone;
     float waitTime = 0;  // 시전시간
-    float invokeTime = 2.0f; //공격생성시간
+    float invokeTime = 4f; //공격생성시간
     [SerializeField]
     private SkillPoint skillPoint;
 
@@ -80,15 +80,16 @@ public class WarriorSkill3_1 : MonoBehaviour, IWarriorSkill
         // 쿨타임 관련 처리
         float tmpCool = 0f;
         waitTime = 0;
-
         anim.SetBool("SkillDone", false);
         skillDone = false;
-
         transform.LookAt(hit.transform.position);
+        
         KeyManager.instance.skill = Skill.SKILL_USING_CANT_MOVE;
 
         StartCoroutine(ComboStart(hit));
         transform.LookAt(hit.transform.position);
+
+        Vector3 disatnceTmp = hit.transform.position - transform.position;
         while (tmpCool < cool)
         {
             isCoolDown = true;
@@ -96,6 +97,10 @@ public class WarriorSkill3_1 : MonoBehaviour, IWarriorSkill
             tmpCool += Time.deltaTime;
             waitTime += Time.deltaTime;
 
+            if(disatnceTmp.magnitude > skillRange)
+            {
+                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, hit.transform.position, 10 * Time.deltaTime);
+            }
 
             if (waitTime >= invokeTime && false == skillDone)
             {
@@ -121,6 +126,9 @@ public class WarriorSkill3_1 : MonoBehaviour, IWarriorSkill
         yield return new WaitForSeconds(2f);
         transform.LookAt(hit.transform.position);
         anim.SetTrigger("SkillNum3Combo");
+        yield return new WaitForSeconds(2f);
+
+
     }
 
 }

@@ -13,6 +13,8 @@ public class UserUnitSpawner : MonoBehaviour
 
     [SerializeField]
     private List<Transform> unitPrefabPosition;
+    [SerializeField]
+    private Transform heroPrefabPosition;
 
     [SerializeField]
     private InGameUnitSelectButtons inGameUnitSelectButtons;
@@ -41,7 +43,6 @@ public class UserUnitSpawner : MonoBehaviour
     {
         List<UnitController> unitList = new List<UnitController>();
 
-        Vector3 position = new Vector3(120, 5f, 120);
 
 
 
@@ -66,7 +67,7 @@ public class UserUnitSpawner : MonoBehaviour
             {
 
 
-                GameObject clone = Instantiate(UnitIndex[i].LevelObjects[tmpData[i].level - 1], position, Quaternion.identity);
+                GameObject clone = Instantiate(UnitIndex[i].LevelObjects[tmpData[i].level - 1], Vector3.zero, Quaternion.identity);
                 UserUnit userUnit = clone.GetComponent<UserUnit>();
 
                 clone.GetComponent<UnitInfo>().SetData(tmpData[i]);
@@ -137,7 +138,7 @@ public class UserUnitSpawner : MonoBehaviour
 
 
 
-        GameObject heroClone = Instantiate(heroPrefab[0], position, Quaternion.identity);
+        GameObject heroClone = Instantiate(heroPrefab[0], heroPrefabPosition.position, Quaternion.identity);
 
         UnitController heroUnitController = heroClone.GetComponent<UnitController>();
         unitList.Add(heroUnitController);

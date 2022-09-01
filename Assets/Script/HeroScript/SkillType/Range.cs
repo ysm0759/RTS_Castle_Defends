@@ -36,6 +36,8 @@ public class Range : SkillType
     //마우스에 따른 원 이미지
     public override void ShowSkill(float scope, float range)
     {
+        KeyManager.instance.skillKind = SkillKind.RANGE;
+
         RaycastHit hit;
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground"));
@@ -56,13 +58,14 @@ public class Range : SkillType
     // 스킬 사용
     public override void UseSkill(float range  , IWarriorSkill skill)// 넘겨준 코루틴 받고)
     {
-
         CursorManager.instance.SetCursor(CursorType.DEFAULT);
-        Collider[] hitSkillPoint;
+
         hitSkillPoint = Physics.OverlapCapsule(transform.position - Vector3.up * 100, transform.position - Vector3.down * 100, range, LayerMask.GetMask("Skill"));
         projector[(int)ProjectorType.RANGE].gameObject.transform.position = this.transform.position + (Vector3.up * 200f);
+        Debug.Log("??");
         if (hitSkillPoint.Length >= 1)
         {
+
             RTSUserUnitControlManager.instance.SetSkillPointOnOff(false);
             //스킬 사용
             // 코루틴 시작 가능 ?
