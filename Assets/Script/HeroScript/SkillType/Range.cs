@@ -62,7 +62,7 @@ public class Range : SkillType
 
         hitSkillPoint = Physics.OverlapCapsule(transform.position - Vector3.up * 100, transform.position - Vector3.down * 100, range, LayerMask.GetMask("Skill"));
         projector[(int)ProjectorType.RANGE].gameObject.transform.position = this.transform.position + (Vector3.up * 200f);
-        Debug.Log("??");
+
         if (hitSkillPoint.Length >= 1)
         {
 

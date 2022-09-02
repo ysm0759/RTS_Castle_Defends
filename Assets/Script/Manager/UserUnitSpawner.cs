@@ -67,7 +67,7 @@ public class UserUnitSpawner : MonoBehaviour
             {
 
 
-                GameObject clone = Instantiate(UnitIndex[i].LevelObjects[tmpData[i].level - 1], Vector3.zero, Quaternion.identity);
+                GameObject clone = Instantiate(UnitIndex[i].LevelObjects[tmpData[i].level - 1], tmpVec, Quaternion.identity);
                 UserUnit userUnit = clone.GetComponent<UserUnit>();
 
                 clone.GetComponent<UnitInfo>().SetData(tmpData[i]);

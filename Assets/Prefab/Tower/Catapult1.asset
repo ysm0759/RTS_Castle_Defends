@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Catapult1
   m_EditorClassIdentifier: 
   towerIndex: 2
-  maxHp: 100
-  hp: 100
+  maxHp: 10000
+  hp: 10000
   df: 2
   damage: 5
   attackSpeed: 3
@@ -23,7 +23,7 @@ MonoBehaviour:
   multiAttack: 1
   nextData: {fileID: 11400000, guid: efa2f5a8d10be6a4fa3253de7d9713db, type: 2}
   upgradeCost: 2
-  buyCost: 2
+  buyCost: 5
   level: 1
   prefab: {fileID: 961652435454712152, guid: dbac2e475c6e95141ac1445d51e8a3b7, type: 3}
   modelIndex: 0

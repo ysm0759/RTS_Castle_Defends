@@ -66,48 +66,54 @@ public class UnitController : MonoBehaviour
             }
 
             IsArrive();
-            if (state.IsMoveState(UnitMoveState.STOP) || KeyManager.instance.skill == Skill.SKILL_USING_CANT_MOVE || KeyManager.instance.skill == Skill.SKILL_USING_CAN_MOVE )
+            if(tag == "Hero" && (KeyManager.instance.skill == Skill.SKILL_USING_CANT_MOVE || KeyManager.instance.skill == Skill.SKILL_USING_CAN_MOVE))
             {
                 state.SetAttackState(UnitAttackState.NONE_ATTACK);
+                anim.SetBool("Attack", false);
+            }
+            if (state.IsMoveState(UnitMoveState.STOP))
+            {
+                state.SetAttackState(UnitAttackState.NONE_ATTACK);
+                anim.SetBool("Attack", false);
             }
             else
             {
 
-                if (state.IsTraceState(UnitTraceState.ATTACK_FOCUS))
-                {
+                //if (state.IsTraceState(UnitTraceState.ATTACK_FOCUS))
+                //{
 
-                    if (enemyFocus == null)
-                    {
-                        state.SetTraceState(UnitTraceState.TRACE);
-                    }
-                    else
-                    {
-                        MoveTo(enemyFocus.transform.position);
+                //    if (enemyFocus == null)
+                //    {
+                //        state.SetTraceState(UnitTraceState.TRACE);
+                //    }
+                //    else
+                //    {
+                //        MoveTo(enemyFocus.transform.position);
 
-                        Vector3 dir = enemyFocus.transform.position - gameObject.transform.position;
-                        if (dir.sqrMagnitude < userUnit.unitInfo.attackRange)
-                        {
-                            navMeshAgent.isStopped = true;
-                            state.SetAttackState(UnitAttackState.DO_ATTACK);
-                            anim.SetBool("IsMove", false);
-                            anim.SetFloat("AttackSpeed", animAttackSpeed);
-                            targetPosition = new Vector3(enemyFocus.transform.position.x, transform.position.y, enemyFocus.transform.position.z);
-                            if (canAttack)
-                                StartCoroutine("Attack");
+                //        Vector3 dir = enemyFocus.transform.position - gameObject.transform.position;
+                //        if (dir.sqrMagnitude < userUnit.unitInfo.attackRange)
+                //        {
+                //            navMeshAgent.isStopped = true;
+                //            state.SetAttackState(UnitAttackState.DO_ATTACK);
+                //            anim.SetBool("IsMove", false);
+                //            anim.SetFloat("AttackSpeed", animAttackSpeed);
+                //            targetPosition = new Vector3(enemyFocus.transform.position.x, transform.position.y, enemyFocus.transform.position.z);
+                //            if (canAttack)
+                //                StartCoroutine("Attack");
 
-                        }
-                        else
-                        {
-                            state.SetAttackState(UnitAttackState.NONE_ATTACK);
-                            anim.SetBool("Attack", false);
-                        }
+                //        }
+                //        else
+                //        {
+                //            state.SetAttackState(UnitAttackState.NONE_ATTACK);
+                //            anim.SetBool("Attack", false);
+                //        }
 
 
-                        yield return null;
-                        continue;
-                    }
+                //        yield return null;
+                //        continue;
+                //    }
 
-                }
+                //}
 
                 if (state.IsTraceState(UnitTraceState.TRACE))
                 {
@@ -161,6 +167,7 @@ public class UnitController : MonoBehaviour
         if (state.IsMoveState(UnitMoveState.STOP))
         {
             anim.SetBool("Attack", false);
+            Debug.Log("??");
         }
         else if (state.IsAttackState(UnitAttackState.DO_ATTACK))
         {

@@ -24,10 +24,7 @@ public class WarriorSkill3_1 : MonoBehaviour, IWarriorSkill
 
     bool skillDone;
     float waitTime = 0;  // 시전시간
-    float invokeTime = 4f; //공격생성시간
-    [SerializeField]
-    private SkillPoint skillPoint;
-
+    float invokeTime = 4.5f; //공격생성시간
 
 
     Animator anim;
@@ -37,7 +34,6 @@ public class WarriorSkill3_1 : MonoBehaviour, IWarriorSkill
         isCoolDown = false;
         anim = GetComponent<Animator>();
 
-        skillPoint = FindObjectOfType<SkillPoint>();
     }
 
     // 이벤트를 만들고
@@ -121,12 +117,45 @@ public class WarriorSkill3_1 : MonoBehaviour, IWarriorSkill
 
     IEnumerator ComboStart(Collider hit)
     {
+        Vector3 targetPosition;
+        IDamagable tmp = hit.GetComponent<IDamagable>();
+
         anim.SetTrigger("SkillNum3");
-        transform.LookAt(hit.transform.position);
-        yield return new WaitForSeconds(2f);
-        transform.LookAt(hit.transform.position);
+
+        yield return new WaitForSeconds(0.5f);
+        tmp?.Hit(100);
+        targetPosition = new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z);
+        transform.LookAt(targetPosition);
+
+        yield return new WaitForSeconds(0.7f);
+        tmp?.Hit(100);
+        targetPosition = new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z);
+        transform.LookAt(targetPosition);
+
+        yield return new WaitForSeconds(1f);
+        tmp?.Hit(100);
+        targetPosition = new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z);
+        transform.LookAt(targetPosition);
+
+
         anim.SetTrigger("SkillNum3Combo");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.8f);
+
+        tmp?.Hit(100);
+        targetPosition = new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z);
+        transform.LookAt(targetPosition);
+        yield return new WaitForSeconds(0.5f);
+
+        tmp?.Hit(100);
+        targetPosition = new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z);
+        transform.LookAt(targetPosition);
+
+        yield return new WaitForSeconds(1.3f);
+        tmp?.Hit(100);
+        targetPosition = new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z);
+        transform.LookAt(targetPosition);
+
+
 
 
     }

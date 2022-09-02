@@ -81,6 +81,14 @@ public class Targeting : SkillType
                 ShowCancel();
                 yield break;
             }
+            if(Input.GetKeyDown(KeyCode.Escape) ||
+                Input.GetKeyDown(KeyCode.S) || 
+                (Input.GetKeyDown(KeyCode.H) && RTSUserUnitControlManager.instance.isSelectedHero()) || 
+                Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                ShowCancel();
+                yield break;
+            }
             if (tmp.magnitude < range)
             {
 
