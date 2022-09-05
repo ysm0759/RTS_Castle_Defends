@@ -36,8 +36,13 @@ public class WarriorSkill2_1 : MonoBehaviour, IWarriorSkill
     float moveDelay = 0;
     float moveDelayTime = 0.5f;
 
+
     Animator anim;
     Collider[] hit;
+
+
+    [SerializeField] GameObject effects;
+    
     private void Start()
     {
         rangeSkill = GetComponent<Range>();
@@ -121,7 +126,9 @@ public class WarriorSkill2_1 : MonoBehaviour, IWarriorSkill
 
 
                 int count = Physics.OverlapSphereNonAlloc(transform.position, skillRange, hit, LayerMask.GetMask("Enemy"));
-
+                GameObject effects = ObjectPool.GetObject("warriorRangeEffect");
+                effects.SetActive(true);
+                effects.transform.position = skillPoint.transform.position + (Vector3.up * 3);
                 for (int i = 0; i < count; i++)
                 {
                     hit[i].GetComponent<IDamagable>().Hit(damage);
@@ -138,6 +145,13 @@ public class WarriorSkill2_1 : MonoBehaviour, IWarriorSkill
     }
 
 
+    private void OnDisable()
+    {
+        isCoolDown = false;
+        InGameSkillUI.instance.skillUI[1].fillAmount = 1f;
+        KeyManager.instance.skill = Skill.SKILL_NONE;
+
+    }
 }
 
 

@@ -18,6 +18,11 @@ public abstract class Hero : MonoBehaviour
 
     public InGameUnitHP inGameHeroHpBar;
 
+    public void HeroSkillInit()
+    {
+
+    }
+
     private void Update()
     {
         if (KeyManager.instance.skill == Skill.SKILL_USING_CANT_MOVE || KeyManager.instance.skill == Skill.SKILL_USING_CAN_MOVE)

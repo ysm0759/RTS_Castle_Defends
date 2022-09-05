@@ -49,7 +49,7 @@ public class ObjectPool : MonoBehaviour
             prefabDic.Add(poolingObjectPrefab[i].name, poolingObjectPrefab[i].PrefabObject);
             poolingObjectQueues.Add(poolingObjectPrefab[i].name, new Queue<GameObject>());
         }
-
+        
     }
 
     private GameObject CreateNewObject(string name)
@@ -65,7 +65,6 @@ public class ObjectPool : MonoBehaviour
 
     public static GameObject GetObject(string name)
     {
-
         if (Instance.poolingObjectQueues[name]?.Count > 0)
         {
             var obj = Instance.poolingObjectQueues[name].Dequeue();
@@ -89,5 +88,8 @@ public class ObjectPool : MonoBehaviour
         obj.transform.SetParent(Instance.transform);
         Instance.poolingObjectQueues[name].Enqueue(obj);
     }
+
+
+
 
 }

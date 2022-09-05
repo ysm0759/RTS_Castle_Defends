@@ -17,13 +17,22 @@ public class AttackTower : MonoBehaviour
     string attackName;
 
 
-    
 
-    
-    private void Start()
+    Animator anim;
+    private float animAttackTime;
+    private float animAttackSpeed;
+
+    Vector3 targetPosition;
+
+    private void Awake()
     {
         enemyList = new List<Collider>();
         objectAttack = GetComponent<ObjectAttack>();
+        anim = GetComponentInParent<Animator>();
+    }
+
+    private void Start()
+    {
         canAttack = true;
 
         SetData();
@@ -49,7 +58,7 @@ public class AttackTower : MonoBehaviour
         canAttack = true;
         //GetComponent<Collider>().transform.localScale = attackRange; //콜라이더 크기 바꿔주기 TODO::
 
-
+        SetAnimAttackTime();
     }
 
 
@@ -80,12 +89,22 @@ public class AttackTower : MonoBehaviour
     IEnumerator Attack()
     {
         canAttack = false;
-        while(true)
+        anim.SetFloat("AttackSpeed", animAttackSpeed);
+        while (true)
         {
-            if(enemyList.Count <= 0)
+
+            if (enemyList.Count <= 0)
                break;
-            for(int i = 0; i < multiAttack && i < enemyList.Count; i++)
+            if(anim !=null)
             {
+                targetPosition = new Vector3(enemyList[0].transform.position.x, transform.position.y, enemyList[0].transform.position.z);
+                anim?.SetBool("Attack", true);
+                gameObject.transform.LookAt(targetPosition);
+            }
+
+            for (int i = 0; i < multiAttack && i < enemyList.Count; i++)
+            {
+
                 objectAttack.Attack(enemyList[i], attackDamage, attackName);
             }
             
@@ -94,13 +113,34 @@ public class AttackTower : MonoBehaviour
 
 
         canAttack = true;
-    
+        anim?.SetBool("Attack",true);
+
     }
+
+
 
     public void RemoveInListOfTower(Collider enemy)
     {
         enemyList.Remove(enemy);
     }
 
+    public void SetAnimAttackTime()
+    {
+        RuntimeAnimatorController ac = anim.runtimeAnimatorController;
+        for (int i = 0; i < ac.animationClips.Length; i++)
+        {
+            if (ac.animationClips[i].name.ToUpper().Contains("ATTACK"))
+            {
+                animAttackTime = ac.animationClips[i].length;
+                break;
+            }
+        }
+        SetAnimAttackSpeed();
 
+    }
+    private void SetAnimAttackSpeed()
+    {
+        animAttackSpeed = animAttackTime / attackSpeed;
+
+    }
 }

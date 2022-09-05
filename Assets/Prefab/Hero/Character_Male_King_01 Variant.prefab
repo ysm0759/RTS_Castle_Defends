@@ -3052,7 +3052,6 @@ MonoBehaviour:
   skillScope: 5
   skillRange: 5
   cool: 10
-  skillPoint: {fileID: 0}
 --- !u!114 &8105033391311037277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4531,6 +4530,11 @@ PrefabInstance:
     - target: {fileID: 19994078, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114417952626073932, guid: d18380a6098943a4a879b5a0f3826c9d,
+        type: 3}
+      propertyPath: y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}

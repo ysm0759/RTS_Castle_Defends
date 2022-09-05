@@ -17,7 +17,7 @@ public class WarriorSkill1_1 : MonoBehaviour, IWarriorSkill
     [SerializeField] 
     float skillRange; // 내 사거리
     [SerializeField]
-    float damage = 10;
+    float damage = 100;
 
     [SerializeField]
     float cool;
@@ -37,6 +37,7 @@ public class WarriorSkill1_1 : MonoBehaviour, IWarriorSkill
 
     [SerializeField]
     private GameObject effect;
+
 
     private void Start()
     {
@@ -109,7 +110,6 @@ public class WarriorSkill1_1 : MonoBehaviour, IWarriorSkill
             attackDelay += Time.deltaTime;
             if(attackDelay >= attackDelayTime && false == skillDone)
             {
-                //계속 공격
                 Attack();
                 attackDelay = 0.0f;
             }
@@ -121,7 +121,6 @@ public class WarriorSkill1_1 : MonoBehaviour, IWarriorSkill
                 skillDone = true;
                 KeyManager.instance.skill = Skill.SKILL_DONE;
                 effect.SetActive(false);
-
 
             }
 
@@ -142,6 +141,14 @@ public class WarriorSkill1_1 : MonoBehaviour, IWarriorSkill
             hit[i].GetComponent<IDamagable>().Hit(damage);
         }
 
+    }
+
+
+    private void OnDisable()
+    {
+        isCoolDown = false;
+        InGameSkillUI.instance.skillUI[0].fillAmount = 1f;
+        KeyManager.instance.skill = Skill.SKILL_NONE;
     }
 }
 

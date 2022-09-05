@@ -66,11 +66,15 @@ public class UnitController : MonoBehaviour
             }
 
             IsArrive();
+            
             if(tag == "Hero" && (KeyManager.instance.skill == Skill.SKILL_USING_CANT_MOVE || KeyManager.instance.skill == Skill.SKILL_USING_CAN_MOVE))
             {
                 state.SetAttackState(UnitAttackState.NONE_ATTACK);
                 anim.SetBool("Attack", false);
+                yield return new WaitForSeconds(0.2f);
+                continue;
             }
+
             if (state.IsMoveState(UnitMoveState.STOP))
             {
                 state.SetAttackState(UnitAttackState.NONE_ATTACK);

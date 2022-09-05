@@ -160,4 +160,14 @@ public class WarriorSkill3_1 : MonoBehaviour, IWarriorSkill
 
     }
 
+
+
+
+    private void OnDisable()
+    {
+        isCoolDown = false;
+        InGameSkillUI.instance.skillUI[2].fillAmount = 1f;
+        KeyManager.instance.skill = Skill.SKILL_NONE;
+
+    }
 }
