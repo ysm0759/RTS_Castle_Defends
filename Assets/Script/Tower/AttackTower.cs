@@ -18,23 +18,25 @@ public class AttackTower : MonoBehaviour
 
 
 
-    Animator anim;
+    [SerializeField]Animator[] anim;
     private float animAttackTime;
     private float animAttackSpeed;
 
     Vector3 targetPosition;
+    int towerIndex;
+
+    [SerializeField]GameObject parentObject;
 
     private void Awake()
     {
         enemyList = new List<Collider>();
         objectAttack = GetComponent<ObjectAttack>();
-        anim = GetComponentInParent<Animator>();
+        
     }
 
     private void Start()
     {
         canAttack = true;
-
         SetData();
     }
     
@@ -54,11 +56,16 @@ public class AttackTower : MonoBehaviour
         attackSpeed = tower.GetTowerInfo().attackSpeed;
         multiAttack = tower.GetTowerInfo().multiAttack;
         attackName = tower.GetTowerInfo().attackName;
+        towerIndex = (int)tower.GetTowerInfo().modelIndex;
         enemyList.Clear();
         canAttack = true;
         //GetComponent<Collider>().transform.localScale = attackRange; //콜라이더 크기 바꿔주기 TODO::
+        if(anim.Length  != 0)
+        {
+            Debug.Log(anim.Length);
+            SetAnimAttackTime();
 
-        SetAnimAttackTime();
+        }
     }
 
 
@@ -88,8 +95,12 @@ public class AttackTower : MonoBehaviour
 
     IEnumerator Attack()
     {
+        
         canAttack = false;
-        anim.SetFloat("AttackSpeed", animAttackSpeed);
+        if(anim.Length != 0)
+        {
+            anim[towerIndex]?.SetFloat("AttackSpeed", animAttackSpeed);
+        }
         while (true)
         {
 
@@ -97,9 +108,9 @@ public class AttackTower : MonoBehaviour
                break;
             if(anim !=null)
             {
-                targetPosition = new Vector3(enemyList[0].transform.position.x, transform.position.y, enemyList[0].transform.position.z);
-                anim?.SetBool("Attack", true);
-                gameObject.transform.LookAt(targetPosition);
+                targetPosition = new Vector3(enemyList[0].transform.position.x, parentObject.transform.position.y, enemyList[0].transform.position.z);
+                anim[towerIndex]?.SetBool("Attack", true);
+                parentObject.transform.LookAt(targetPosition);
             }
 
             for (int i = 0; i < multiAttack && i < enemyList.Count; i++)
@@ -113,7 +124,10 @@ public class AttackTower : MonoBehaviour
 
 
         canAttack = true;
-        anim?.SetBool("Attack",true);
+        if (anim.Length != 0)
+        {
+            anim[towerIndex]?.SetFloat("AttackSpeed", animAttackSpeed);
+        }
 
     }
 
@@ -126,7 +140,7 @@ public class AttackTower : MonoBehaviour
 
     public void SetAnimAttackTime()
     {
-        RuntimeAnimatorController ac = anim.runtimeAnimatorController;
+        RuntimeAnimatorController ac = anim[towerIndex].runtimeAnimatorController;
         for (int i = 0; i < ac.animationClips.Length; i++)
         {
             if (ac.animationClips[i].name.ToUpper().Contains("ATTACK"))
