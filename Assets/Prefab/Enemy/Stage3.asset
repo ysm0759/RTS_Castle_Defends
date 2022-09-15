@@ -33,4 +33,5 @@ MonoBehaviour:
     EA: 7
     unitDataScriptableObject: {fileID: 11400000, guid: e3c48d42f5ec5044ca15ba23600bfbb3,
       type: 2}
+  rewordMoney: 10
   NextStage: {fileID: 11400000, guid: a27f250ad0397c64c94cb8c053e82158, type: 2}

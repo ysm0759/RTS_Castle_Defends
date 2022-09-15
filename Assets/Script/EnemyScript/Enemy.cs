@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour, IDamagable
     {
         unitInfo.hp -= (damage - unitInfo.df) > 1 ? (damage - unitInfo.df) : 1;
 
-        if (unitInfo.isAlive == false)
+        if (unitInfo.isAlive == false && col.enabled == true)
         {
             OnDead();
         }

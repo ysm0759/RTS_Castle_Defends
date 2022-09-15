@@ -29,7 +29,6 @@ public class Warrior : Hero
 
     public override void CancelSkill(int num)
     {
-
          aaa[num].CanselSkill();
     }
 

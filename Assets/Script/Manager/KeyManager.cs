@@ -67,7 +67,10 @@ public class KeyManager : MonoBehaviour
 
     private void Update()
     {
-
+        if(GameManager.instance.gameState != GameState.GAME_START)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (Skill.SKILL_USING_CANT_MOVE == skill || Skill.SKILL_USING_CAN_MOVE == skill)
@@ -149,14 +152,14 @@ public class KeyManager : MonoBehaviour
             //    skill = Skill.SKILL_SHOW_CANCEL;
         }
 
-        else if (Input.GetKeyDown(KeyCode.Q))
-        {
-            //화면 전환은 Camera에 있음
-        }
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            //화면 전환은 Camera에 있음
-        }
+        //else if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    //화면 전환은 Camera에 있음
+        //}
+        //else if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    //화면 전환은 Camera에 있음
+        //}
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             RTSUserUnitControlManager.instance.SelectHero();

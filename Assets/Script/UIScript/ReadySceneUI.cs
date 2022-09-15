@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ReadySceneUI : MonoBehaviour
 {
@@ -8,7 +9,12 @@ public class ReadySceneUI : MonoBehaviour
     [SerializeField] GameObject enemyPanel;
     [SerializeField] ReadyEnemyInfo readyEnemyInfo;
     [SerializeField] ReadyEnemyPortrait readyEnemyPortrait;
+    [SerializeField] Text stageLevel;
 
+    public void OnEnable()
+    {
+        stageLevel.text = EnemySpawnManager.instance.stageData.stageLevel;
+    }
     public void OnClickGameStart()
     {
         GameManager.instance.GameStart();

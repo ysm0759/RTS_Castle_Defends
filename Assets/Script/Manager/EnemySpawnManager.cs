@@ -59,6 +59,7 @@ public class EnemySpawnManager : MonoBehaviour
             if (_enemyEA <= 0)
             {
                 Debug.Log("게임 종료");
+                GameManager.instance.IncreasedCost(stageData.rewordMoney);
                 stageData = stageData.NextStage;
                 if(stageData != null)
                 {

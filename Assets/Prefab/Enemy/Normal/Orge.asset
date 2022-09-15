@@ -16,10 +16,10 @@ MonoBehaviour:
   maxHp: 200
   hp: 200
   df: 3
-  moveSpeed: 10
+  moveSpeed: 8
   attackSpeed: 2
-  damage: 80
-  attackRange: 2
+  damage: 10
+  attackRange: 3
   upgradeCost: 0
   population: 0
   level: 0

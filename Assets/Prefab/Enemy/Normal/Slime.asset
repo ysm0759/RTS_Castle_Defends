@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Slime
   m_EditorClassIdentifier: 
   unitType: 6
-  maxHp: 1000
-  hp: 1000
+  maxHp: 70
+  hp: 70
   df: 1
   moveSpeed: 10
   attackSpeed: 3
   damage: 1
-  attackRange: 2
+  attackRange: 3
   upgradeCost: 0
   population: 0
   level: 0

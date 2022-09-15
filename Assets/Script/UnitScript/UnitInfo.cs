@@ -5,8 +5,6 @@ using UnityEngine;
 public class UnitInfo : MonoBehaviour
 {
 
-    public static float traceRange = 10; // 추적 거리
-
 
     bool _isAlive = true;
 

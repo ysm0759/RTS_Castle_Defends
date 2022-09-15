@@ -62,7 +62,6 @@ public class AttackTower : MonoBehaviour
         //GetComponent<Collider>().transform.localScale = attackRange; //콜라이더 크기 바꿔주기 TODO::
         if(anim.Length  != 0)
         {
-            Debug.Log(anim.Length);
             SetAnimAttackTime();
 
         }
@@ -106,7 +105,7 @@ public class AttackTower : MonoBehaviour
 
             if (enemyList.Count <= 0)
                break;
-            if(anim !=null)
+            if(anim.Length != 0)
             {
                 targetPosition = new Vector3(enemyList[0].transform.position.x, parentObject.transform.position.y, enemyList[0].transform.position.z);
                 anim[towerIndex]?.SetBool("Attack", true);

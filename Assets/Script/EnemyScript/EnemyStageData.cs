@@ -24,7 +24,8 @@ public class EnemyStageData : ScriptableObject
     }
     public SerializeFieldDictionary[] EnemySpawnData;
 
-
+    public int rewordMoney;
+    public string stageLevel;
     public EnemyStageData NextStage;
 
 
