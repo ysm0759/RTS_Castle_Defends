@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitInfo: {fileID: 996953596124978149}
+  _inGameUnitHP: {fileID: 0}
 --- !u!114 &996953596124978147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,7 +136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbc9fffab1bd07f43b65e13e51dd397c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destination: {x: 0, y: 0, z: 0}
 --- !u!114 &996953596124978149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e254313afb46cc4498dbb52226ce7a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: fef2f0ed1565cbc47afdadcd8f7bbe06, type: 2}
+  _data: {fileID: 0}
+  _type: 0
   _maxHp: 0
   _hp: 0
   _df: 0
@@ -218,7 +219,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 14
   m_CollisionDetection: 0
 --- !u!1001 &4509398027361321504
 PrefabInstance:

@@ -39,4 +39,5 @@ MonoBehaviour:
     unitDataScriptableObject: {fileID: 11400000, guid: 1e755739ca2da6945911b822ed93bb6e,
       type: 2}
   rewordMoney: 10
+  stageLevel: 1-4
   NextStage: {fileID: 0}
