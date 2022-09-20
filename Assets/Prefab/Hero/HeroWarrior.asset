@@ -24,7 +24,7 @@ MonoBehaviour:
   population: 0
   level: 0
   attackName: 
-  multiAttack: 3
+  multiAttack: 1
   nextStat: {fileID: 0}
   explain: 
   sprite: {fileID: 0}

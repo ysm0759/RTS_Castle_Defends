@@ -6,9 +6,11 @@ public class PrefabParabola : PrefabObject
 {
 
     [SerializeField]float maxHeight = 60;
-    [SerializeField] float x = 0f;
     [SerializeField] float destroyTime = 1.0f;
     Vector3 startPosition;
+
+    [SerializeField] float time;
+
     Collider[] hit;
     private void Awake()
     {
@@ -23,35 +25,17 @@ public class PrefabParabola : PrefabObject
     }
 
 
-    //private void Update()
-    //{
-
-
-    //    // TODO : 포물선 완성 위치 이동
-    //    time += Time.deltaTime;
-    //    //transform.position = Vector3.Slerp(startPosition, destination, Time.deltaTime);
-    //    transform.position = Vector3.Lerp(startPosition, destination, time);//Vector3.MoveTowards(transform.position, destination, tmp * Time.deltaTime);
-    //    Vector3.Lerp(startPosition, destination, time);
-    //    transform.position = new Vector3(transform.position.x, -4 * time * (time - 1) * maxHeight, transform.position.z);
-
-    //    dir = destination - gameObject.transform.position;
-
-
-    //}
     IEnumerator Parabola()
     {
         yield return null;
 
         startPosition = transform.position;
-        x = 0;
-                                                                                            // ax^2 +bx + c; X는 시간의 경과
-        float a = ((6 * destroyTime) - (9 * maxHeight)) / (destroyTime * destroyTime * 2); // 이차함수 a 값
-        float b = ((9 * maxHeight) - (8 * startPosition.y)) / (destroyTime * 2);           // 이차함수 b값
-        float c = startPosition.y;                                                         // 이차함수 c값
+        time = 0f;
+
         StartCoroutine(ReturnObject());
         while (true)
         {
-            /*
+
             // TODO : 포물선 완성 위치 이동
             time += Time.deltaTime;
             //transform.position = Vector3.Slerp(startPosition, destination, Time.deltaTime);
@@ -59,14 +43,7 @@ public class PrefabParabola : PrefabObject
             Vector3.Lerp(startPosition, destination, time);
             transform.position = new Vector3(transform.position.x, -4 * time * (time - 1) * maxHeight, transform.position.z);
 
-            dir = destination - gameObject.transform.position;
-            */
 
-            x += Time.deltaTime;
-            transform.position = Vector3.Lerp(startPosition, destination, x);
-            Vector3.Lerp(startPosition, destination, x);
-            transform.position = new Vector3(transform.position.x, ((a * x * x ) +( b * x )+ c )* Time.deltaTime, transform.position.z);
-            Debug.Log("Time" + x+ " : " + ((a * x * x) + (b * x) + c));
             yield return null;
         }
 
