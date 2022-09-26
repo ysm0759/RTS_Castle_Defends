@@ -152,10 +152,16 @@ public class UnitStoreUI : MonoBehaviour
             {
                 if(tmp == data[unitType])
                 {
+                    data[unitType] = null;
+                    lockImage[unitType].SetActive(true);
+                    isBuy[unitType] = false;
+                    OnClickUnit(defaultUnit[unitType]);
                     return;
                 }
+
                 GameManager.instance.ReturnCost(tmp.upgradeCost);
                 tmp = tmp.nextStat;
+                Debug.Log("??");
             }
         }
     }

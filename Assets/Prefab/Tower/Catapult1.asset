@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Catapult1
   m_EditorClassIdentifier: 
   towerIndex: 2
-  maxHp: 10000
-  hp: 10000
+  maxHp: 120
+  hp: 120
   df: 2
   damage: 5
   attackSpeed: 3
@@ -27,5 +27,6 @@ MonoBehaviour:
   level: 1
   prefab: {fileID: 961652435454712152, guid: dbac2e475c6e95141ac1445d51e8a3b7, type: 3}
   modelIndex: 0
-  explain: "\uD558\uC774"
+  explain: "\uC801\uC758 \uC704\uCE58\uB85C \uB3CC\uB369\uC774\uB97C \uB358\uC800\n\uBC94\uC704
+    \uD53C\uD574\uB97C \uC785\uD799\uB2C8\uB2E4."
   sprite: {fileID: 21300000, guid: 4ac828d614b2e724e8c4835be43b9f9d, type: 3}

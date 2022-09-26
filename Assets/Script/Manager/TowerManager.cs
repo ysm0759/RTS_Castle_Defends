@@ -81,7 +81,22 @@ public class TowerManager : MonoBehaviour
     }
 
 
+    public void OffNode()
+    {
+        for (int i = 0; i < towerNodes.Length; i++)
+        {
+            towerNodes[i].node.SetActive(false);
+        }
 
+    }
+
+    public void OnNode()
+    {
+        for (int i = 0; i < towerNodes.Length; i++)
+        {
+            towerNodes[i].node.SetActive(true);
+        }
+    }
 
     public void InitTowers()
     {
@@ -105,18 +120,6 @@ public class TowerManager : MonoBehaviour
     }
 
 
-    public void StartGame()
-    {
-        if (GameManager.instance.gameState == GameState.GAME_START ||
-           GameManager.instance.gameState == GameState.MAIN)
-        {
-
-        }
-        else
-        {
-
-        }
-    }
 
     public void DisplayNode(bool isVisible)
     {

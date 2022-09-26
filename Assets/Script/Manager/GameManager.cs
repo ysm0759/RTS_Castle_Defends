@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
         mainCamera.SetActive(false);
         readyCamera.SetActive(true);
         gameState = GameState.MAIN;
-
+        TowerManager.instance.OffNode();
     }
     
     public void ReadyScene()
@@ -117,6 +117,7 @@ public class GameManager : MonoBehaviour
         mainCamera.SetActive(true);
         readyCamera.SetActive(false);
         gameState = GameState.READY;
+        TowerManager.instance.OnNode();
     }
 
 

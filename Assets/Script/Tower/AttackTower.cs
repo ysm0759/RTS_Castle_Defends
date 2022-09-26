@@ -125,6 +125,8 @@ public class AttackTower : MonoBehaviour
         canAttack = true;
         if (anim.Length != 0)
         {
+            anim[towerIndex]?.SetBool("Attack", false);
+
             anim[towerIndex]?.SetFloat("AttackSpeed", animAttackSpeed);
         }
 

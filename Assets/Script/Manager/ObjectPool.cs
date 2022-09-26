@@ -3,18 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum OBJECT_NAME
-{
-    User_Warrior,
-    User_Archer,
-    User_Megician,
-    
-    User_Projectile,
-    User_Meteor,
-
-
-    Enemy_Melee,
-}
 
 public class ObjectPool : MonoBehaviour
 {

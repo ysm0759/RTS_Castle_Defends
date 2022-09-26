@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ArcherTower1
   m_EditorClassIdentifier: 
   towerIndex: 1
-  maxHp: 10000
-  hp: 100000
+  maxHp: 100
+  hp: 100
   df: 2
   damage: 3
   attackSpeed: 1
