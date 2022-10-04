@@ -30,7 +30,7 @@ public class TowerManager : MonoBehaviour
     [SerializeField] GameObject explain;
     [SerializeField] GameObject onOffObject;
     TowerNode[] towerNodes; //타워 기본 노드
-
+    [SerializeField]TowerCastle castle;
     private Camera mainCamera;
     static public TowerManager instance;
     TowerStatu towerStatu = TowerStatu.NONE;
@@ -108,6 +108,8 @@ public class TowerManager : MonoBehaviour
                 tmp.InitTower();
             }
         }
+        castle.InitTower();
+
     }
 
 

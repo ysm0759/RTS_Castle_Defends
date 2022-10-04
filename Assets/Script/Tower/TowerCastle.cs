@@ -32,6 +32,8 @@ public class TowerCastle : MonoBehaviour , IDamagable
         isBurn = false;
         isDestroy = false;
         inGameUnitHP.SetData(towerInfo.maxHp, towerInfo.hp);
+
+
     }
 
 

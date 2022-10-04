@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-public class WarriorSkill1_1 : MonoBehaviour, IWarriorSkill
+public class WheelWind : MonoBehaviour, IWarriorSkill
 {
 
     // 각자으 ㅣ쿨타임 이런거는 여기 에 있는게 맞는거같아 

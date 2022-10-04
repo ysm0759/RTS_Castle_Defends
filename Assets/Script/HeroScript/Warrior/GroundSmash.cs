@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WarriorSkill2_1 : MonoBehaviour, IWarriorSkill
+public class GroundSmash : MonoBehaviour, IWarriorSkill
 {
 
 

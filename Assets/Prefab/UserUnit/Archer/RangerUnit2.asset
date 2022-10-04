@@ -29,4 +29,4 @@ MonoBehaviour:
   explain: "\uC544\uCC98\n\uC804\uC0AC\uB97C \uACE0\uAE30\uBC29\uD328\uB85C \uC138\uC6CC
     \uD6C4\uBC29\uC5D0\uC11C \uC9C0\uC6D0\uD574\uC90D\uB2C8\uB2E4. "
   sprite: {fileID: 21300000, guid: 85bc5a2306bcf3f4fb7d53cd3d640a13, type: 3}
-  buttonSprite: {fileID: 0}
+  buttonSprite: {fileID: 21300000, guid: 85bc5a2306bcf3f4fb7d53cd3d640a13, type: 3}

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WarriorSkill3_1 : MonoBehaviour, IWarriorSkill
+public class SwordDance : MonoBehaviour, IWarriorSkill
 {
 
 

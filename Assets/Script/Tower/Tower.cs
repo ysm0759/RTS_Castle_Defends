@@ -60,7 +60,10 @@ public class Tower : MonoBehaviour, IDamagable
 
         inGameUnitHP?.SetData(towerInfo.maxHp, towerInfo.hp);
         inGameUnitHP?.UpdateHpBar(towerInfo.hp);
-
+        if(burning?.activeSelf ==true)
+        {
+            ObjectPool.ReturnObject("burning", burning);
+        }
         if (attackTower != null)
         {
             attackTower.SetData();
