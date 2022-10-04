@@ -123,17 +123,17 @@ public class SwordDance : MonoBehaviour, IWarriorSkill
         anim.SetTrigger("SkillNum3");
 
         yield return new WaitForSeconds(0.5f);
-        tmp?.Hit(100);
+        tmp?.Hit(5);
         targetPosition = new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z);
         transform.LookAt(targetPosition);
 
         yield return new WaitForSeconds(0.7f);
-        tmp?.Hit(100);
+        tmp?.Hit(6);
         targetPosition = new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z);
         transform.LookAt(targetPosition);
 
         yield return new WaitForSeconds(1f);
-        tmp?.Hit(100);
+        tmp?.Hit(7);
         targetPosition = new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z);
         transform.LookAt(targetPosition);
 
@@ -141,17 +141,17 @@ public class SwordDance : MonoBehaviour, IWarriorSkill
         anim.SetTrigger("SkillNum3Combo");
         yield return new WaitForSeconds(0.8f);
 
-        tmp?.Hit(100);
+        tmp?.Hit(8);
         targetPosition = new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z);
         transform.LookAt(targetPosition);
         yield return new WaitForSeconds(0.5f);
 
-        tmp?.Hit(100);
+        tmp?.Hit(9);
         targetPosition = new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z);
         transform.LookAt(targetPosition);
 
         yield return new WaitForSeconds(1.3f);
-        tmp?.Hit(100);
+        tmp?.Hit(10);
         targetPosition = new Vector3(hit.transform.position.x, transform.position.y, hit.transform.position.z);
         transform.LookAt(targetPosition);
 

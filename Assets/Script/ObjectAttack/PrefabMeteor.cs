@@ -12,12 +12,10 @@ public class PrefabMeteor : PrefabObject
         if(gameObject.layer == LayerMask.GetMask("Enemy"))
         {
             layer = LayerMask.GetMask("User");
-            Debug.Log("공격대상 아군");
         }
         else
         {
             layer = LayerMask.GetMask("Enemy");
-            Debug.Log("적군");
         }
     }
 

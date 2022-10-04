@@ -47,7 +47,7 @@ public class UnitDataScriptableObject : ScriptableObject
 
     public UnitDataScriptableObject nextStat;
 
-    public static float traceRange = 20; // 추적 거리
+    public static float traceRange = 30; // 추적 거리
 
     [TextArea]
     public string explain; // 유닛 설명

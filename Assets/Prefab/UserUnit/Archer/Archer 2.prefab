@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 552802762737997232}
   - component: {fileID: 552802762737997238}
   - component: {fileID: 6655435032045992295}
-  - component: {fileID: -3553044458567482098}
   - component: {fileID: 3709907426595242314}
+  - component: {fileID: -3553044458567482098}
   m_Layer: 8
   m_Name: Archer 2
   m_TagString: Player
@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitInfo: {fileID: 6655435032045992295}
+  _inGameUnitHP: {fileID: 0}
 --- !u!114 &552802762737997238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,7 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e254313afb46cc4498dbb52226ce7a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 013b486691485a64ab2e2332bbedacd4, type: 2}
+  _data: {fileID: 0}
+  _type: 0
   _maxHp: 0
   _hp: 0
   _df: 0
@@ -173,6 +175,18 @@ MonoBehaviour:
   _upgradeCost: 0
   _attackName: 
   _multiAttack: 0
+--- !u!114 &3709907426595242314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552802762737997199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25b8176c1fb4ea40a9bfa84c8f13d8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &-3553044458567482098
 Animator:
   serializedVersion: 3
@@ -192,18 +206,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3709907426595242314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 552802762737997199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f25b8176c1fb4ea40a9bfa84c8f13d8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &552802764044945778
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,6 +345,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 494462, guid: d7a9cda9dc257034dbf5be0c17b673be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9563318, guid: d7a9cda9dc257034dbf5be0c17b673be, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

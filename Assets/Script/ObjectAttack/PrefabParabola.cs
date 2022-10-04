@@ -52,11 +52,14 @@ public class PrefabParabola : PrefabObject
     {
         yield return new WaitForSeconds(destroyTime);
 
-        int count = Physics.OverlapSphereNonAlloc(transform.position, 10, hit, LayerMask.GetMask("Enemy"));
+        int count = Physics.OverlapCapsuleNonAlloc(transform.position + Vector3.up * 100, transform.position + Vector3.down * 100, 20, hit, LayerMask.GetMask("Enemy"));
+
+       // int count = Physics.OverlapSphereNonAlloc(transform.position + Vector3.up * 5 , 20, hit, LayerMask.GetMask("Enemy"));
         if (count >= 1)
         {
             for (int i = 0; i < count; i++)
             {
+                Debug.Log(count);
                 hit[i].GetComponent<IDamagable>().Hit(damage);
             }
         }
