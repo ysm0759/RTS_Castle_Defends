@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundSmash : MonoBehaviour, IWarriorSkill
+public class GroundSmash : MonoBehaviour, ISkill
 {
 
 
@@ -42,15 +42,17 @@ public class GroundSmash : MonoBehaviour, IWarriorSkill
 
 
     [SerializeField] GameObject effects;
-    
-    private void Start()
+
+    private void Awake()
     {
         rangeSkill = GetComponent<Range>();
-        isCoolDown = false;
         anim = GetComponent<Animator>();
+    }
+    private void Start()
+    {
 
+        isCoolDown = false;
         skillPoint = FindObjectOfType < SkillPoint>();
-
         hit = new Collider[40];
     }
 
@@ -145,7 +147,9 @@ public class GroundSmash : MonoBehaviour, IWarriorSkill
     }
 
 
-    private void OnDisable()
+
+
+    private void OnEnable()
     {
         isCoolDown = false;
         InGameSkillUI.instance.skillUI[1].fillAmount = 1f;

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Warrior : Hero
 {
-    IWarriorSkill[] skills;
+    ISkill[] skills;
 
 
     private void Start()
     {
-        skills = GetComponents<IWarriorSkill>();
+        skills = GetComponents<ISkill>();
 
     }
 

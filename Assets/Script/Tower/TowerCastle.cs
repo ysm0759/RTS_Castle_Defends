@@ -37,7 +37,13 @@ public class TowerCastle : MonoBehaviour , IDamagable
     }
 
 
-
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            Hit(100000f);
+        }
+    }
     public void Hit(float damage) 
     {
         towerInfo.hp -= (damage - towerInfo.df) > 1 ? (damage - towerInfo.df) : 1;

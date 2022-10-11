@@ -73,7 +73,7 @@ public class UserUnitSpawner : MonoBehaviour
                 clone.GetComponent<UnitInfo>().SetData(tmpData[i]);
                 UnitController unit = clone.GetComponent<UnitController>();
                 unitList.Add(unit);
-                inGameUnitSelectButtons.AddGroup(unit);
+                inGameUnitSelectButtons.AddGroup(unit); // 생성된 유닛 그룹 넣어주기 유닛 버튼에 연동되게 넣어주기 
 
                 userUnit.unityAction += RTSUserUnitControlManager.instance.OnDead;
                 userUnit.unityAction += inGameUnitSelectButtons.inGameUnitSelectButtonElement.RemoveObject;

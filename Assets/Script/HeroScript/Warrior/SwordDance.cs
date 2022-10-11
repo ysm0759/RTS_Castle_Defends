@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordDance : MonoBehaviour, IWarriorSkill
+public class SwordDance : MonoBehaviour, ISkill
 {
 
 
@@ -24,7 +24,7 @@ public class SwordDance : MonoBehaviour, IWarriorSkill
 
     bool skillDone;
     float waitTime = 0;  // 시전시간
-    float invokeTime = 4.5f; //공격생성시간
+    float invokeTime = 5f; //공격생성시간
 
 
     Animator anim;
@@ -40,10 +40,6 @@ public class SwordDance : MonoBehaviour, IWarriorSkill
     //
     public bool IsCoolDown()
     {
-
-
-        //여기서 관리 해야함
-        //return isCoolDown;
         return isCoolDown;
     }
 

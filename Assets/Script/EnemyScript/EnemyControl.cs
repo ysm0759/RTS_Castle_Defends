@@ -49,7 +49,7 @@ public class EnemyControl : MonoBehaviour
         yield return null;
         navMeshAgent.enabled = true;
         navMeshAgent.speed = enemyUnit.unitInfo.moveSpeed;
-        MoveTypeOnlyDestination();
+        MoveTypeNodeDestination();
         SetDestinationRandom();
         state = new UnitState();
         hit = new Collider[enemyUnit.unitInfo.multiAttack];
@@ -67,7 +67,7 @@ public class EnemyControl : MonoBehaviour
         return nodeIndex;
     }
 
-    public void MoveTypeOnlyDestination()
+    public void MoveTypeNodeDestination()
     {
         destinationCollider = dest.GetComponent<Collider>();
 
@@ -104,7 +104,7 @@ public class EnemyControl : MonoBehaviour
     {
         navMeshAgent.destination = destination;
         navMeshAgent.isStopped = true;
-        yield return new WaitForSeconds(2.0f);
+        yield return null;//new WaitForSeconds(2.0f);
         navMeshAgent.isStopped = false;
         StartCoroutine(SetDestinationCastle());
 
@@ -140,6 +140,8 @@ public class EnemyControl : MonoBehaviour
                     state.SetTraceState(UnitTraceState.ATTACK_TRACE);
                 }
             }
+
+
             if (state.IsTraceState(UnitTraceState.ATTACK_TRACE))
             {
                 hitCount = Physics.OverlapSphereNonAlloc(transform.position, enemyUnit.unitInfo.attackRange, hit, LayerMask.GetMask("User"));
@@ -219,12 +221,12 @@ public class EnemyControl : MonoBehaviour
                 MoveTo(destination);
             }
         }
+
         if (navMeshAgent.velocity.sqrMagnitude <= 0.2f * 0.2f && navMeshAgent.remainingDistance <= 0.5f)
         {
 
             anim.SetBool("IsMove", false);
             state.SetTraceState(UnitTraceState.TRACE);
-
         }
     }
 
@@ -253,11 +255,12 @@ public class EnemyControl : MonoBehaviour
                 yield break;
             }
 
-            if (state.IsTraceState(UnitTraceState.TRACE) && !state.IsAttackState(UnitAttackState.DO_ATTACK))
+            if ((navMeshAgent.velocity.sqrMagnitude <= 0.5f || navMeshAgent.remainingDistance <= 3f) && !state.IsAttackState(UnitAttackState.DO_ATTACK))
             {
                 MoveTo(destination);
                 state.SetMoveState(UnitMoveState.MOVE);
                 state.SetTraceState(UnitTraceState.TRACE);
+                Debug.Log("@@@@@@@@@");
             }
             yield return new WaitForSeconds(2.0f);
         }

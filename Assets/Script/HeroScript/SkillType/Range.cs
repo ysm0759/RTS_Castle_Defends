@@ -9,7 +9,7 @@ public enum ProjectorType
     RANGE,
 }
 
-public class Range : SkillType
+public class Range : MonoBehaviour
 {
 
     [SerializeField]
@@ -34,7 +34,7 @@ public class Range : SkillType
     }
 
     //마우스에 따른 원 이미지
-    public override void ShowSkill(float scope, float range)
+    public void ShowSkill(float scope, float range)
     {
         KeyManager.instance.skillKind = SkillKind.RANGE;
 
@@ -56,7 +56,7 @@ public class Range : SkillType
 
 
     // 스킬 사용
-    public override void UseSkill(float range  , IWarriorSkill skill)// 넘겨준 코루틴 받고)
+    public void UseSkill(float range  , ISkill skill)// 넘겨준 코루틴 받고)
     {
         CursorManager.instance.SetCursor(CursorType.DEFAULT);
 
@@ -76,7 +76,7 @@ public class Range : SkillType
     }
 
 
-    public override void ShowCancel()
+    public void ShowCancel()
     {
         if(KeyManager.instance.keyState != KeyState.A)
         {

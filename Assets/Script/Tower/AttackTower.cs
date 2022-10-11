@@ -51,7 +51,6 @@ public class AttackTower : MonoBehaviour
         yield return null;
 
         tower = GetComponentInParent<Tower>();
-
         attackDamage = tower.GetTowerInfo().damage;
         attackSpeed = tower.GetTowerInfo().attackSpeed;
         multiAttack = tower.GetTowerInfo().multiAttack;
@@ -63,7 +62,6 @@ public class AttackTower : MonoBehaviour
         if(anim.Length  != 0)
         {
             SetAnimAttackTime();
-
         }
     }
 
@@ -150,12 +148,8 @@ public class AttackTower : MonoBehaviour
                 break;
             }
         }
-        SetAnimAttackSpeed();
-
-    }
-    private void SetAnimAttackSpeed()
-    {
         animAttackSpeed = animAttackTime / attackSpeed;
 
     }
+
 }

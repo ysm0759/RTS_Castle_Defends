@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-public class WheelWind : MonoBehaviour, IWarriorSkill
+public class WheelWind : MonoBehaviour, ISkill
 {
 
     // 각자으 ㅣ쿨타임 이런거는 여기 에 있는게 맞는거같아 
@@ -62,17 +62,15 @@ public class WheelWind : MonoBehaviour, IWarriorSkill
     public void ShowRange()
     {
         immediateSkill.ImmediateSkill(this);
-        //immediateSkill.ShowSkill(skillScope, skillRange);
     }
 
     public void UseSkill()
     {
-        immediateSkill.UseSkill(skillRange, this); //넘겨줘서 );
     }
 
     public void CanselSkill()
     {
-        immediateSkill.ShowCancel();
+
     }
 
     public void StartCoolDown(Collider hit = null)
@@ -144,7 +142,7 @@ public class WheelWind : MonoBehaviour, IWarriorSkill
     }
 
 
-    private void OnDisable()
+    private void OnEnable()
     {
         isCoolDown = false;
         InGameSkillUI.instance.skillUI[0].fillAmount = 1f;

@@ -98,7 +98,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 996953596124978157}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Speed: 10
   m_Acceleration: 3000
   avoidancePriority: 50
@@ -124,7 +124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitInfo: {fileID: 996953596124978149}
-  prefabObject: {fileID: 0}
   _inGameUnitHP: {fileID: 0}
 --- !u!114 &996953596124978147
 MonoBehaviour:
@@ -151,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data: {fileID: 0}
+  _type: 0
   _maxHp: 0
   _hp: 0
   _df: 0
@@ -206,10 +206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5f547ed763fe714bab5e8b44322757d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EA: 3
   data: {fileID: 11400000, guid: 494b05f3ab031f943a08eacc998ff91a, type: 2}
   enemyControl: {fileID: 0}
-  rangeObject: {fileID: 7130447127301634930}
   radius: 4
 --- !u!54 &5965399887489831356
 Rigidbody:

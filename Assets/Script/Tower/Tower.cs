@@ -94,12 +94,12 @@ public class Tower : MonoBehaviour, IDamagable
             destroy = ObjectPool.GetObject("destroy");
             destroy.transform.position = transform.position;
             destroy.SetActive(true);
-            Invoke("returnDestroyObject", 3f);
+            Invoke("ReturnDestroyObject", 3f);
         }
 
     }
 
-    private void returnDestroyObject()
+    private void ReturnDestroyObject()
     {
         ObjectPool.ReturnObject("destroy", destroy);
     }

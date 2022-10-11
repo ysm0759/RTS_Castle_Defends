@@ -22,7 +22,8 @@ public class MouseClick : MonoBehaviour
     }
 
 
-    private void LateUpdate() {
+    private void LateUpdate()
+    {
 
         if (Input.GetMouseButtonDown(0))
         {

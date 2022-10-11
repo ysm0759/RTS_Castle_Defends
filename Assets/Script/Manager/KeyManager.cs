@@ -37,6 +37,14 @@ public enum Skill
 
 }
 
+public enum SkillKind
+{
+    TARGETING,
+    RANGE,
+    IMMEIDATE,
+    NONE,
+
+}
 
 public class KeyManager : MonoBehaviour
 {

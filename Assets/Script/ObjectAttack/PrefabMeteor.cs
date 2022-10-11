@@ -6,10 +6,18 @@ public class PrefabMeteor : PrefabObject
 {
     Collider[] hit;
     int layer;
-    private void OnEnable()
+
+
+    public override void SetDestinationDamage(Vector3 destination, float damage, Collider target = null)
     {
         hit = new Collider[10];
-        if(gameObject.layer == LayerMask.GetMask("Enemy"))
+        this.destination = destination;
+        gameObject.transform.LookAt(destination);
+        this.damage = damage;
+        this.target = target;
+
+
+        if (1 << target.gameObject.layer == LayerMask.GetMask("User"))
         {
             layer = LayerMask.GetMask("User");
         }
@@ -17,6 +25,8 @@ public class PrefabMeteor : PrefabObject
         {
             layer = LayerMask.GetMask("Enemy");
         }
+
+
     }
 
     private void Update()

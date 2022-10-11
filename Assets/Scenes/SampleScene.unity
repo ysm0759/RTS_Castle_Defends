@@ -20216,7 +20216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &860790008
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24136,6 +24136,8 @@ MonoBehaviour:
     PrefabObject: {fileID: 100010, guid: c98be9ff8d0b99c4f8857faf470634cf, type: 3}
   - name: warriorRangeEffect
     PrefabObject: {fileID: 100010, guid: b97184e0833ffba4ca32beb2bc860a7c, type: 3}
+  - name: dragonMeteor
+    PrefabObject: {fileID: 164416, guid: 26008819f62a90542a8630e8c634fed2, type: 3}
 --- !u!4 &1002289183 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 430254, guid: f21c48374d4fdc4489f7894214718503,

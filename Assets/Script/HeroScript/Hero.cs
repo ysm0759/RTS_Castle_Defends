@@ -12,16 +12,10 @@ public abstract class Hero : MonoBehaviour
 
     public abstract void CancelSkill(int num);
 
-    [SerializeField]
-    private GameObject maker;
     private int prevSkill = 0;
 
     public InGameUnitHP inGameHeroHpBar;
 
-    public void HeroSkillInit()
-    {
-
-    }
 
     private void Update()
     {

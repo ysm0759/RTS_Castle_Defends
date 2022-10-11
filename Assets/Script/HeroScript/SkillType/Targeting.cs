@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Targeting : SkillType
+public class Targeting : MonoBehaviour
 {
     [SerializeField]
     private Projector[] projector;
@@ -23,7 +23,7 @@ public class Targeting : SkillType
     }
 
     //마우스에 따른 원 이미지
-    public override void ShowSkill(float scope, float range)
+    public void ShowSkill(float scope, float range)
     {
         KeyManager.instance.skillKind = SkillKind.TARGETING;
 
@@ -37,7 +37,7 @@ public class Targeting : SkillType
 
 
     // 스킬 사용
-    public override void UseSkill(float range, IWarriorSkill skill)
+    public void UseSkill(float range, ISkill skill)
     {
         KeyManager.instance.skillKind = SkillKind.TARGETING;
 
@@ -66,7 +66,7 @@ public class Targeting : SkillType
 
     }
 
-    IEnumerator DrawClose(IWarriorSkill skill)
+    IEnumerator DrawClose(ISkill skill)
     {
         Vector3 tmp;
         CursorManager.instance.SetCursor(CursorType.DEFAULT);
@@ -74,7 +74,7 @@ public class Targeting : SkillType
         {
             tmp = hit.transform.position - transform.position;
             projector[(int)ProjectorType.RANGE].gameObject.transform.position = this.transform.position + (Vector3.up * 200f);
-            RTSUserUnitControlManager.instance.hero.MoveTo(hit.transform.position);
+            unitController.MoveTo(hit.transform.position);
 
             if (KeyManager.instance.skill != Skill.SKILL_TRACE)
             {
@@ -91,8 +91,6 @@ public class Targeting : SkillType
             }
             if (tmp.magnitude < range)
             {
-
-
                 skill.StartCoolDown(hit.collider);
                 ShowCancel();
                 yield break;
@@ -105,7 +103,7 @@ public class Targeting : SkillType
     }
 
 
-    public override void ShowCancel()
+    public void ShowCancel()
     {
         if (KeyManager.instance.keyState != KeyState.A)
         {

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class InGameUnitHpBar : InGameUnitHP
 {
-    static public bool _uiOnOff = false;
+    static public bool _uiOnOff = true;
     static public bool uiOnOff
     {
         get
@@ -31,7 +31,9 @@ public class InGameUnitHpBar : InGameUnitHP
         this.gameObject.SetActive(true);
         GetComponentInParent<IDamagable>().inGameUnitHP = this;
         uiOnOffEvent += SetHide;
+        SetHide(uiOnOff);
         hpBar.color = HPColor();
+        Debug.Log("???");
     }
 
     Color HPColor()
